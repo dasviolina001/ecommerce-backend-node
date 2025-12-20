@@ -1,6 +1,6 @@
 import { prisma } from "../db/prisma";
 
-import { comparePassword, generateToken } from "../auth/jwt";
+import { hashPassword, comparePassword, generateToken } from "../auth/jwt";
 
 import { CustomError } from "../middleware/errorHandler";
 
@@ -14,30 +14,48 @@ export const registerAdmin = async (data: {
   email: string;
   password: string;
 }) => {
-  const admin = await prisma.user.create({
-    data: {
-      fullName: data.fullName,
-      email: data.email,
-      password: data.password,
-      isAdmin: true,
-    },
-    select: {
-      id: true,
-      fullName: true,
-      email: true,
-      isAdmin: true,
-      createdAt: true,
-    },
+  // Check if email already exists (business logic check)
+  const existingUser = await prisma.user.findUnique({
+    where: { email: data.email.trim().toLowerCase() },
   });
 
-  return admin;
+  if (existingUser) {
+    throw new CustomError("Email already exists", 409);
+  }
+
+  try {
+    const hashedPassword = await hashPassword(data.password);
+
+    const admin = await prisma.user.create({
+      data: {
+        fullName: data.fullName.trim(),
+        email: data.email.trim().toLowerCase(),
+        password: hashedPassword,
+        isAdmin: true,
+      },
+      select: {
+        id: true,
+        fullName: true,
+        email: true,
+        isAdmin: true,
+        createdAt: true,
+      },
+    });
+
+    return admin;
+  } catch (error: any) {
+    if (error.code === "P2002") {
+      throw new CustomError("Email already exists", 409);
+    }
+    throw new CustomError("Failed to register admin. Please try again.", 500);
+  }
 };
 
 export const loginAdmin = async (data: LoginData) => {
   const { email, password } = data;
 
   const user = await prisma.user.findUnique({
-    where: { email },
+    where: { email: email.trim().toLowerCase() },
   });
 
   if (!user) {
@@ -78,186 +96,248 @@ export const loginAdmin = async (data: LoginData) => {
 export const getAllUsers = async (page = 1, limit = 10) => {
   const skip = (page - 1) * limit;
 
-  const users = await prisma.user.findMany({
-    skip,
-    take: limit,
-    select: {
-      id: true,
-      fullName: true,
-      email: true,
-      isAdmin: true,
-      isUserVerified: true,
-      isActive: true,
-      createdAt: true,
-      updatedAt: true,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+  try {
+    const users = await prisma.user.findMany({
+      skip,
+      take: limit,
+      select: {
+        id: true,
+        fullName: true,
+        email: true,
+        isAdmin: true,
+        isUserVerified: true,
+        isActive: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
 
-  const total = await prisma.user.count();
+    const total = await prisma.user.count();
 
-  return {
-    users,
-    pagination: {
-      total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
-    },
-  };
+    return {
+      users,
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+      },
+    };
+  } catch (error: any) {
+    throw new CustomError("Failed to retrieve users", 500);
+  }
 };
 
 export const getUserById = async (userId: string) => {
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
-    select: {
-      id: true,
-      fullName: true,
-      email: true,
-      isAdmin: true,
-      isUserVerified: true,
-      isActive: true,
-      createdAt: true,
-      updatedAt: true,
-      bankDetails: {
-        select: {
-          id: true,
-          bankName: true,
-          accountHolderName: true,
-          ifsc: true,
-          branchName: true,
-          accountNumber: true,
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        fullName: true,
+        email: true,
+        isAdmin: true,
+        isUserVerified: true,
+        isActive: true,
+        createdAt: true,
+        updatedAt: true,
+        bankDetails: {
+          select: {
+            id: true,
+            bankName: true,
+            accountHolderName: true,
+            ifsc: true,
+            branchName: true,
+            accountNumber: true,
+          },
         },
       },
-    },
-  });
+    });
 
-  if (!user) {
-    throw new CustomError("User not found", 404);
+    if (!user) {
+      throw new CustomError("User not found", 404);
+    }
+
+    return user;
+  } catch (error: any) {
+    if (error instanceof CustomError) {
+      throw error;
+    }
+    throw new CustomError("Failed to retrieve user", 500);
   }
-
-  return user;
 };
 
 export const updateUserStatus = async (userId: string, isActive: boolean) => {
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
-  });
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+    });
 
-  if (!user) {
-    throw new CustomError("User not found", 404);
+    if (!user) {
+      throw new CustomError("User not found", 404);
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: { isActive },
+      select: {
+        id: true,
+        fullName: true,
+        email: true,
+        isActive: true,
+        updatedAt: true,
+      },
+    });
+
+    return updatedUser;
+  } catch (error: any) {
+    if (error instanceof CustomError) {
+      throw error;
+    }
+    throw new CustomError("Failed to update user status", 500);
   }
-
-  const updatedUser = await prisma.user.update({
-    where: { id: userId },
-    data: { isActive },
-    select: {
-      id: true,
-      fullName: true,
-      email: true,
-      isActive: true,
-      updatedAt: true,
-    },
-  });
-
-  return updatedUser;
 };
 
 export const verifyUser = async (userId: string) => {
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
-  });
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+    });
 
-  if (!user) {
-    throw new CustomError("User not found", 404);
+    if (!user) {
+      throw new CustomError("User not found", 404);
+    }
+
+    if (user.isUserVerified) {
+      throw new CustomError("User is already verified", 400);
+    }
+
+    const verifiedUser = await prisma.user.update({
+      where: { id: userId },
+      data: { isUserVerified: true },
+      select: {
+        id: true,
+        fullName: true,
+        email: true,
+        isUserVerified: true,
+        updatedAt: true,
+      },
+    });
+
+    return verifiedUser;
+  } catch (error: any) {
+    if (error instanceof CustomError) {
+      throw error;
+    }
+    throw new CustomError("Failed to verify user", 500);
   }
-
-  const verifiedUser = await prisma.user.update({
-    where: { id: userId },
-    data: { isUserVerified: true },
-    select: {
-      id: true,
-      fullName: true,
-      email: true,
-      isUserVerified: true,
-      updatedAt: true,
-    },
-  });
-
-  return verifiedUser;
 };
 
 export const deleteUser = async (userId: string) => {
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
-  });
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+    });
 
-  if (!user) {
-    throw new CustomError("User not found", 404);
+    if (!user) {
+      throw new CustomError("User not found", 404);
+    }
+
+    // Prevent deleting admin users (business logic)
+    if (user.isAdmin) {
+      throw new CustomError("Cannot delete admin user", 403);
+    }
+
+    await prisma.user.delete({
+      where: { id: userId },
+    });
+
+    return { message: "User deleted successfully" };
+  } catch (error: any) {
+    if (error instanceof CustomError) {
+      throw error;
+    }
+    throw new CustomError("Failed to delete user", 500);
   }
-
-  await prisma.user.delete({
-    where: { id: userId },
-  });
-
-  return { message: "User deleted successfully" };
 };
 
 export const getUserBankDetails = async (userId: string) => {
-  const bankDetails = await prisma.bankDetails.findUnique({
-    where: { userId },
-    select: {
-      id: true,
-      bankName: true,
-      accountHolderName: true,
-      ifsc: true,
-      branchName: true,
-      accountNumber: true,
-      createdAt: true,
-      updatedAt: true,
-    },
-  });
+  try {
+    // First verify user exists
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true },
+    });
 
-  if (!bankDetails) {
-    throw new CustomError("Bank details not found for this user", 404);
+    if (!user) {
+      throw new CustomError("User not found", 404);
+    }
+
+    const bankDetails = await prisma.bankDetails.findUnique({
+      where: { userId },
+      select: {
+        id: true,
+        bankName: true,
+        accountHolderName: true,
+        ifsc: true,
+        branchName: true,
+        accountNumber: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+
+    if (!bankDetails) {
+      throw new CustomError("Bank details not found for this user", 404);
+    }
+
+    return bankDetails;
+  } catch (error: any) {
+    if (error instanceof CustomError) {
+      throw error;
+    }
+    throw new CustomError("Failed to retrieve bank details", 500);
   }
-
-  return bankDetails;
 };
 
 export const getAllUserBankDetails = async (page = 1, limit = 10) => {
   const skip = (page - 1) * limit;
 
-  const bankDetails = await prisma.bankDetails.findMany({
-    skip,
-    take: limit,
-    select: {
-      id: true,
-      bankName: true,
-      accountHolderName: true,
-      ifsc: true,
-      branchName: true,
-      accountNumber: true,
-      userId: true,
-      createdAt: true,
-      updatedAt: true,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+  try {
+    const bankDetails = await prisma.bankDetails.findMany({
+      skip,
+      take: limit,
+      select: {
+        id: true,
+        bankName: true,
+        accountHolderName: true,
+        ifsc: true,
+        branchName: true,
+        accountNumber: true,
+        userId: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
 
-  const total = await prisma.bankDetails.count();
+    const total = await prisma.bankDetails.count();
 
-  return {
-    bankDetails,
-    pagination: {
-      total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
-    },
-  };
+    return {
+      bankDetails,
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+      },
+    };
+  } catch (error: any) {
+    throw new CustomError("Failed to retrieve bank details", 500);
+  }
 };
