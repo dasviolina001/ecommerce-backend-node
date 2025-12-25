@@ -29,7 +29,6 @@ interface CreateProductInput {
 interface UpdateProductInput extends Partial<CreateProductInput> {}
 
 export const productService = {
-  // Create a new product
   async createProduct(input: CreateProductInput): Promise<Product> {
     return prisma.product.create({
       data: {
@@ -41,7 +40,6 @@ export const productService = {
     });
   },
 
-  // Get all products with filters and pagination
   async getAllProducts(
     page: number = 1,
     limit: number = 10,
@@ -56,6 +54,7 @@ export const productService = {
     const skip = (page - 1) * limit;
 
     const where: any = {};
+
     if (filters?.categoryId) {
       where.OR = [
         { masterCategoryId: filters.categoryId },
@@ -64,10 +63,13 @@ export const productService = {
     }
     if (filters?.isFeatured !== undefined)
       where.isFeatured = filters.isFeatured;
+
     if (filters?.isBestSelling !== undefined)
       where.isBestSelling = filters.isBestSelling;
+
     if (filters?.isNewCollection !== undefined)
       where.isNewCollection = filters.isNewCollection;
+
     if (filters?.isActive !== undefined) where.isActive = filters.isActive;
 
     const [products, total] = await Promise.all([
@@ -93,7 +95,6 @@ export const productService = {
     };
   },
 
-  // Get featured products
   async getFeaturedProducts(limit: number = 10) {
     return prisma.product.findMany({
       where: { isFeatured: true, isActive: true },
@@ -106,7 +107,6 @@ export const productService = {
     });
   },
 
-  // Get best selling products
   async getBestSellingProducts(limit: number = 10) {
     return prisma.product.findMany({
       where: { isBestSelling: true, isActive: true },
@@ -119,7 +119,6 @@ export const productService = {
     });
   },
 
-  // Get new collection products
   async getNewCollectionProducts(limit: number = 10) {
     return prisma.product.findMany({
       where: { isNewCollection: true, isActive: true },
@@ -132,7 +131,6 @@ export const productService = {
     });
   },
 
-  // Get single product by ID
   async getProductById(productId: string): Promise<Product | null> {
     return prisma.product.findUnique({
       where: { id: productId },
@@ -143,7 +141,6 @@ export const productService = {
     });
   },
 
-  // Get products by category
   async getProductsByCategory(
     categoryId: string,
     page: number = 1,
@@ -188,7 +185,6 @@ export const productService = {
     };
   },
 
-  // Update product
   async updateProduct(
     productId: string,
     input: UpdateProductInput
@@ -205,7 +201,7 @@ export const productService = {
     });
   },
 
-  // Delete product (soft delete)
+  // Deactivate product (soft delete)
   async deleteProduct(productId: string): Promise<Product> {
     return prisma.product.update({
       where: { id: productId },
@@ -220,7 +216,6 @@ export const productService = {
     });
   },
 
-  // Search products
   async searchProducts(query: string, limit: number = 10) {
     return prisma.product.findMany({
       where: {

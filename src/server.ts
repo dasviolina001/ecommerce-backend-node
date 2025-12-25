@@ -20,6 +20,14 @@ import adminProductRoutes from "./routes/adminProductRoutes";
 
 import userProductRoutes from "./routes/userProductRoutes";
 
+import userCartRoutes from "./routes/userCartRoutes";
+
+import userWishlistRoutes from "./routes/userWishlistRoutes";
+
+import swaggerUi from "swagger-ui-express";
+
+import swaggerDocument from "./swagger-output.json";
+
 const app = express();
 
 app.use(
@@ -31,6 +39,23 @@ app.use(
 );
 
 app.use(express.json());
+
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, {
+    explorer: true,
+    customSiteTitle: "Node Ecommerce API Docs",
+    swaggerOptions: {
+      docExpansion: "none",
+      filter: true,
+      displayRequestDuration: true,
+      tagsSorter: "alpha",
+      operationsSorter: "alpha",
+      defaultModelsExpandDepth: -1,
+    },
+  })
+);
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -47,6 +72,10 @@ app.use("/api/v1/admin/categories", adminCategoryRoutes);
 app.use("/api/v1/admin/products", adminProductRoutes);
 
 app.use("/api/v1/products", userProductRoutes);
+
+app.use("/api/v1/cart", userCartRoutes);
+
+app.use("/api/v1/wishlist", userWishlistRoutes);
 
 app.get("/api/health", (_, res) => {
   res.json({ status: "___I'm yours to command.___" });

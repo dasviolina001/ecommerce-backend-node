@@ -25,6 +25,8 @@ model User {
   isUserVerified Boolean  @default(false)
 
   bankDetails BankDetails?
+  cart        Cart[]
+  wishlist    Wishlist[]
 }
 
 model BankDetails {
@@ -91,6 +93,9 @@ model Product {
   masterCategory Category  @relation("MasterCategory", fields: [masterCategoryId], references: [id], onDelete: Cascade)
   lastCategory   Category? @relation("LastCategory", fields: [lastCategoryId], references: [id], onDelete: SetNull)
 
+  cart      Cart[]
+  wishlist  Wishlist[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -100,4 +105,34 @@ model Product {
   @@index([isBestSelling])
   @@index([isActive])
   @@index([productName])
+}
+
+model Cart {
+  id        String   @id @default(uuid())
+  userId    String
+  productId String
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@index([userId])
+  @@index([productId])
+}
+
+model Wishlist {
+  id        String   @id @default(uuid())
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@index([userId])
+  @@index([productId])
 }
