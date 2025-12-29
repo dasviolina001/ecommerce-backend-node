@@ -40,6 +40,20 @@ app.use(
 
 app.use(express.json());
 
+const logger = (
+  req: express.Request,
+  _: express.Response,
+  next: express.NextFunction
+) => {
+  const url = req.url;
+  const method = req.method;
+  const time = new Date().toISOString();
+  console.log(`[${time}] ${method} ${url}`);
+  next();
+};
+
+app.use(logger);
+
 app.use(
   "/api-docs",
   swaggerUi.serve,

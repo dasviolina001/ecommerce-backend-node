@@ -38,9 +38,9 @@ router.post(
 
 router.post("/login", validate(loginAdminValidation), asyncHandler(login));
 
-router.use(authMiddleware);
+router.use(authMiddleware as any);
 
-router.use(adminAuthMiddleware);
+router.use(adminAuthMiddleware as any);
 
 router.get(
   "/users",

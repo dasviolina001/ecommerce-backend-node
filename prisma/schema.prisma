@@ -93,8 +93,8 @@ model Product {
   masterCategory Category  @relation("MasterCategory", fields: [masterCategoryId], references: [id], onDelete: Cascade)
   lastCategory   Category? @relation("LastCategory", fields: [lastCategoryId], references: [id], onDelete: SetNull)
 
-  cart      Cart[]
-  wishlist  Wishlist[]
+  cart     Cart[]
+  wishlist Wishlist[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -121,6 +121,11 @@ model Cart {
   @@unique([userId, productId])
   @@index([userId])
   @@index([productId])
+}
+
+model Address {
+  id     String @id @default(uuid())
+  userId String
 }
 
 model Wishlist {

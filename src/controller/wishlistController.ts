@@ -20,6 +20,7 @@ const wishlistService = new WishlistService();
 export const addToWishlist = asyncHandler(
   async (req: Request, res: Response) => {
     const userId = req.user?.id;
+    
     const { productId } = req.body;
 
     if (!productId) {

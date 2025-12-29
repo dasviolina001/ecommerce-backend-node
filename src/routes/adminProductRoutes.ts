@@ -24,9 +24,9 @@ import { asyncHandler } from "../lib/asyncHandler";
 
 const router = Router();
 
-router.use(authMiddleware);
+router.use(authMiddleware as any);
 
-router.use(adminAuthMiddleware);
+router.use(adminAuthMiddleware as any);
 
 router.post(
   "/",

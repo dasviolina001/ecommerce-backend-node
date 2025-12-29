@@ -21,22 +21,22 @@ router.post("/register", asyncHandler(register));
 
 router.post("/login", asyncHandler(login));
 
-router.get("/profile", authMiddleware, asyncHandler(getProfile));
+router.get("/profile", authMiddleware as any, asyncHandler(getProfile));
 
-router.put("/profile", authMiddleware, asyncHandler(updateProfile));
+router.put("/profile", authMiddleware as any, asyncHandler(updateProfile));
 
-router.put("/change-password", authMiddleware, asyncHandler(changePassword));
+router.put("/change-password", authMiddleware as any, asyncHandler(changePassword));
 
-router.post("/bank-details", authMiddleware, asyncHandler(addBankDetails));
+router.post("/bank-details", authMiddleware as any, asyncHandler(addBankDetails));
 
 router.put(
   "/bank-details",
-  authMiddleware,
+  authMiddleware as any,
   asyncHandler(updateBankDetailsController)
 );
 router.get(
   "/bank-details",
-  authMiddleware,
+  authMiddleware as any,
   asyncHandler(getBankDetailsController)
 );
 
