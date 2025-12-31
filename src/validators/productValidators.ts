@@ -23,10 +23,7 @@ export const createProductValidation = [
   // mainImage is handled as file upload - no body validation needed
 
   body("youtubeLink")
-    .optional()
-    .trim()
-    .isURL()
-    .withMessage("Invalid YouTube URL"),
+    .optional(),
 
   body("size")
     .optional()
