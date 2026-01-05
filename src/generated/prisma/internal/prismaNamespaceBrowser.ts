@@ -59,7 +59,11 @@ export const ModelName = {
   Address: 'Address',
   Wishlist: 'Wishlist',
   ColorScheme: 'ColorScheme',
-  SizeChart: 'SizeChart'
+  SizeChart: 'SizeChart',
+  Coupon: 'Coupon',
+  CouponUser: 'CouponUser',
+  CouponProduct: 'CouponProduct',
+  CouponCategory: 'CouponCategory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -146,6 +150,7 @@ export const ProductScalarFieldEnum = {
   isActive: 'isActive',
   masterCategoryId: 'masterCategoryId',
   lastCategoryId: 'lastCategoryId',
+  sizeChartId: 'sizeChartId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -158,6 +163,7 @@ export const CartScalarFieldEnum = {
   userId: 'userId',
   productId: 'productId',
   quantity: 'quantity',
+  couponCode: 'couponCode',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -203,6 +209,55 @@ export const SizeChartScalarFieldEnum = {
 } as const
 
 export type SizeChartScalarFieldEnum = (typeof SizeChartScalarFieldEnum)[keyof typeof SizeChartScalarFieldEnum]
+
+
+export const CouponScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  type: 'type',
+  value: 'value',
+  minOrderValue: 'minOrderValue',
+  maxDiscount: 'maxDiscount',
+  isStackable: 'isStackable',
+  isActive: 'isActive',
+  startsAt: 'startsAt',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CouponScalarFieldEnum = (typeof CouponScalarFieldEnum)[keyof typeof CouponScalarFieldEnum]
+
+
+export const CouponUserScalarFieldEnum = {
+  id: 'id',
+  couponId: 'couponId',
+  userId: 'userId',
+  usedAt: 'usedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type CouponUserScalarFieldEnum = (typeof CouponUserScalarFieldEnum)[keyof typeof CouponUserScalarFieldEnum]
+
+
+export const CouponProductScalarFieldEnum = {
+  id: 'id',
+  couponId: 'couponId',
+  productId: 'productId',
+  createdAt: 'createdAt'
+} as const
+
+export type CouponProductScalarFieldEnum = (typeof CouponProductScalarFieldEnum)[keyof typeof CouponProductScalarFieldEnum]
+
+
+export const CouponCategoryScalarFieldEnum = {
+  id: 'id',
+  couponId: 'couponId',
+  categoryId: 'categoryId',
+  createdAt: 'createdAt'
+} as const
+
+export type CouponCategoryScalarFieldEnum = (typeof CouponCategoryScalarFieldEnum)[keyof typeof CouponCategoryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -298,7 +353,8 @@ export const ProductOrderByRelevanceFieldEnum = {
   size: 'size',
   paymentType: 'paymentType',
   masterCategoryId: 'masterCategoryId',
-  lastCategoryId: 'lastCategoryId'
+  lastCategoryId: 'lastCategoryId',
+  sizeChartId: 'sizeChartId'
 } as const
 
 export type ProductOrderByRelevanceFieldEnum = (typeof ProductOrderByRelevanceFieldEnum)[keyof typeof ProductOrderByRelevanceFieldEnum]
@@ -307,7 +363,8 @@ export type ProductOrderByRelevanceFieldEnum = (typeof ProductOrderByRelevanceFi
 export const CartOrderByRelevanceFieldEnum = {
   id: 'id',
   userId: 'userId',
-  productId: 'productId'
+  productId: 'productId',
+  couponCode: 'couponCode'
 } as const
 
 export type CartOrderByRelevanceFieldEnum = (typeof CartOrderByRelevanceFieldEnum)[keyof typeof CartOrderByRelevanceFieldEnum]
@@ -345,4 +402,35 @@ export const SizeChartOrderByRelevanceFieldEnum = {
 } as const
 
 export type SizeChartOrderByRelevanceFieldEnum = (typeof SizeChartOrderByRelevanceFieldEnum)[keyof typeof SizeChartOrderByRelevanceFieldEnum]
+
+
+export const CouponOrderByRelevanceFieldEnum = {
+  code: 'code'
+} as const
+
+export type CouponOrderByRelevanceFieldEnum = (typeof CouponOrderByRelevanceFieldEnum)[keyof typeof CouponOrderByRelevanceFieldEnum]
+
+
+export const CouponUserOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId'
+} as const
+
+export type CouponUserOrderByRelevanceFieldEnum = (typeof CouponUserOrderByRelevanceFieldEnum)[keyof typeof CouponUserOrderByRelevanceFieldEnum]
+
+
+export const CouponProductOrderByRelevanceFieldEnum = {
+  id: 'id',
+  productId: 'productId'
+} as const
+
+export type CouponProductOrderByRelevanceFieldEnum = (typeof CouponProductOrderByRelevanceFieldEnum)[keyof typeof CouponProductOrderByRelevanceFieldEnum]
+
+
+export const CouponCategoryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  categoryId: 'categoryId'
+} as const
+
+export type CouponCategoryOrderByRelevanceFieldEnum = (typeof CouponCategoryOrderByRelevanceFieldEnum)[keyof typeof CouponCategoryOrderByRelevanceFieldEnum]
 

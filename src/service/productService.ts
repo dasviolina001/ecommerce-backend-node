@@ -20,6 +20,7 @@ interface CreateProductInput {
   metaData?: Record<string, any>;
   masterCategoryId: string;
   lastCategoryId?: string;
+  sizeChartId?: string;
   isFeatured?: boolean;
   isBestSelling?: boolean;
   isNewCollection?: boolean;
@@ -80,6 +81,7 @@ export const productService = {
         include: {
           masterCategory: true,
           lastCategory: true,
+          sizeChart: true,
         },
         orderBy: { createdAt: "desc" },
       }),
@@ -102,6 +104,7 @@ export const productService = {
       include: {
         masterCategory: true,
         lastCategory: true,
+        sizeChart: true,
       },
       orderBy: { createdAt: "desc" },
     });
@@ -114,6 +117,7 @@ export const productService = {
       include: {
         masterCategory: true,
         lastCategory: true,
+        sizeChart: true,
       },
       orderBy: { createdAt: "desc" },
     });
@@ -126,6 +130,7 @@ export const productService = {
       include: {
         masterCategory: true,
         lastCategory: true,
+        sizeChart: true,
       },
       orderBy: { createdAt: "desc" },
     });
@@ -137,6 +142,7 @@ export const productService = {
       include: {
         masterCategory: true,
         lastCategory: true,
+        sizeChart: true,
       },
     });
   },
@@ -162,6 +168,7 @@ export const productService = {
         include: {
           masterCategory: true,
           lastCategory: true,
+          sizeChart: true,
         },
         orderBy: { createdAt: "desc" },
       }),
@@ -232,6 +239,7 @@ export const productService = {
       include: {
         masterCategory: true,
         lastCategory: true,
+        sizeChart: true,
       },
     });
   },

@@ -76,6 +76,12 @@ export const createProductValidation = [
     .isUUID()
     .withMessage("Last category must be a valid UUID"),
 
+  body("sizeChartId")
+    .optional()
+    .trim()
+    .isUUID()
+    .withMessage("Size chart must be a valid UUID"),
+
   body("dimensions")
     .optional()
     .custom((value) => {
@@ -179,6 +185,12 @@ export const updateProductValidation = [
     .optional()
     .isInt({ min: 0 })
     .withMessage("Quantity must be a non-negative integer"),
+
+  body("sizeChartId")
+    .optional()
+    .trim()
+    .isUUID()
+    .withMessage("Size chart must be a valid UUID"),
 
   body("paymentType")
     .optional()

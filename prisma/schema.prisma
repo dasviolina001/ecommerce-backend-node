@@ -27,6 +27,7 @@ model User {
   bankDetails BankDetails?
   cart        Cart[]
   wishlist    Wishlist[]
+  coupons     CouponUser[]
 }
 
 model BankDetails {
@@ -53,10 +54,11 @@ model Category {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  parent                 Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
-  children               Category[] @relation("CategoryHierarchy")
-  masterCategoryProducts Product[]  @relation("MasterCategory")
-  lastCategoryProducts   Product[]  @relation("LastCategory")
+  parent                 Category?        @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children               Category[]       @relation("CategoryHierarchy")
+  masterCategoryProducts Product[]        @relation("MasterCategory")
+  lastCategoryProducts   Product[]        @relation("LastCategory")
+  coupons                CouponCategory[]
 
   @@index([parentId])
   @@index([slug])
@@ -89,18 +91,22 @@ model Product {
 
   masterCategoryId String
   lastCategoryId   String?
+  sizeChartId      String?
 
-  masterCategory Category  @relation("MasterCategory", fields: [masterCategoryId], references: [id], onDelete: Cascade)
-  lastCategory   Category? @relation("LastCategory", fields: [lastCategoryId], references: [id], onDelete: SetNull)
+  masterCategory Category   @relation("MasterCategory", fields: [masterCategoryId], references: [id], onDelete: Cascade)
+  lastCategory   Category?  @relation("LastCategory", fields: [lastCategoryId], references: [id], onDelete: SetNull)
+  sizeChart      SizeChart? @relation(fields: [sizeChartId], references: [id], onDelete: SetNull)
 
   cart     Cart[]
   wishlist Wishlist[]
+  coupons  CouponProduct[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([masterCategoryId])
   @@index([lastCategoryId])
+  @@index([sizeChartId])
   @@index([isFeatured])
   @@index([isBestSelling])
   @@index([isActive])
@@ -108,12 +114,13 @@ model Product {
 }
 
 model Cart {
-  id        String   @id @default(uuid())
-  userId    String
-  productId String
-  quantity  Int      @default(1)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(uuid())
+  userId     String
+  productId  String
+  quantity   Int      @default(1)
+  couponCode String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
@@ -153,7 +160,82 @@ model SizeChart {
   id        String   @id @default(uuid())
   name      String
   sizes     Json
-  colors    Json
+  colors    Json?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  products Product[]
+}
+
+enum CouponType {
+  FIXED
+  PERCENTAGE
+}
+
+model Coupon {
+  id            Int        @id @default(autoincrement())
+  code          String     @unique
+  type          CouponType
+  value         Float
+  minOrderValue Float?
+  maxDiscount   Float?
+  isStackable   Boolean    @default(false)
+  isActive      Boolean    @default(true)
+
+  startsAt  DateTime
+  expiresAt DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users      CouponUser[]
+  products   CouponProduct[]
+  categories CouponCategory[]
+
+  @@index([code])
+  @@index([isActive])
+  @@index([expiresAt])
+}
+
+model CouponUser {
+  id        String    @id @default(uuid())
+  couponId  Int
+  userId    String
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  coupon Coupon @relation(fields: [couponId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([couponId, userId])
+  @@index([userId])
+  @@index([couponId])
+}
+
+model CouponProduct {
+  id        String   @id @default(uuid())
+  couponId  Int
+  productId String
+  createdAt DateTime @default(now())
+
+  coupon  Coupon  @relation(fields: [couponId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([couponId, productId])
+  @@index([productId])
+  @@index([couponId])
+}
+
+model CouponCategory {
+  id         String   @id @default(uuid())
+  couponId   Int
+  categoryId String
+  createdAt  DateTime @default(now())
+
+  coupon   Coupon   @relation(fields: [couponId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([couponId, categoryId])
+  @@index([categoryId])
+  @@index([couponId])
 }

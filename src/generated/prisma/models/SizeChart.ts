@@ -149,7 +149,7 @@ export type SizeChartGroupByOutputType = {
   id: string
   name: string
   sizes: runtime.JsonValue
-  colors: runtime.JsonValue
+  colors: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
   _count: SizeChartCountAggregateOutputType | null
@@ -179,18 +179,20 @@ export type SizeChartWhereInput = {
   id?: Prisma.StringFilter<"SizeChart"> | string
   name?: Prisma.StringFilter<"SizeChart"> | string
   sizes?: Prisma.JsonFilter<"SizeChart">
-  colors?: Prisma.JsonFilter<"SizeChart">
+  colors?: Prisma.JsonNullableFilter<"SizeChart">
   createdAt?: Prisma.DateTimeFilter<"SizeChart"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SizeChart"> | Date | string
+  products?: Prisma.ProductListRelationFilter
 }
 
 export type SizeChartOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   sizes?: Prisma.SortOrder
-  colors?: Prisma.SortOrder
+  colors?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  products?: Prisma.ProductOrderByRelationAggregateInput
   _relevance?: Prisma.SizeChartOrderByRelevanceInput
 }
 
@@ -201,16 +203,17 @@ export type SizeChartWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SizeChartWhereInput | Prisma.SizeChartWhereInput[]
   name?: Prisma.StringFilter<"SizeChart"> | string
   sizes?: Prisma.JsonFilter<"SizeChart">
-  colors?: Prisma.JsonFilter<"SizeChart">
+  colors?: Prisma.JsonNullableFilter<"SizeChart">
   createdAt?: Prisma.DateTimeFilter<"SizeChart"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SizeChart"> | Date | string
+  products?: Prisma.ProductListRelationFilter
 }, "id">
 
 export type SizeChartOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   sizes?: Prisma.SortOrder
-  colors?: Prisma.SortOrder
+  colors?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SizeChartCountOrderByAggregateInput
@@ -225,7 +228,7 @@ export type SizeChartScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"SizeChart"> | string
   name?: Prisma.StringWithAggregatesFilter<"SizeChart"> | string
   sizes?: Prisma.JsonWithAggregatesFilter<"SizeChart">
-  colors?: Prisma.JsonWithAggregatesFilter<"SizeChart">
+  colors?: Prisma.JsonNullableWithAggregatesFilter<"SizeChart">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SizeChart"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SizeChart"> | Date | string
 }
@@ -234,43 +237,47 @@ export type SizeChartCreateInput = {
   id?: string
   name: string
   sizes: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  colors: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  colors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
+  products?: Prisma.ProductCreateNestedManyWithoutSizeChartInput
 }
 
 export type SizeChartUncheckedCreateInput = {
   id?: string
   name: string
   sizes: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  colors: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  colors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutSizeChartInput
 }
 
 export type SizeChartUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   sizes?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  colors?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  colors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  products?: Prisma.ProductUpdateManyWithoutSizeChartNestedInput
 }
 
 export type SizeChartUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   sizes?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  colors?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  colors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  products?: Prisma.ProductUncheckedUpdateManyWithoutSizeChartNestedInput
 }
 
 export type SizeChartCreateManyInput = {
   id?: string
   name: string
   sizes: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  colors: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  colors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -279,7 +286,7 @@ export type SizeChartUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   sizes?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  colors?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  colors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -288,9 +295,14 @@ export type SizeChartUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   sizes?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  colors?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  colors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SizeChartNullableScalarRelationFilter = {
+  is?: Prisma.SizeChartWhereInput | null
+  isNot?: Prisma.SizeChartWhereInput | null
 }
 
 export type SizeChartOrderByRelevanceInput = {
@@ -322,6 +334,103 @@ export type SizeChartMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type SizeChartCreateNestedOneWithoutProductsInput = {
+  create?: Prisma.XOR<Prisma.SizeChartCreateWithoutProductsInput, Prisma.SizeChartUncheckedCreateWithoutProductsInput>
+  connectOrCreate?: Prisma.SizeChartCreateOrConnectWithoutProductsInput
+  connect?: Prisma.SizeChartWhereUniqueInput
+}
+
+export type SizeChartUpdateOneWithoutProductsNestedInput = {
+  create?: Prisma.XOR<Prisma.SizeChartCreateWithoutProductsInput, Prisma.SizeChartUncheckedCreateWithoutProductsInput>
+  connectOrCreate?: Prisma.SizeChartCreateOrConnectWithoutProductsInput
+  upsert?: Prisma.SizeChartUpsertWithoutProductsInput
+  disconnect?: Prisma.SizeChartWhereInput | boolean
+  delete?: Prisma.SizeChartWhereInput | boolean
+  connect?: Prisma.SizeChartWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SizeChartUpdateToOneWithWhereWithoutProductsInput, Prisma.SizeChartUpdateWithoutProductsInput>, Prisma.SizeChartUncheckedUpdateWithoutProductsInput>
+}
+
+export type SizeChartCreateWithoutProductsInput = {
+  id?: string
+  name: string
+  sizes: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  colors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type SizeChartUncheckedCreateWithoutProductsInput = {
+  id?: string
+  name: string
+  sizes: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  colors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type SizeChartCreateOrConnectWithoutProductsInput = {
+  where: Prisma.SizeChartWhereUniqueInput
+  create: Prisma.XOR<Prisma.SizeChartCreateWithoutProductsInput, Prisma.SizeChartUncheckedCreateWithoutProductsInput>
+}
+
+export type SizeChartUpsertWithoutProductsInput = {
+  update: Prisma.XOR<Prisma.SizeChartUpdateWithoutProductsInput, Prisma.SizeChartUncheckedUpdateWithoutProductsInput>
+  create: Prisma.XOR<Prisma.SizeChartCreateWithoutProductsInput, Prisma.SizeChartUncheckedCreateWithoutProductsInput>
+  where?: Prisma.SizeChartWhereInput
+}
+
+export type SizeChartUpdateToOneWithWhereWithoutProductsInput = {
+  where?: Prisma.SizeChartWhereInput
+  data: Prisma.XOR<Prisma.SizeChartUpdateWithoutProductsInput, Prisma.SizeChartUncheckedUpdateWithoutProductsInput>
+}
+
+export type SizeChartUpdateWithoutProductsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  sizes?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  colors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SizeChartUncheckedUpdateWithoutProductsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  sizes?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  colors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type SizeChartCountOutputType
+ */
+
+export type SizeChartCountOutputType = {
+  products: number
+}
+
+export type SizeChartCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  products?: boolean | SizeChartCountOutputTypeCountProductsArgs
+}
+
+/**
+ * SizeChartCountOutputType without action
+ */
+export type SizeChartCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SizeChartCountOutputType
+   */
+  select?: Prisma.SizeChartCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * SizeChartCountOutputType without action
+ */
+export type SizeChartCountOutputTypeCountProductsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProductWhereInput
+}
 
 
 export type SizeChartSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -331,6 +440,8 @@ export type SizeChartSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   colors?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  products?: boolean | Prisma.SizeChart$productsArgs<ExtArgs>
+  _count?: boolean | Prisma.SizeChartCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sizeChart"]>
 
 
@@ -345,15 +456,21 @@ export type SizeChartSelectScalar = {
 }
 
 export type SizeChartOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "sizes" | "colors" | "createdAt" | "updatedAt", ExtArgs["result"]["sizeChart"]>
+export type SizeChartInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  products?: boolean | Prisma.SizeChart$productsArgs<ExtArgs>
+  _count?: boolean | Prisma.SizeChartCountOutputTypeDefaultArgs<ExtArgs>
+}
 
 export type $SizeChartPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SizeChart"
-  objects: {}
+  objects: {
+    products: Prisma.$ProductPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
     sizes: runtime.JsonValue
-    colors: runtime.JsonValue
+    colors: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["sizeChart"]>
@@ -696,6 +813,7 @@ readonly fields: SizeChartFieldRefs;
  */
 export interface Prisma__SizeChartClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  products<T extends Prisma.SizeChart$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SizeChart$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -748,6 +866,10 @@ export type SizeChartFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.SizeChartOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SizeChartInclude<ExtArgs> | null
+  /**
    * Filter, which SizeChart to fetch.
    */
   where: Prisma.SizeChartWhereUniqueInput
@@ -766,6 +888,10 @@ export type SizeChartFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensi
    */
   omit?: Prisma.SizeChartOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SizeChartInclude<ExtArgs> | null
+  /**
    * Filter, which SizeChart to fetch.
    */
   where: Prisma.SizeChartWhereUniqueInput
@@ -783,6 +909,10 @@ export type SizeChartFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the SizeChart
    */
   omit?: Prisma.SizeChartOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SizeChartInclude<ExtArgs> | null
   /**
    * Filter, which SizeChart to fetch.
    */
@@ -832,6 +962,10 @@ export type SizeChartFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.SizeChartOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SizeChartInclude<ExtArgs> | null
+  /**
    * Filter, which SizeChart to fetch.
    */
   where?: Prisma.SizeChartWhereInput
@@ -880,6 +1014,10 @@ export type SizeChartFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.SizeChartOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SizeChartInclude<ExtArgs> | null
+  /**
    * Filter, which SizeCharts to fetch.
    */
   where?: Prisma.SizeChartWhereInput
@@ -923,6 +1061,10 @@ export type SizeChartCreateArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.SizeChartOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SizeChartInclude<ExtArgs> | null
+  /**
    * The data needed to create a SizeChart.
    */
   data: Prisma.XOR<Prisma.SizeChartCreateInput, Prisma.SizeChartUncheckedCreateInput>
@@ -951,6 +1093,10 @@ export type SizeChartUpdateArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the SizeChart
    */
   omit?: Prisma.SizeChartOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SizeChartInclude<ExtArgs> | null
   /**
    * The data needed to update a SizeChart.
    */
@@ -992,6 +1138,10 @@ export type SizeChartUpsertArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.SizeChartOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SizeChartInclude<ExtArgs> | null
+  /**
    * The filter to search for the SizeChart to update in case it exists.
    */
   where: Prisma.SizeChartWhereUniqueInput
@@ -1018,6 +1168,10 @@ export type SizeChartDeleteArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.SizeChartOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SizeChartInclude<ExtArgs> | null
+  /**
    * Filter which SizeChart to delete.
    */
   where: Prisma.SizeChartWhereUniqueInput
@@ -1038,6 +1192,30 @@ export type SizeChartDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
+ * SizeChart.products
+ */
+export type SizeChart$productsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Product
+   */
+  select?: Prisma.ProductSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Product
+   */
+  omit?: Prisma.ProductOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductInclude<ExtArgs> | null
+  where?: Prisma.ProductWhereInput
+  orderBy?: Prisma.ProductOrderByWithRelationInput | Prisma.ProductOrderByWithRelationInput[]
+  cursor?: Prisma.ProductWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProductScalarFieldEnum | Prisma.ProductScalarFieldEnum[]
+}
+
+/**
  * SizeChart without action
  */
 export type SizeChartDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1049,4 +1227,8 @@ export type SizeChartDefaultArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the SizeChart
    */
   omit?: Prisma.SizeChartOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SizeChartInclude<ExtArgs> | null
 }

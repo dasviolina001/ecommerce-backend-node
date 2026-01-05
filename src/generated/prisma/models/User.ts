@@ -217,6 +217,7 @@ export type UserWhereInput = {
   bankDetails?: Prisma.XOR<Prisma.BankDetailsNullableScalarRelationFilter, Prisma.BankDetailsWhereInput> | null
   cart?: Prisma.CartListRelationFilter
   wishlist?: Prisma.WishlistListRelationFilter
+  coupons?: Prisma.CouponUserListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -232,6 +233,7 @@ export type UserOrderByWithRelationInput = {
   bankDetails?: Prisma.BankDetailsOrderByWithRelationInput
   cart?: Prisma.CartOrderByRelationAggregateInput
   wishlist?: Prisma.WishlistOrderByRelationAggregateInput
+  coupons?: Prisma.CouponUserOrderByRelationAggregateInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -251,6 +253,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   bankDetails?: Prisma.XOR<Prisma.BankDetailsNullableScalarRelationFilter, Prisma.BankDetailsWhereInput> | null
   cart?: Prisma.CartListRelationFilter
   wishlist?: Prisma.WishlistListRelationFilter
+  coupons?: Prisma.CouponUserListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -296,6 +299,7 @@ export type UserCreateInput = {
   bankDetails?: Prisma.BankDetailsCreateNestedOneWithoutUserInput
   cart?: Prisma.CartCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistCreateNestedManyWithoutUserInput
+  coupons?: Prisma.CouponUserCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -311,6 +315,7 @@ export type UserUncheckedCreateInput = {
   bankDetails?: Prisma.BankDetailsUncheckedCreateNestedOneWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput
+  coupons?: Prisma.CouponUserUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -326,6 +331,7 @@ export type UserUpdateInput = {
   bankDetails?: Prisma.BankDetailsUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUpdateManyWithoutUserNestedInput
+  coupons?: Prisma.CouponUserUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -341,6 +347,7 @@ export type UserUncheckedUpdateInput = {
   bankDetails?: Prisma.BankDetailsUncheckedUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput
+  coupons?: Prisma.CouponUserUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -480,6 +487,20 @@ export type UserUpdateOneRequiredWithoutWishlistNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWishlistInput, Prisma.UserUpdateWithoutWishlistInput>, Prisma.UserUncheckedUpdateWithoutWishlistInput>
 }
 
+export type UserCreateNestedOneWithoutCouponsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCouponsInput, Prisma.UserUncheckedCreateWithoutCouponsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCouponsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCouponsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCouponsInput, Prisma.UserUncheckedCreateWithoutCouponsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCouponsInput
+  upsert?: Prisma.UserUpsertWithoutCouponsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCouponsInput, Prisma.UserUpdateWithoutCouponsInput>, Prisma.UserUncheckedUpdateWithoutCouponsInput>
+}
+
 export type UserCreateWithoutBankDetailsInput = {
   id?: string
   fullName: string
@@ -492,6 +513,7 @@ export type UserCreateWithoutBankDetailsInput = {
   isUserVerified?: boolean
   cart?: Prisma.CartCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistCreateNestedManyWithoutUserInput
+  coupons?: Prisma.CouponUserCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBankDetailsInput = {
@@ -506,6 +528,7 @@ export type UserUncheckedCreateWithoutBankDetailsInput = {
   isUserVerified?: boolean
   cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput
+  coupons?: Prisma.CouponUserUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBankDetailsInput = {
@@ -536,6 +559,7 @@ export type UserUpdateWithoutBankDetailsInput = {
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cart?: Prisma.CartUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUpdateManyWithoutUserNestedInput
+  coupons?: Prisma.CouponUserUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBankDetailsInput = {
@@ -550,6 +574,7 @@ export type UserUncheckedUpdateWithoutBankDetailsInput = {
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput
+  coupons?: Prisma.CouponUserUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCartInput = {
@@ -564,6 +589,7 @@ export type UserCreateWithoutCartInput = {
   isUserVerified?: boolean
   bankDetails?: Prisma.BankDetailsCreateNestedOneWithoutUserInput
   wishlist?: Prisma.WishlistCreateNestedManyWithoutUserInput
+  coupons?: Prisma.CouponUserCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCartInput = {
@@ -578,6 +604,7 @@ export type UserUncheckedCreateWithoutCartInput = {
   isUserVerified?: boolean
   bankDetails?: Prisma.BankDetailsUncheckedCreateNestedOneWithoutUserInput
   wishlist?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput
+  coupons?: Prisma.CouponUserUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCartInput = {
@@ -608,6 +635,7 @@ export type UserUpdateWithoutCartInput = {
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankDetails?: Prisma.BankDetailsUpdateOneWithoutUserNestedInput
   wishlist?: Prisma.WishlistUpdateManyWithoutUserNestedInput
+  coupons?: Prisma.CouponUserUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCartInput = {
@@ -622,6 +650,7 @@ export type UserUncheckedUpdateWithoutCartInput = {
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankDetails?: Prisma.BankDetailsUncheckedUpdateOneWithoutUserNestedInput
   wishlist?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput
+  coupons?: Prisma.CouponUserUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWishlistInput = {
@@ -636,6 +665,7 @@ export type UserCreateWithoutWishlistInput = {
   isUserVerified?: boolean
   bankDetails?: Prisma.BankDetailsCreateNestedOneWithoutUserInput
   cart?: Prisma.CartCreateNestedManyWithoutUserInput
+  coupons?: Prisma.CouponUserCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWishlistInput = {
@@ -650,6 +680,7 @@ export type UserUncheckedCreateWithoutWishlistInput = {
   isUserVerified?: boolean
   bankDetails?: Prisma.BankDetailsUncheckedCreateNestedOneWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
+  coupons?: Prisma.CouponUserUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWishlistInput = {
@@ -680,6 +711,7 @@ export type UserUpdateWithoutWishlistInput = {
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankDetails?: Prisma.BankDetailsUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUpdateManyWithoutUserNestedInput
+  coupons?: Prisma.CouponUserUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWishlistInput = {
@@ -694,6 +726,83 @@ export type UserUncheckedUpdateWithoutWishlistInput = {
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankDetails?: Prisma.BankDetailsUncheckedUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
+  coupons?: Prisma.CouponUserUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutCouponsInput = {
+  id?: string
+  fullName: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  isActive?: boolean
+  isAdmin?: boolean
+  isUserVerified?: boolean
+  bankDetails?: Prisma.BankDetailsCreateNestedOneWithoutUserInput
+  cart?: Prisma.CartCreateNestedManyWithoutUserInput
+  wishlist?: Prisma.WishlistCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCouponsInput = {
+  id?: string
+  fullName: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  isActive?: boolean
+  isAdmin?: boolean
+  isUserVerified?: boolean
+  bankDetails?: Prisma.BankDetailsUncheckedCreateNestedOneWithoutUserInput
+  cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
+  wishlist?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCouponsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCouponsInput, Prisma.UserUncheckedCreateWithoutCouponsInput>
+}
+
+export type UserUpsertWithoutCouponsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCouponsInput, Prisma.UserUncheckedUpdateWithoutCouponsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCouponsInput, Prisma.UserUncheckedCreateWithoutCouponsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCouponsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCouponsInput, Prisma.UserUncheckedUpdateWithoutCouponsInput>
+}
+
+export type UserUpdateWithoutCouponsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bankDetails?: Prisma.BankDetailsUpdateOneWithoutUserNestedInput
+  cart?: Prisma.CartUpdateManyWithoutUserNestedInput
+  wishlist?: Prisma.WishlistUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCouponsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bankDetails?: Prisma.BankDetailsUncheckedUpdateOneWithoutUserNestedInput
+  cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
+  wishlist?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -704,11 +813,13 @@ export type UserUncheckedUpdateWithoutWishlistInput = {
 export type UserCountOutputType = {
   cart: number
   wishlist: number
+  coupons: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cart?: boolean | UserCountOutputTypeCountCartArgs
   wishlist?: boolean | UserCountOutputTypeCountWishlistArgs
+  coupons?: boolean | UserCountOutputTypeCountCouponsArgs
 }
 
 /**
@@ -735,6 +846,13 @@ export type UserCountOutputTypeCountWishlistArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.WishlistWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCouponsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CouponUserWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -749,6 +867,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   bankDetails?: boolean | Prisma.User$bankDetailsArgs<ExtArgs>
   cart?: boolean | Prisma.User$cartArgs<ExtArgs>
   wishlist?: boolean | Prisma.User$wishlistArgs<ExtArgs>
+  coupons?: boolean | Prisma.User$couponsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -771,6 +890,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   bankDetails?: boolean | Prisma.User$bankDetailsArgs<ExtArgs>
   cart?: boolean | Prisma.User$cartArgs<ExtArgs>
   wishlist?: boolean | Prisma.User$wishlistArgs<ExtArgs>
+  coupons?: boolean | Prisma.User$couponsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -780,6 +900,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     bankDetails: Prisma.$BankDetailsPayload<ExtArgs> | null
     cart: Prisma.$CartPayload<ExtArgs>[]
     wishlist: Prisma.$WishlistPayload<ExtArgs>[]
+    coupons: Prisma.$CouponUserPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1134,6 +1255,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   bankDetails<T extends Prisma.User$bankDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bankDetailsArgs<ExtArgs>>): Prisma.Prisma__BankDetailsClient<runtime.Types.Result.GetResult<Prisma.$BankDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   cart<T extends Prisma.User$cartArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cartArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   wishlist<T extends Prisma.User$wishlistArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$wishlistArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  coupons<T extends Prisma.User$couponsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$couponsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CouponUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1579,6 +1701,30 @@ export type User$wishlistArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.WishlistScalarFieldEnum | Prisma.WishlistScalarFieldEnum[]
+}
+
+/**
+ * User.coupons
+ */
+export type User$couponsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CouponUser
+   */
+  select?: Prisma.CouponUserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CouponUser
+   */
+  omit?: Prisma.CouponUserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CouponUserInclude<ExtArgs> | null
+  where?: Prisma.CouponUserWhereInput
+  orderBy?: Prisma.CouponUserOrderByWithRelationInput | Prisma.CouponUserOrderByWithRelationInput[]
+  cursor?: Prisma.CouponUserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CouponUserScalarFieldEnum | Prisma.CouponUserScalarFieldEnum[]
 }
 
 /**

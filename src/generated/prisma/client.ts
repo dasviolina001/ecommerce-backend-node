@@ -82,3 +82,23 @@ export type ColorScheme = Prisma.ColorSchemeModel
  * 
  */
 export type SizeChart = Prisma.SizeChartModel
+/**
+ * Model Coupon
+ * 
+ */
+export type Coupon = Prisma.CouponModel
+/**
+ * Model CouponUser
+ * 
+ */
+export type CouponUser = Prisma.CouponUserModel
+/**
+ * Model CouponProduct
+ * 
+ */
+export type CouponProduct = Prisma.CouponProductModel
+/**
+ * Model CouponCategory
+ * 
+ */
+export type CouponCategory = Prisma.CouponCategoryModel
