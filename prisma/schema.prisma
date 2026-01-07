@@ -140,6 +140,7 @@ model Address {
   state            String?
   city             String?
   district         String?
+  isDefault        Boolean  @default(false)
   userId           String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt

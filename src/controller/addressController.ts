@@ -23,10 +23,27 @@ export const createAddress = async (
       state,
       city,
       district,
+      isDefault,
     } = req.body;
 
     if (!mainAddress || !pincode) {
       throw new CustomError("Main address and pincode are required", 400);
+    }
+
+  
+    const addressCount = await prisma.address.count({
+      where: { userId: req.user.id },
+    });
+
+    
+    const shouldBeDefault = addressCount === 0 ? true : isDefault || false;
+
+    if (shouldBeDefault) {
+      
+      await prisma.address.updateMany({
+        where: { userId: req.user.id, isDefault: true },
+        data: { isDefault: false },
+      });
     }
 
     const address = await prisma.address.create({
@@ -39,6 +56,7 @@ export const createAddress = async (
         state,
         city,
         district,
+        isDefault: shouldBeDefault,
       },
     });
 
@@ -65,9 +83,10 @@ export const getUserAddresses = async (
       where: {
         userId: req.user.id,
       },
-      orderBy: {
-        createdAt: "desc",
-      },
+      orderBy: [
+        { isDefault: "desc" },
+        { createdAt: "desc" },
+      ],
     });
 
     res.status(200).json({
@@ -90,6 +109,7 @@ export const updateAddress = async (
     }
 
     const { id } = req.params;
+    
     const {
       mainAddress,
       secondaryAddress,
@@ -98,6 +118,7 @@ export const updateAddress = async (
       state,
       city,
       district,
+      isDefault,
     } = req.body;
 
     const existingAddress = await prisma.address.findUnique({
@@ -112,6 +133,14 @@ export const updateAddress = async (
       throw new CustomError("Access denied", 403);
     }
 
+    if (isDefault) {
+      
+      await prisma.address.updateMany({
+        where: { userId: req.user.id, isDefault: true },
+        data: { isDefault: false },
+      });
+    }
+
     const updatedAddress = await prisma.address.update({
       where: { id },
       data: {
@@ -122,6 +151,7 @@ export const updateAddress = async (
         state,
         city,
         district,
+        ...(isDefault !== undefined && { isDefault }),  
       },
     });
 
