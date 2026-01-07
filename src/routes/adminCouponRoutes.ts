@@ -26,6 +26,7 @@ import {
 const router = Router();
 
 router.use(authMiddleware as any);
+
 router.use(adminAuthMiddleware as any);
 
 router.post("/", validate(createCouponValidation), createCoupon);

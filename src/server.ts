@@ -36,6 +36,10 @@ import adminCouponRoutes from "./routes/adminCouponRoutes";
 
 import userCouponRoutes from "./routes/userCouponRoutes";
 
+import adminBlogRoutes from "./routes/adminBlogRoutes";
+
+import userBlogRoutes from "./routes/userBlogRoutes";
+
 const app = express();
 
 app.use(
@@ -97,6 +101,8 @@ app.use("/api/v1/admin/size-charts", adminSizeChartRoutes);
 
 app.use("/api/v1/admin/coupons", adminCouponRoutes);
 
+app.use("/api/v1/admin/blogs", adminBlogRoutes);
+
 app.use("/api/v1/admin/products", adminProductRoutes);
 
 app.use("/api/v1/products", userProductRoutes);
@@ -106,6 +112,8 @@ app.use("/api/v1/cart", userCartRoutes);
 app.use("/api/v1/wishlist", userWishlistRoutes);
 
 app.use("/api/v1/coupons", userCouponRoutes);
+
+app.use("/api/v1/blogs", userBlogRoutes);
 
 app.get("/api/health", (_, res) => {
   res.json({ status: "___I'm yours to command.___" });

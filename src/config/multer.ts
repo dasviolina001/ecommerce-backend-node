@@ -4,15 +4,32 @@ import path from "path";
 
 import fs from "fs";
 
-const uploadDir = path.join(process.cwd(), "uploads/products");
+const productUploadDir = path.join(process.cwd(), "uploads/products");
 
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
+const blogUploadDir = path.join(process.cwd(), "uploads/blogs");
 
-const storage = multer.diskStorage({
+[productUploadDir, blogUploadDir].forEach((dir) => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+});
+
+const productStorage = multer.diskStorage({
   destination: (_, __, cb) => {
-    cb(null, uploadDir);
+    cb(null, productUploadDir);
+  },
+  filename: (_, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(
+      null,
+      file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname)
+    );
+  },
+});
+
+const blogStorage = multer.diskStorage({
+  destination: (_, __, cb) => {
+    cb(null, blogUploadDir);
   },
   filename: (_, file, cb) => {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -38,7 +55,7 @@ const fileFilter = (
 };
 
 export const productImageUpload = multer({
-  storage,
+  storage: productStorage,
   fileFilter,
   limits: {
     fileSize: 5 * 1024 * 1024,
@@ -46,4 +63,15 @@ export const productImageUpload = multer({
 }).fields([
   { name: "mainImage", maxCount: 1 },
   { name: "productImages", maxCount: 5 },
+]);
+
+export const blogImageUpload = multer({
+  storage: blogStorage,
+  fileFilter,
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+}).fields([
+  { name: "thumbImage", maxCount: 1 },
+  { name: "contentImages", maxCount: 10 },
 ]);

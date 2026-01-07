@@ -63,7 +63,8 @@ export const ModelName = {
   Coupon: 'Coupon',
   CouponUser: 'CouponUser',
   CouponProduct: 'CouponProduct',
-  CouponCategory: 'CouponCategory'
+  CouponCategory: 'CouponCategory',
+  Blog: 'Blog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -260,6 +261,21 @@ export const CouponCategoryScalarFieldEnum = {
 export type CouponCategoryScalarFieldEnum = (typeof CouponCategoryScalarFieldEnum)[keyof typeof CouponCategoryScalarFieldEnum]
 
 
+export const BlogScalarFieldEnum = {
+  id: 'id',
+  header: 'header',
+  description: 'description',
+  content: 'content',
+  thumbImage: 'thumbImage',
+  contentImages: 'contentImages',
+  author: 'author',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BlogScalarFieldEnum = (typeof BlogScalarFieldEnum)[keyof typeof BlogScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -433,4 +449,16 @@ export const CouponCategoryOrderByRelevanceFieldEnum = {
 } as const
 
 export type CouponCategoryOrderByRelevanceFieldEnum = (typeof CouponCategoryOrderByRelevanceFieldEnum)[keyof typeof CouponCategoryOrderByRelevanceFieldEnum]
+
+
+export const BlogOrderByRelevanceFieldEnum = {
+  id: 'id',
+  header: 'header',
+  description: 'description',
+  content: 'content',
+  thumbImage: 'thumbImage',
+  author: 'author'
+} as const
+
+export type BlogOrderByRelevanceFieldEnum = (typeof BlogOrderByRelevanceFieldEnum)[keyof typeof BlogOrderByRelevanceFieldEnum]
 

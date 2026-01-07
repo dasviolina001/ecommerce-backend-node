@@ -239,3 +239,16 @@ model CouponCategory {
   @@index([categoryId])
   @@index([couponId])
 }
+
+model Blog {
+  id          String   @id @default(uuid())
+  header      String
+  description String?
+  content     String   @db.LongText
+  thumbImage  String?
+  contentImages Json?
+  author      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
