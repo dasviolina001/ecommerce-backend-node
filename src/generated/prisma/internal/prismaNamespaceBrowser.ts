@@ -174,7 +174,16 @@ export type CartScalarFieldEnum = (typeof CartScalarFieldEnum)[keyof typeof Cart
 
 export const AddressScalarFieldEnum = {
   id: 'id',
-  userId: 'userId'
+  mainAddress: 'mainAddress',
+  secondaryAddress: 'secondaryAddress',
+  landmark: 'landmark',
+  pincode: 'pincode',
+  state: 'state',
+  city: 'city',
+  district: 'district',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum]
@@ -388,6 +397,13 @@ export type CartOrderByRelevanceFieldEnum = (typeof CartOrderByRelevanceFieldEnu
 
 export const AddressOrderByRelevanceFieldEnum = {
   id: 'id',
+  mainAddress: 'mainAddress',
+  secondaryAddress: 'secondaryAddress',
+  landmark: 'landmark',
+  pincode: 'pincode',
+  state: 'state',
+  city: 'city',
+  district: 'district',
   userId: 'userId'
 } as const
 

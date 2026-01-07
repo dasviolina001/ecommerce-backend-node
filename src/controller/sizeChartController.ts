@@ -33,6 +33,7 @@ export const createSizeChart = asyncHandler(
 
 export const getAllSizeCharts = asyncHandler(
   async (req: Request, res: Response) => {
+    
     const { page = 1, limit = 10 } = req.query;
 
     const sizeCharts = await sizeChartService.getAllSizeCharts(

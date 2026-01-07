@@ -9,6 +9,7 @@ import { asyncHandler } from "../lib/asyncHandler";
 export const createProduct = asyncHandler(
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
+    
     if (!errors.isEmpty()) {
       res.status(400).json({ success: false, errors: errors.array() });
       return;
@@ -48,6 +49,7 @@ export const createProduct = asyncHandler(
     }
 
     const mainImage = `/uploads/products/${files.mainImage[0].filename}`;
+
     const productImages = (files.productImages || []).map(
       (file) => `/uploads/products/${file.filename}`
     );

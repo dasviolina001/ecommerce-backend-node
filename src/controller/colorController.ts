@@ -57,6 +57,7 @@ export const updateColorScheme = asyncHandler(
     }
 
     const { colorSchemeId } = req.params;
+    
     const { name, description } = req.body;
 
     const colorScheme = await colorSchemeService.updateColorScheme(

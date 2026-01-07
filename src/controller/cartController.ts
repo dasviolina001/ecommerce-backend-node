@@ -8,6 +8,7 @@ const cartService = new CartService();
 
 export const addToCart = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?.id;
+
   const { productId, quantity } = req.body;
 
   if (!productId) {
@@ -54,7 +55,9 @@ export const getCartItems = asyncHandler(
 export const updateCartQuantity = asyncHandler(
   async (req: Request, res: Response) => {
     const userId = req.user?.id;
+
     const { productId } = req.params;
+    
     const { quantity } = req.body;
 
     if (!quantity) {
@@ -83,6 +86,7 @@ export const updateCartQuantity = asyncHandler(
 export const removeFromCart = asyncHandler(
   async (req: Request, res: Response) => {
     const userId = req.user?.id;
+    
     const { productId } = req.params;
 
     if (!userId) {

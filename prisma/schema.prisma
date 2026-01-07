@@ -28,6 +28,7 @@ model User {
   cart        Cart[]
   wishlist    Wishlist[]
   coupons     CouponUser[]
+  addresses   Address[]
 }
 
 model BankDetails {
@@ -131,8 +132,21 @@ model Cart {
 }
 
 model Address {
-  id     String @id @default(uuid())
-  userId String
+  id               String   @id @default(uuid())
+  mainAddress      String
+  secondaryAddress String?
+  landmark         String?
+  pincode          String
+  state            String?
+  city             String?
+  district         String?
+  userId           String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model Wishlist {

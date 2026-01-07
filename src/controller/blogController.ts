@@ -6,25 +6,25 @@ import * as blogService from "../service/blogService";
 
 import { CustomError } from "../middleware/errorHandler";
 
- 
 export const createBlog = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     if (!req.user) {
       throw new CustomError("User not authenticated", 401);
     }
     
-
     const { header, description, content, author } = req.body;
 
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
     let thumbImage: string | undefined;
+    
     let contentImages: string[] | undefined;
 
     if (files) {
       if (files.thumbImage && files.thumbImage.length > 0) {
         thumbImage = `/uploads/blogs/${files.thumbImage[0].filename}`;
       }
+      
       if (files.contentImages && files.contentImages.length > 0) {
         contentImages = files.contentImages.map(
           (file) => `/uploads/blogs/${file.filename}`
@@ -58,17 +58,20 @@ export const createBlog = async (req: AuthRequest, res: Response): Promise<void>
 export const updateBlog = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
+
     const { header, description, content, author } = req.body;
 
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
     let thumbImage: string | undefined;
+
     let contentImages: string[] | undefined;
 
     if (files) {
       if (files.thumbImage && files.thumbImage.length > 0) {
         thumbImage = `/uploads/blogs/${files.thumbImage[0].filename}`;
       }
+
       if (files.contentImages && files.contentImages.length > 0) {
         contentImages = files.contentImages.map(
           (file) => `/uploads/blogs/${file.filename}`
@@ -117,7 +120,6 @@ export const deleteBlog = async (req: AuthRequest, res: Response): Promise<void>
     throw error;
   }
 };
-
  
 export const getAllBlogs = async (_: Request, res: Response): Promise<void> => {
   try {
