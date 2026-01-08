@@ -7,40 +7,40 @@
 
 */
 -- DropForeignKey
-ALTER TABLE `cart` DROP FOREIGN KEY `Cart_userId_fkey`;
+ALTER TABLE `Cart` DROP FOREIGN KEY `Cart_userId_fkey`;
 
 -- DropForeignKey
-ALTER TABLE `couponproduct` DROP FOREIGN KEY `CouponProduct_couponId_fkey`;
+ALTER TABLE `CouponProduct` DROP FOREIGN KEY `CouponProduct_couponId_fkey`;
 
 -- DropForeignKey
-ALTER TABLE `wishlist` DROP FOREIGN KEY `Wishlist_userId_fkey`;
+ALTER TABLE `Wishlist` DROP FOREIGN KEY `Wishlist_userId_fkey`;
 
 -- DropIndex
-DROP INDEX `Cart_userId_productId_key` ON `cart`;
+DROP INDEX `Cart_userId_productId_key` ON `Cart`;
 
 -- DropIndex
-DROP INDEX `CouponProduct_couponId_productId_key` ON `couponproduct`;
+DROP INDEX `CouponProduct_couponId_productId_key` ON `CouponProduct`;
 
 -- DropIndex
-DROP INDEX `Wishlist_userId_productId_key` ON `wishlist`;
+DROP INDEX `Wishlist_userId_productId_key` ON `Wishlist`;
 
 -- AlterTable
-ALTER TABLE `cart` ADD COLUMN `variantId` VARCHAR(191) NULL;
+ALTER TABLE `Cart` ADD COLUMN `variantId` VARCHAR(191) NULL;
 
 -- AlterTable
-ALTER TABLE `category` ADD COLUMN `isFeatured` BOOLEAN NULL DEFAULT false;
+ALTER TABLE `Category` ADD COLUMN `isFeatured` BOOLEAN NULL DEFAULT false;
 
 -- AlterTable
-ALTER TABLE `couponproduct` ADD COLUMN `variantId` VARCHAR(191) NULL;
+ALTER TABLE `CouponProduct` ADD COLUMN `variantId` VARCHAR(191) NULL;
 
 -- AlterTable
-ALTER TABLE `product` ADD COLUMN `hasCashOnDelivery` BOOLEAN NOT NULL DEFAULT true,
+ALTER TABLE `Product` ADD COLUMN `hasCashOnDelivery` BOOLEAN NOT NULL DEFAULT true,
     ADD COLUMN `hasVariants` BOOLEAN NOT NULL DEFAULT false,
     MODIFY `quantity` INTEGER NOT NULL DEFAULT 0,
     MODIFY `paymentType` VARCHAR(191) NULL;
 
 -- AlterTable
-ALTER TABLE `wishlist` ADD COLUMN `variantId` VARCHAR(191) NULL;
+ALTER TABLE `Wishlist` ADD COLUMN `variantId` VARCHAR(191) NULL;
 
 -- CreateTable
 CREATE TABLE `ProductVariant` (

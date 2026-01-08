@@ -1,8 +1,8 @@
 -- AlterTable
-ALTER TABLE `product` ADD COLUMN `sizeChartId` VARCHAR(191) NULL;
+ALTER TABLE `Product` ADD COLUMN `sizeChartId` VARCHAR(191) NULL;
 
 -- AlterTable
-ALTER TABLE `sizechart` MODIFY `colors` JSON NULL;
+ALTER TABLE `SizeChart` MODIFY `colors` JSON NULL;
 
 -- CreateIndex
 CREATE INDEX `Product_sizeChartId_idx` ON `Product`(`sizeChartId`);

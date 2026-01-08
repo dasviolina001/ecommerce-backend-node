@@ -1,5 +1,5 @@
 -- AlterTable
-ALTER TABLE `product` MODIFY `buyingPrice` DOUBLE NULL,
+ALTER TABLE `Product` MODIFY `buyingPrice` DOUBLE NULL,
     MODIFY `maximumRetailPrice` DOUBLE NULL,
     MODIFY `sellingPrice` DOUBLE NULL;
 

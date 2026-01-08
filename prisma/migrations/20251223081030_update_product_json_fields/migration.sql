@@ -6,5 +6,5 @@
 
 */
 -- AlterTable
-ALTER TABLE `product` MODIFY `dimensions` JSON NULL,
+ALTER TABLE `Product` MODIFY `dimensions` JSON NULL,
     MODIFY `metaData` JSON NULL;

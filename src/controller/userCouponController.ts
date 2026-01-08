@@ -11,8 +11,7 @@ import { asyncHandler } from "../lib/asyncHandler";
 import { prisma } from "../db/prisma";
 
 import { CustomError } from "../middleware/errorHandler";
-
-
+ 
 export const validateCoupon = asyncHandler(
   async (req: AuthRequest, res: Response) => {
     const errors = validationResult(req);

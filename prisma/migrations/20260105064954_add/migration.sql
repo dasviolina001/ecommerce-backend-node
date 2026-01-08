@@ -1,5 +1,5 @@
 -- AlterTable
-ALTER TABLE `cart` ADD COLUMN `couponCode` VARCHAR(191) NULL;
+ALTER TABLE `Cart` ADD COLUMN `couponCode` VARCHAR(191) NULL;
 
 -- CreateTable
 CREATE TABLE `Coupon` (

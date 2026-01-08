@@ -1,2 +1,2 @@
 -- AlterTable
-ALTER TABLE `address` ADD COLUMN `isDefault` BOOLEAN NOT NULL DEFAULT false;
+ALTER TABLE `Address` ADD COLUMN `isDefault` BOOLEAN NOT NULL DEFAULT false;
