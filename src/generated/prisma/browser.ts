@@ -122,3 +122,18 @@ export type PincodeGroup = Prisma.PincodeGroupModel
  * 
  */
 export type PincodeGroupPincode = Prisma.PincodeGroupPincodeModel
+/**
+ * Model AboutPageContent
+ * 
+ */
+export type AboutPageContent = Prisma.AboutPageContentModel
+/**
+ * Model ContactPageInformation
+ * 
+ */
+export type ContactPageInformation = Prisma.ContactPageInformationModel
+/**
+ * Model PolicyPageContent
+ * 
+ */
+export type PolicyPageContent = Prisma.PolicyPageContentModel

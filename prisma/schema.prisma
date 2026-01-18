@@ -464,3 +464,35 @@ model PincodeGroupPincode {
   @@index([pincodeGroupId])
   @@index([pincodeId])
 }
+
+model AboutPageContent {
+  id        String   @id @default(uuid())
+  title     String
+  content   Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([title])
+}
+
+model ContactPageInformation {
+  id        String   @id @default(uuid())
+  label     String
+  type      String
+  value     Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type])
+  @@index([label])
+}
+
+model PolicyPageContent {
+  id        String   @id @default(uuid())
+  title     String
+  content   Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([title])
+}

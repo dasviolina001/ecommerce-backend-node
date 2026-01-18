@@ -404,7 +404,10 @@ export const ModelName = {
   OrderHistory: 'OrderHistory',
   Pincode: 'Pincode',
   PincodeGroup: 'PincodeGroup',
-  PincodeGroupPincode: 'PincodeGroupPincode'
+  PincodeGroupPincode: 'PincodeGroupPincode',
+  AboutPageContent: 'AboutPageContent',
+  ContactPageInformation: 'ContactPageInformation',
+  PolicyPageContent: 'PolicyPageContent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -420,7 +423,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "bankDetails" | "category" | "product" | "productVariant" | "cart" | "address" | "wishlist" | "colorScheme" | "sizeChart" | "coupon" | "couponUser" | "couponProduct" | "couponCategory" | "blog" | "order" | "orderItem" | "orderHistory" | "pincode" | "pincodeGroup" | "pincodeGroupPincode"
+    modelProps: "user" | "bankDetails" | "category" | "product" | "productVariant" | "cart" | "address" | "wishlist" | "colorScheme" | "sizeChart" | "coupon" | "couponUser" | "couponProduct" | "couponCategory" | "blog" | "order" | "orderItem" | "orderHistory" | "pincode" | "pincodeGroup" | "pincodeGroupPincode" | "aboutPageContent" | "contactPageInformation" | "policyPageContent"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1810,6 +1813,204 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AboutPageContent: {
+      payload: Prisma.$AboutPageContentPayload<ExtArgs>
+      fields: Prisma.AboutPageContentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AboutPageContentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AboutPageContentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AboutPageContentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AboutPageContentPayload>
+        }
+        findFirst: {
+          args: Prisma.AboutPageContentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AboutPageContentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AboutPageContentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AboutPageContentPayload>
+        }
+        findMany: {
+          args: Prisma.AboutPageContentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AboutPageContentPayload>[]
+        }
+        create: {
+          args: Prisma.AboutPageContentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AboutPageContentPayload>
+        }
+        createMany: {
+          args: Prisma.AboutPageContentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AboutPageContentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AboutPageContentPayload>
+        }
+        update: {
+          args: Prisma.AboutPageContentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AboutPageContentPayload>
+        }
+        deleteMany: {
+          args: Prisma.AboutPageContentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AboutPageContentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AboutPageContentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AboutPageContentPayload>
+        }
+        aggregate: {
+          args: Prisma.AboutPageContentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAboutPageContent>
+        }
+        groupBy: {
+          args: Prisma.AboutPageContentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AboutPageContentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AboutPageContentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AboutPageContentCountAggregateOutputType> | number
+        }
+      }
+    }
+    ContactPageInformation: {
+      payload: Prisma.$ContactPageInformationPayload<ExtArgs>
+      fields: Prisma.ContactPageInformationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ContactPageInformationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPageInformationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ContactPageInformationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPageInformationPayload>
+        }
+        findFirst: {
+          args: Prisma.ContactPageInformationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPageInformationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ContactPageInformationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPageInformationPayload>
+        }
+        findMany: {
+          args: Prisma.ContactPageInformationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPageInformationPayload>[]
+        }
+        create: {
+          args: Prisma.ContactPageInformationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPageInformationPayload>
+        }
+        createMany: {
+          args: Prisma.ContactPageInformationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ContactPageInformationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPageInformationPayload>
+        }
+        update: {
+          args: Prisma.ContactPageInformationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPageInformationPayload>
+        }
+        deleteMany: {
+          args: Prisma.ContactPageInformationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ContactPageInformationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ContactPageInformationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPageInformationPayload>
+        }
+        aggregate: {
+          args: Prisma.ContactPageInformationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateContactPageInformation>
+        }
+        groupBy: {
+          args: Prisma.ContactPageInformationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactPageInformationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ContactPageInformationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactPageInformationCountAggregateOutputType> | number
+        }
+      }
+    }
+    PolicyPageContent: {
+      payload: Prisma.$PolicyPageContentPayload<ExtArgs>
+      fields: Prisma.PolicyPageContentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PolicyPageContentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PolicyPageContentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PolicyPageContentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PolicyPageContentPayload>
+        }
+        findFirst: {
+          args: Prisma.PolicyPageContentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PolicyPageContentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PolicyPageContentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PolicyPageContentPayload>
+        }
+        findMany: {
+          args: Prisma.PolicyPageContentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PolicyPageContentPayload>[]
+        }
+        create: {
+          args: Prisma.PolicyPageContentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PolicyPageContentPayload>
+        }
+        createMany: {
+          args: Prisma.PolicyPageContentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.PolicyPageContentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PolicyPageContentPayload>
+        }
+        update: {
+          args: Prisma.PolicyPageContentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PolicyPageContentPayload>
+        }
+        deleteMany: {
+          args: Prisma.PolicyPageContentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PolicyPageContentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.PolicyPageContentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PolicyPageContentPayload>
+        }
+        aggregate: {
+          args: Prisma.PolicyPageContentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePolicyPageContent>
+        }
+        groupBy: {
+          args: Prisma.PolicyPageContentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PolicyPageContentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PolicyPageContentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PolicyPageContentCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2167,6 +2368,40 @@ export const PincodeGroupPincodeScalarFieldEnum = {
 export type PincodeGroupPincodeScalarFieldEnum = (typeof PincodeGroupPincodeScalarFieldEnum)[keyof typeof PincodeGroupPincodeScalarFieldEnum]
 
 
+export const AboutPageContentScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AboutPageContentScalarFieldEnum = (typeof AboutPageContentScalarFieldEnum)[keyof typeof AboutPageContentScalarFieldEnum]
+
+
+export const ContactPageInformationScalarFieldEnum = {
+  id: 'id',
+  label: 'label',
+  type: 'type',
+  value: 'value',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContactPageInformationScalarFieldEnum = (typeof ContactPageInformationScalarFieldEnum)[keyof typeof ContactPageInformationScalarFieldEnum]
+
+
+export const PolicyPageContentScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PolicyPageContentScalarFieldEnum = (typeof PolicyPageContentScalarFieldEnum)[keyof typeof PolicyPageContentScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2440,6 +2675,31 @@ export const PincodeGroupPincodeOrderByRelevanceFieldEnum = {
 export type PincodeGroupPincodeOrderByRelevanceFieldEnum = (typeof PincodeGroupPincodeOrderByRelevanceFieldEnum)[keyof typeof PincodeGroupPincodeOrderByRelevanceFieldEnum]
 
 
+export const AboutPageContentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  title: 'title'
+} as const
+
+export type AboutPageContentOrderByRelevanceFieldEnum = (typeof AboutPageContentOrderByRelevanceFieldEnum)[keyof typeof AboutPageContentOrderByRelevanceFieldEnum]
+
+
+export const ContactPageInformationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  label: 'label',
+  type: 'type'
+} as const
+
+export type ContactPageInformationOrderByRelevanceFieldEnum = (typeof ContactPageInformationOrderByRelevanceFieldEnum)[keyof typeof ContactPageInformationOrderByRelevanceFieldEnum]
+
+
+export const PolicyPageContentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  title: 'title'
+} as const
+
+export type PolicyPageContentOrderByRelevanceFieldEnum = (typeof PolicyPageContentOrderByRelevanceFieldEnum)[keyof typeof PolicyPageContentOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -2631,6 +2891,9 @@ export type GlobalOmitConfig = {
   pincode?: Prisma.PincodeOmit
   pincodeGroup?: Prisma.PincodeGroupOmit
   pincodeGroupPincode?: Prisma.PincodeGroupPincodeOmit
+  aboutPageContent?: Prisma.AboutPageContentOmit
+  contactPageInformation?: Prisma.ContactPageInformationOmit
+  policyPageContent?: Prisma.PolicyPageContentOmit
 }
 
 /* Types for Logging */

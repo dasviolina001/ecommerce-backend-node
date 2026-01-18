@@ -60,6 +60,18 @@ import userPincodeRoutes from "./routes/userPincodeRoutes";
 
 import userPincodeGroupRoutes from "./routes/userPincodeGroupRoutes";
 
+import adminAboutPageContentRoutes from "./routes/adminAboutPageContentRoutes";
+
+import userAboutPageContentRoutes from "./routes/userAboutPageContentRoutes";
+
+import adminContactPageInformationRoutes from "./routes/adminContactPageInformationRoutes";
+
+import userContactPageInformationRoutes from "./routes/userContactPageInformationRoutes";
+
+import adminPolicyPageContentRoutes from "./routes/adminPolicyPageContentRoutes";
+
+import userPolicyPageContentRoutes from "./routes/userPolicyPageContentRoutes";
+
 const app = express();
 
 app.use(
@@ -83,10 +95,9 @@ const logger = (
   console.log(`[${time}] ${method} ${url}`);
   console.log(`Content-Type: ${req.headers["content-type"]}`);
   console.log(
-    `Body keys: ${
-      Object.keys(req.body || {}).length > 0
-        ? Object.keys(req.body).join(", ")
-        : "EMPTY"
+    `Body keys: ${Object.keys(req.body || {}).length > 0
+      ? Object.keys(req.body).join(", ")
+      : "EMPTY"
     }`
   );
   next();
@@ -162,6 +173,18 @@ app.use("/api/v1/admin/pincode-groups", adminPincodeGroupRoutes);
 app.use("/api/v1/pincodes", userPincodeRoutes);
 
 app.use("/api/v1/pincode-groups", userPincodeGroupRoutes);
+
+app.use("/api/v1/admin/about-page-content", adminAboutPageContentRoutes);
+
+app.use("/api/v1/about-page-content", userAboutPageContentRoutes);
+
+app.use("/api/v1/admin/contact-page-information", adminContactPageInformationRoutes);
+
+app.use("/api/v1/contact-page-information", userContactPageInformationRoutes);
+
+app.use("/api/v1/admin/policy-page-content", adminPolicyPageContentRoutes);
+
+app.use("/api/v1/policy-page-content", userPolicyPageContentRoutes);
 
 app.get("/api/health", (_, res) => {
   res.json({ status: "___I'm yours to command.___" });

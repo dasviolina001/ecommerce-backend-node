@@ -71,7 +71,10 @@ export const ModelName = {
   OrderHistory: 'OrderHistory',
   Pincode: 'Pincode',
   PincodeGroup: 'PincodeGroup',
-  PincodeGroupPincode: 'PincodeGroupPincode'
+  PincodeGroupPincode: 'PincodeGroupPincode',
+  AboutPageContent: 'AboutPageContent',
+  ContactPageInformation: 'ContactPageInformation',
+  PolicyPageContent: 'PolicyPageContent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -408,6 +411,40 @@ export const PincodeGroupPincodeScalarFieldEnum = {
 export type PincodeGroupPincodeScalarFieldEnum = (typeof PincodeGroupPincodeScalarFieldEnum)[keyof typeof PincodeGroupPincodeScalarFieldEnum]
 
 
+export const AboutPageContentScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AboutPageContentScalarFieldEnum = (typeof AboutPageContentScalarFieldEnum)[keyof typeof AboutPageContentScalarFieldEnum]
+
+
+export const ContactPageInformationScalarFieldEnum = {
+  id: 'id',
+  label: 'label',
+  type: 'type',
+  value: 'value',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContactPageInformationScalarFieldEnum = (typeof ContactPageInformationScalarFieldEnum)[keyof typeof ContactPageInformationScalarFieldEnum]
+
+
+export const PolicyPageContentScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PolicyPageContentScalarFieldEnum = (typeof PolicyPageContentScalarFieldEnum)[keyof typeof PolicyPageContentScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -679,4 +716,29 @@ export const PincodeGroupPincodeOrderByRelevanceFieldEnum = {
 } as const
 
 export type PincodeGroupPincodeOrderByRelevanceFieldEnum = (typeof PincodeGroupPincodeOrderByRelevanceFieldEnum)[keyof typeof PincodeGroupPincodeOrderByRelevanceFieldEnum]
+
+
+export const AboutPageContentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  title: 'title'
+} as const
+
+export type AboutPageContentOrderByRelevanceFieldEnum = (typeof AboutPageContentOrderByRelevanceFieldEnum)[keyof typeof AboutPageContentOrderByRelevanceFieldEnum]
+
+
+export const ContactPageInformationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  label: 'label',
+  type: 'type'
+} as const
+
+export type ContactPageInformationOrderByRelevanceFieldEnum = (typeof ContactPageInformationOrderByRelevanceFieldEnum)[keyof typeof ContactPageInformationOrderByRelevanceFieldEnum]
+
+
+export const PolicyPageContentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  title: 'title'
+} as const
+
+export type PolicyPageContentOrderByRelevanceFieldEnum = (typeof PolicyPageContentOrderByRelevanceFieldEnum)[keyof typeof PolicyPageContentOrderByRelevanceFieldEnum]
 
