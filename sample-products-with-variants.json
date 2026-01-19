@@ -1,0 +1,876 @@
+[
+  {
+    "product": {
+      "productName": "Premium Cotton T-Shirt",
+      "shortDesc": "Comfortable 100% cotton t-shirt",
+      "longDesc": "High-quality cotton t-shirt perfect for everyday wear. Soft, breathable, and durable fabric.",
+      "mainImage": "https://example.com/tshirt-main.jpg",
+      "productImages": "[\"https://example.com/tshirt-1.jpg\", \"https://example.com/tshirt-2.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": true,
+      "isBestSelling": false,
+      "isNewCollection": true
+    },
+    "variants": [
+      {
+        "sku": "TSHIRT-RED-S",
+        "variantName": "Red Small",
+        "color": "Red",
+        "size": "S",
+        "buyingPrice": 150,
+        "maximumRetailPrice": 500,
+        "sellingPrice": 399,
+        "quantity": 50,
+        "isDefault": true
+      },
+      {
+        "sku": "TSHIRT-RED-M",
+        "variantName": "Red Medium",
+        "color": "Red",
+        "size": "M",
+        "buyingPrice": 150,
+        "maximumRetailPrice": 500,
+        "sellingPrice": 399,
+        "quantity": 60
+      },
+      {
+        "sku": "TSHIRT-BLUE-L",
+        "variantName": "Blue Large",
+        "color": "Blue",
+        "size": "L",
+        "buyingPrice": 150,
+        "maximumRetailPrice": 500,
+        "sellingPrice": 399,
+        "quantity": 45
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Denim Jeans Classic",
+      "shortDesc": "Classic blue denim jeans",
+      "longDesc": "Premium quality denim jeans with comfortable fit. Perfect for casual and semi-formal occasions.",
+      "mainImage": "https://example.com/jeans-main.jpg",
+      "productImages": "[\"https://example.com/jeans-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": false,
+      "isBestSelling": true,
+      "isNewCollection": false
+    },
+    "variants": [
+      {
+        "sku": "JEANS-BLUE-28",
+        "variantName": "Blue 28",
+        "color": "Blue",
+        "size": "28",
+        "buyingPrice": 400,
+        "maximumRetailPrice": 1200,
+        "sellingPrice": 899,
+        "quantity": 30,
+        "isDefault": true
+      },
+      {
+        "sku": "JEANS-BLUE-30",
+        "variantName": "Blue 30",
+        "color": "Blue",
+        "size": "30",
+        "buyingPrice": 400,
+        "maximumRetailPrice": 1200,
+        "sellingPrice": 899,
+        "quantity": 35
+      },
+      {
+        "sku": "JEANS-BLACK-32",
+        "variantName": "Black 32",
+        "color": "Black",
+        "size": "32",
+        "buyingPrice": 400,
+        "maximumRetailPrice": 1200,
+        "sellingPrice": 899,
+        "quantity": 25
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Casual Shirt Oxford",
+      "shortDesc": "Premium Oxford cotton shirt",
+      "longDesc": "Elegantly designed Oxford shirt suitable for office and casual wear. Made from premium cotton blend.",
+      "mainImage": "https://example.com/oxford-main.jpg",
+      "productImages": "[\"https://example.com/oxford-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": true,
+      "isBestSelling": false,
+      "isNewCollection": true
+    },
+    "variants": [
+      {
+        "sku": "OXFORD-WHITE-S",
+        "variantName": "White Small",
+        "color": "White",
+        "size": "S",
+        "buyingPrice": 250,
+        "maximumRetailPrice": 800,
+        "sellingPrice": 599,
+        "quantity": 40,
+        "isDefault": true
+      },
+      {
+        "sku": "OXFORD-BLUE-M",
+        "variantName": "Blue Medium",
+        "color": "Blue",
+        "size": "M",
+        "buyingPrice": 250,
+        "maximumRetailPrice": 800,
+        "sellingPrice": 599,
+        "quantity": 50
+      },
+      {
+        "sku": "OXFORD-GRAY-L",
+        "variantName": "Gray Large",
+        "color": "Gray",
+        "size": "L",
+        "buyingPrice": 250,
+        "maximumRetailPrice": 800,
+        "sellingPrice": 599,
+        "quantity": 35
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Polo T-Shirt Sports",
+      "shortDesc": "Performance polo t-shirt",
+      "longDesc": "Breathable sports polo shirt with moisture-wicking technology. Ideal for sports and casual activities.",
+      "mainImage": "https://example.com/polo-main.jpg",
+      "productImages": "[\"https://example.com/polo-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": false,
+      "isBestSelling": false,
+      "isNewCollection": true
+    },
+    "variants": [
+      {
+        "sku": "POLO-BLACK-S",
+        "variantName": "Black Small",
+        "color": "Black",
+        "size": "S",
+        "buyingPrice": 180,
+        "maximumRetailPrice": 600,
+        "sellingPrice": 449,
+        "quantity": 55,
+        "isDefault": true
+      },
+      {
+        "sku": "POLO-WHITE-M",
+        "variantName": "White Medium",
+        "color": "White",
+        "size": "M",
+        "buyingPrice": 180,
+        "maximumRetailPrice": 600,
+        "sellingPrice": 449,
+        "quantity": 65
+      },
+      {
+        "sku": "POLO-NAVY-L",
+        "variantName": "Navy Large",
+        "color": "Navy",
+        "size": "L",
+        "buyingPrice": 180,
+        "maximumRetailPrice": 600,
+        "sellingPrice": 449,
+        "quantity": 50
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Hoodie Sweatshirt",
+      "shortDesc": "Warm comfortable hoodie",
+      "longDesc": "Cozy hoodie sweatshirt made from soft fleece. Perfect for winter wear and casual outings.",
+      "mainImage": "https://example.com/hoodie-main.jpg",
+      "productImages": "[\"https://example.com/hoodie-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": false,
+      "isBestSelling": true,
+      "isNewCollection": false
+    },
+    "variants": [
+      {
+        "sku": "HOODIE-BLACK-S",
+        "variantName": "Black Small",
+        "color": "Black",
+        "size": "S",
+        "buyingPrice": 300,
+        "maximumRetailPrice": 1000,
+        "sellingPrice": 749,
+        "quantity": 40,
+        "isDefault": true
+      },
+      {
+        "sku": "HOODIE-GRAY-M",
+        "variantName": "Gray Medium",
+        "color": "Gray",
+        "size": "M",
+        "buyingPrice": 300,
+        "maximumRetailPrice": 1000,
+        "sellingPrice": 749,
+        "quantity": 50
+      },
+      {
+        "sku": "HOODIE-BLUE-L",
+        "variantName": "Blue Large",
+        "color": "Blue",
+        "size": "L",
+        "buyingPrice": 300,
+        "maximumRetailPrice": 1000,
+        "sellingPrice": 749,
+        "quantity": 35
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Cargo Shorts",
+      "shortDesc": "Comfortable cargo shorts",
+      "longDesc": "Multi-pocket cargo shorts perfect for outdoor activities. Durable and comfortable fit.",
+      "mainImage": "https://example.com/cargo-main.jpg",
+      "productImages": "[\"https://example.com/cargo-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": true,
+      "isBestSelling": false,
+      "isNewCollection": true
+    },
+    "variants": [
+      {
+        "sku": "CARGO-KHAKI-S",
+        "variantName": "Khaki Small",
+        "color": "Khaki",
+        "size": "S",
+        "buyingPrice": 200,
+        "maximumRetailPrice": 700,
+        "sellingPrice": 499,
+        "quantity": 45,
+        "isDefault": true
+      },
+      {
+        "sku": "CARGO-KHAKI-M",
+        "variantName": "Khaki Medium",
+        "color": "Khaki",
+        "size": "M",
+        "buyingPrice": 200,
+        "maximumRetailPrice": 700,
+        "sellingPrice": 499,
+        "quantity": 55
+      },
+      {
+        "sku": "CARGO-OLIVE-L",
+        "variantName": "Olive Large",
+        "color": "Olive",
+        "size": "L",
+        "buyingPrice": 200,
+        "maximumRetailPrice": 700,
+        "sellingPrice": 499,
+        "quantity": 40
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Crew Neck Sweater",
+      "shortDesc": "Classic crew neck sweater",
+      "longDesc": "Soft and warm crew neck sweater. Perfect for layering or wearing standalone during cooler months.",
+      "mainImage": "https://example.com/sweater-main.jpg",
+      "productImages": "[\"https://example.com/sweater-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": false,
+      "isBestSelling": false,
+      "isNewCollection": true
+    },
+    "variants": [
+      {
+        "sku": "SWEATER-CHARCOAL-S",
+        "variantName": "Charcoal Small",
+        "color": "Charcoal",
+        "size": "S",
+        "buyingPrice": 280,
+        "maximumRetailPrice": 900,
+        "sellingPrice": 649,
+        "quantity": 35,
+        "isDefault": true
+      },
+      {
+        "sku": "SWEATER-NAVY-M",
+        "variantName": "Navy Medium",
+        "color": "Navy",
+        "size": "M",
+        "buyingPrice": 280,
+        "maximumRetailPrice": 900,
+        "sellingPrice": 649,
+        "quantity": 45
+      },
+      {
+        "sku": "SWEATER-CREAM-L",
+        "variantName": "Cream Large",
+        "color": "Cream",
+        "size": "L",
+        "buyingPrice": 280,
+        "maximumRetailPrice": 900,
+        "sellingPrice": 649,
+        "quantity": 30
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Athletic Tank Top",
+      "shortDesc": "Breathable athletic tank",
+      "longDesc": "Lightweight and breathable tank top designed for intense workouts. Features moisture-wicking technology.",
+      "mainImage": "https://example.com/tank-main.jpg",
+      "productImages": "[\"https://example.com/tank-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": false,
+      "isBestSelling": true,
+      "isNewCollection": false
+    },
+    "variants": [
+      {
+        "sku": "TANK-BLACK-XS",
+        "variantName": "Black Extra Small",
+        "color": "Black",
+        "size": "XS",
+        "buyingPrice": 120,
+        "maximumRetailPrice": 400,
+        "sellingPrice": 299,
+        "quantity": 60,
+        "isDefault": true
+      },
+      {
+        "sku": "TANK-GRAY-M",
+        "variantName": "Gray Medium",
+        "color": "Gray",
+        "size": "M",
+        "buyingPrice": 120,
+        "maximumRetailPrice": 400,
+        "sellingPrice": 299,
+        "quantity": 70
+      },
+      {
+        "sku": "TANK-WHITE-XL",
+        "variantName": "White Extra Large",
+        "color": "White",
+        "size": "XL",
+        "buyingPrice": 120,
+        "maximumRetailPrice": 400,
+        "sellingPrice": 299,
+        "quantity": 50
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Formal Blazer",
+      "shortDesc": "Premium formal blazer",
+      "longDesc": "Elegant formal blazer perfect for business meetings and formal events. Made from high-quality fabric.",
+      "mainImage": "https://example.com/blazer-main.jpg",
+      "productImages": "[\"https://example.com/blazer-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": true,
+      "isBestSelling": false,
+      "isNewCollection": false
+    },
+    "variants": [
+      {
+        "sku": "BLAZER-BLACK-S",
+        "variantName": "Black Small",
+        "color": "Black",
+        "size": "S",
+        "buyingPrice": 800,
+        "maximumRetailPrice": 2500,
+        "sellingPrice": 1899,
+        "quantity": 20,
+        "isDefault": true
+      },
+      {
+        "sku": "BLAZER-GRAY-M",
+        "variantName": "Gray Medium",
+        "color": "Gray",
+        "size": "M",
+        "buyingPrice": 800,
+        "maximumRetailPrice": 2500,
+        "sellingPrice": 1899,
+        "quantity": 25
+      },
+      {
+        "sku": "BLAZER-NAVY-L",
+        "variantName": "Navy Large",
+        "color": "Navy",
+        "size": "L",
+        "buyingPrice": 800,
+        "maximumRetailPrice": 2500,
+        "sellingPrice": 1899,
+        "quantity": 15
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Chino Pants Classic",
+      "shortDesc": "Classic chino pants",
+      "longDesc": "Versatile chino pants suitable for casual and semi-formal wear. Comfortable and stylish fit.",
+      "mainImage": "https://example.com/chino-main.jpg",
+      "productImages": "[\"https://example.com/chino-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": false,
+      "isBestSelling": false,
+      "isNewCollection": true
+    },
+    "variants": [
+      {
+        "sku": "CHINO-BEIGE-28",
+        "variantName": "Beige 28",
+        "color": "Beige",
+        "size": "28",
+        "buyingPrice": 350,
+        "maximumRetailPrice": 1100,
+        "sellingPrice": 799,
+        "quantity": 30,
+        "isDefault": true
+      },
+      {
+        "sku": "CHINO-NAVY-30",
+        "variantName": "Navy 30",
+        "color": "Navy",
+        "size": "30",
+        "buyingPrice": 350,
+        "maximumRetailPrice": 1100,
+        "sellingPrice": 799,
+        "quantity": 35
+      },
+      {
+        "sku": "CHINO-OLIVE-32",
+        "variantName": "Olive 32",
+        "color": "Olive",
+        "size": "32",
+        "buyingPrice": 350,
+        "maximumRetailPrice": 1100,
+        "sellingPrice": 799,
+        "quantity": 25
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Long Sleeve Henley",
+      "shortDesc": "Classic long sleeve henley",
+      "longDesc": "Timeless long sleeve henley shirt. Perfect layering piece for any wardrobe. Comfortable and versatile.",
+      "mainImage": "https://example.com/henley-main.jpg",
+      "productImages": "[\"https://example.com/henley-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": false,
+      "isBestSelling": true,
+      "isNewCollection": false
+    },
+    "variants": [
+      {
+        "sku": "HENLEY-BLACK-S",
+        "variantName": "Black Small",
+        "color": "Black",
+        "size": "S",
+        "buyingPrice": 160,
+        "maximumRetailPrice": 550,
+        "sellingPrice": 399,
+        "quantity": 50,
+        "isDefault": true
+      },
+      {
+        "sku": "HENLEY-WINE-M",
+        "variantName": "Wine Medium",
+        "color": "Wine",
+        "size": "M",
+        "buyingPrice": 160,
+        "maximumRetailPrice": 550,
+        "sellingPrice": 399,
+        "quantity": 60
+      },
+      {
+        "sku": "HENLEY-GRAY-L",
+        "variantName": "Gray Large",
+        "color": "Gray",
+        "size": "L",
+        "buyingPrice": 160,
+        "maximumRetailPrice": 550,
+        "sellingPrice": 399,
+        "quantity": 45
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Denim Jacket",
+      "shortDesc": "Classic denim jacket",
+      "longDesc": "Timeless denim jacket that works with any casual outfit. Durable and comfortable wear.",
+      "mainImage": "https://example.com/denim-jacket-main.jpg",
+      "productImages": "[\"https://example.com/denim-jacket-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": true,
+      "isBestSelling": false,
+      "isNewCollection": true
+    },
+    "variants": [
+      {
+        "sku": "DENJACK-BLUE-S",
+        "variantName": "Blue Small",
+        "color": "Blue",
+        "size": "S",
+        "buyingPrice": 500,
+        "maximumRetailPrice": 1500,
+        "sellingPrice": 1099,
+        "quantity": 30,
+        "isDefault": true
+      },
+      {
+        "sku": "DENJACK-BLUE-M",
+        "variantName": "Blue Medium",
+        "color": "Blue",
+        "size": "M",
+        "buyingPrice": 500,
+        "maximumRetailPrice": 1500,
+        "sellingPrice": 1099,
+        "quantity": 40
+      },
+      {
+        "sku": "DENJACK-BLACK-L",
+        "variantName": "Black Large",
+        "color": "Black",
+        "size": "L",
+        "buyingPrice": 500,
+        "maximumRetailPrice": 1500,
+        "sellingPrice": 1099,
+        "quantity": 25
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Linen Shirt Summer",
+      "shortDesc": "Lightweight linen summer shirt",
+      "longDesc": "Breathable linen shirt perfect for summer. Light, airy, and comfortable for warm weather.",
+      "mainImage": "https://example.com/linen-main.jpg",
+      "productImages": "[\"https://example.com/linen-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": false,
+      "isBestSelling": false,
+      "isNewCollection": true
+    },
+    "variants": [
+      {
+        "sku": "LINEN-WHITE-S",
+        "variantName": "White Small",
+        "color": "White",
+        "size": "S",
+        "buyingPrice": 220,
+        "maximumRetailPrice": 750,
+        "sellingPrice": 549,
+        "quantity": 40,
+        "isDefault": true
+      },
+      {
+        "sku": "LINEN-CREAM-M",
+        "variantName": "Cream Medium",
+        "color": "Cream",
+        "size": "M",
+        "buyingPrice": 220,
+        "maximumRetailPrice": 750,
+        "sellingPrice": 549,
+        "quantity": 50
+      },
+      {
+        "sku": "LINEN-BEIGE-L",
+        "variantName": "Beige Large",
+        "color": "Beige",
+        "size": "L",
+        "buyingPrice": 220,
+        "maximumRetailPrice": 750,
+        "sellingPrice": 549,
+        "quantity": 35
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "V-Neck T-Shirt",
+      "shortDesc": "Casual v-neck t-shirt",
+      "longDesc": "Stylish v-neck t-shirt perfect for casual wear. Comfortable fit and quality material.",
+      "mainImage": "https://example.com/vneck-main.jpg",
+      "productImages": "[\"https://example.com/vneck-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": false,
+      "isBestSelling": true,
+      "isNewCollection": false
+    },
+    "variants": [
+      {
+        "sku": "VNECK-BLACK-S",
+        "variantName": "Black Small",
+        "color": "Black",
+        "size": "S",
+        "buyingPrice": 140,
+        "maximumRetailPrice": 450,
+        "sellingPrice": 349,
+        "quantity": 55,
+        "isDefault": true
+      },
+      {
+        "sku": "VNECK-GRAY-M",
+        "variantName": "Gray Medium",
+        "color": "Gray",
+        "size": "M",
+        "buyingPrice": 140,
+        "maximumRetailPrice": 450,
+        "sellingPrice": 349,
+        "quantity": 65
+      },
+      {
+        "sku": "VNECK-CHARCOAL-L",
+        "variantName": "Charcoal Large",
+        "color": "Charcoal",
+        "size": "L",
+        "buyingPrice": 140,
+        "maximumRetailPrice": 450,
+        "sellingPrice": 349,
+        "quantity": 50
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Windbreaker Jacket",
+      "shortDesc": "Lightweight windbreaker",
+      "longDesc": "Light and packable windbreaker jacket. Perfect for outdoor activities and variable weather.",
+      "mainImage": "https://example.com/windbreaker-main.jpg",
+      "productImages": "[\"https://example.com/windbreaker-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": true,
+      "isBestSelling": false,
+      "isNewCollection": true
+    },
+    "variants": [
+      {
+        "sku": "WINDBREAK-BLACK-S",
+        "variantName": "Black Small",
+        "color": "Black",
+        "size": "S",
+        "buyingPrice": 350,
+        "maximumRetailPrice": 1100,
+        "sellingPrice": 799,
+        "quantity": 35,
+        "isDefault": true
+      },
+      {
+        "sku": "WINDBREAK-BLUE-M",
+        "variantName": "Blue Medium",
+        "color": "Blue",
+        "size": "M",
+        "buyingPrice": 350,
+        "maximumRetailPrice": 1100,
+        "sellingPrice": 799,
+        "quantity": 45
+      },
+      {
+        "sku": "WINDBREAK-GRAY-L",
+        "variantName": "Gray Large",
+        "color": "Gray",
+        "size": "L",
+        "buyingPrice": 350,
+        "maximumRetailPrice": 1100,
+        "sellingPrice": 799,
+        "quantity": 30
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Striped Polo Shirt",
+      "shortDesc": "Classic striped polo shirt",
+      "longDesc": "Timeless striped polo shirt perfect for casual and smart-casual occasions. High-quality material.",
+      "mainImage": "https://example.com/striped-polo-main.jpg",
+      "productImages": "[\"https://example.com/striped-polo-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": false,
+      "isBestSelling": false,
+      "isNewCollection": true
+    },
+    "variants": [
+      {
+        "sku": "STRIPOLO-BLUERED-S",
+        "variantName": "Blue Red Stripe Small",
+        "color": "Blue-Red",
+        "size": "S",
+        "buyingPrice": 190,
+        "maximumRetailPrice": 650,
+        "sellingPrice": 479,
+        "quantity": 45,
+        "isDefault": true
+      },
+      {
+        "sku": "STRIPOLO-WHITEBLUE-M",
+        "variantName": "White Blue Stripe Medium",
+        "color": "White-Blue",
+        "size": "M",
+        "buyingPrice": 190,
+        "maximumRetailPrice": 650,
+        "sellingPrice": 479,
+        "quantity": 55
+      },
+      {
+        "sku": "STRIPOLO-BLACKWHITE-L",
+        "variantName": "Black White Stripe Large",
+        "color": "Black-White",
+        "size": "L",
+        "buyingPrice": 190,
+        "maximumRetailPrice": 650,
+        "sellingPrice": 479,
+        "quantity": 40
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Cardigan Sweater",
+      "shortDesc": "Comfortable cardigan sweater",
+      "longDesc": "Cozy cardigan sweater perfect for layering. Soft material and classic design for all seasons.",
+      "mainImage": "https://example.com/cardigan-main.jpg",
+      "productImages": "[\"https://example.com/cardigan-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": false,
+      "isBestSelling": true,
+      "isNewCollection": false
+    },
+    "variants": [
+      {
+        "sku": "CARDIGAN-CREAM-S",
+        "variantName": "Cream Small",
+        "color": "Cream",
+        "size": "S",
+        "buyingPrice": 310,
+        "maximumRetailPrice": 1000,
+        "sellingPrice": 749,
+        "quantity": 30,
+        "isDefault": true
+      },
+      {
+        "sku": "CARDIGAN-GRAY-M",
+        "variantName": "Gray Medium",
+        "color": "Gray",
+        "size": "M",
+        "buyingPrice": 310,
+        "maximumRetailPrice": 1000,
+        "sellingPrice": 749,
+        "quantity": 40
+      },
+      {
+        "sku": "CARDIGAN-NAVY-L",
+        "variantName": "Navy Large",
+        "color": "Navy",
+        "size": "L",
+        "buyingPrice": 310,
+        "maximumRetailPrice": 1000,
+        "sellingPrice": 749,
+        "quantity": 35
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Track Pants Athletic",
+      "shortDesc": "Comfortable athletic track pants",
+      "longDesc": "Lightweight track pants perfect for sports and workouts. Breathable and flexible material.",
+      "mainImage": "https://example.com/track-main.jpg",
+      "productImages": "[\"https://example.com/track-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": true,
+      "isBestSelling": false,
+      "isNewCollection": true
+    },
+    "variants": [
+      {
+        "sku": "TRACK-BLACK-S",
+        "variantName": "Black Small",
+        "color": "Black",
+        "size": "S",
+        "buyingPrice": 240,
+        "maximumRetailPrice": 800,
+        "sellingPrice": 599,
+        "quantity": 50,
+        "isDefault": true
+      },
+      {
+        "sku": "TRACK-GRAY-M",
+        "variantName": "Gray Medium",
+        "color": "Gray",
+        "size": "M",
+        "buyingPrice": 240,
+        "maximumRetailPrice": 800,
+        "sellingPrice": 599,
+        "quantity": 60
+      },
+      {
+        "sku": "TRACK-NAVY-L",
+        "variantName": "Navy Large",
+        "color": "Navy",
+        "size": "L",
+        "buyingPrice": 240,
+        "maximumRetailPrice": 800,
+        "sellingPrice": 599,
+        "quantity": 45
+      }
+    ]
+  },
+  {
+    "product": {
+      "productName": "Button-Down Shirt Casual",
+      "shortDesc": "Casual button-down shirt",
+      "longDesc": "Versatile button-down shirt perfect for casual wear. Classic design and comfortable fit.",
+      "mainImage": "https://example.com/buttondown-main.jpg",
+      "productImages": "[\"https://example.com/buttondown-1.jpg\"]",
+      "masterCategoryId": "3d5b12db-ab21-405a-9ee1-118ad705c091",
+      "isFeatured": false,
+      "isBestSelling": false,
+      "isNewCollection": true
+    },
+    "variants": [
+      {
+        "sku": "BTNDOWN-BLUE-S",
+        "variantName": "Blue Small",
+        "color": "Blue",
+        "size": "S",
+        "buyingPrice": 270,
+        "maximumRetailPrice": 900,
+        "sellingPrice": 649,
+        "quantity": 35,
+        "isDefault": true
+      },
+      {
+        "sku": "BTNDOWN-GREEN-M",
+        "variantName": "Green Medium",
+        "color": "Green",
+        "size": "M",
+        "buyingPrice": 270,
+        "maximumRetailPrice": 900,
+        "sellingPrice": 649,
+        "quantity": 45
+      },
+      {
+        "sku": "BTNDOWN-RED-L",
+        "variantName": "Red Large",
+        "color": "Red",
+        "size": "L",
+        "buyingPrice": 270,
+        "maximumRetailPrice": 900,
+        "sellingPrice": 649,
+        "quantity": 30
+      }
+    ]
+  }
+]

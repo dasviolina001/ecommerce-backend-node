@@ -4,13 +4,13 @@ import { productVariantService } from "../service/productVariantService";
 
 import { CustomError } from "../middleware/errorHandler";
 
- 
 export const createVariant = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
-    
-    const variantImagesPaths = files?.variantImages?.map(file => file.path) || [];
+
+    const variantImagesPaths =
+      files?.variantImages?.map((file) => file.path) || [];
 
     const variantData: any = {
       productId,
@@ -18,21 +18,39 @@ export const createVariant = async (req: Request, res: Response) => {
       variantName: req.body.variantName,
       color: req.body.color,
       size: req.body.size,
-      dimensions: req.body.dimensions ? JSON.parse(req.body.dimensions) : undefined,
-      attributes: req.body.attributes ? JSON.parse(req.body.attributes) : undefined,
-      variantImages: variantImagesPaths.length > 0 ? variantImagesPaths : 
-                     (req.body.variantImages ? JSON.parse(req.body.variantImages) : []),
+      dimensions: req.body.dimensions
+        ? JSON.parse(req.body.dimensions)
+        : undefined,
+      attributes: req.body.attributes
+        ? JSON.parse(req.body.attributes)
+        : undefined,
+      variantImages:
+        variantImagesPaths.length > 0
+          ? variantImagesPaths
+          : req.body.variantImages
+            ? JSON.parse(req.body.variantImages)
+            : [],
       variantDescription: req.body.variantDescription,
-      buyingPrice: req.body.buyingPrice ? parseFloat(req.body.buyingPrice) : undefined,
-      maximumRetailPrice: req.body.maximumRetailPrice ? parseFloat(req.body.maximumRetailPrice) : undefined,
-      sellingPrice: req.body.sellingPrice ? parseFloat(req.body.sellingPrice) : undefined,
+      buyingPrice: req.body.buyingPrice
+        ? parseFloat(req.body.buyingPrice)
+        : undefined,
+      maximumRetailPrice: req.body.maximumRetailPrice
+        ? parseFloat(req.body.maximumRetailPrice)
+        : undefined,
+      sellingPrice: req.body.sellingPrice
+        ? parseFloat(req.body.sellingPrice)
+        : undefined,
       quantity: req.body.quantity ? parseInt(req.body.quantity) : 0,
-      lowStockAlert: req.body.lowStockAlert ? parseInt(req.body.lowStockAlert) : undefined,
-      expiryDate: req.body.expiryDate ? new Date(req.body.expiryDate) : undefined,
-      hasCashOnDelivery: req.body.hasCashOnDelivery === 'true',
+      lowStockAlert: req.body.lowStockAlert
+        ? parseInt(req.body.lowStockAlert)
+        : undefined,
+      expiryDate: req.body.expiryDate
+        ? new Date(req.body.expiryDate)
+        : undefined,
+      hasCashOnDelivery: req.body.hasCashOnDelivery === "true",
       sizeChartId: req.body.sizeChartId,
-      isRelatedItem: req.body.isRelatedItem === 'true',
-      isDefault: req.body.isDefault === 'true',
+      isRelatedItem: req.body.isRelatedItem === "true",
+      isDefault: req.body.isDefault === "true",
     };
 
     const variant = await productVariantService.createVariant(variantData);
@@ -42,7 +60,6 @@ export const createVariant = async (req: Request, res: Response) => {
   }
 };
 
- 
 export const createMultipleVariants = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
@@ -55,75 +72,88 @@ export const createMultipleVariants = async (req: Request, res: Response) => {
 
     const createdVariants = await productVariantService.createMultipleVariants(
       productId,
-      variants
+      variants,
     );
 
     res.status(201).json({
       success: true,
       data: createdVariants,
-      count: createdVariants.length
+      count: createdVariants.length,
     });
   } catch (error) {
     throw error;
   }
 };
 
- 
 export const updateVariant = async (req: Request, res: Response) => {
   try {
     const { productId, variantId } = req.params;
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
-    
-    const variantImagesPaths = files?.variantImages?.map(file => file.path) || [];
+
+    const variantImagesPaths =
+      files?.variantImages?.map((file) => file.path) || [];
 
     const updateData: any = {};
 
     if (req.body.sku) updateData.sku = req.body.sku;
 
     if (req.body.variantName) updateData.variantName = req.body.variantName;
-    
+
     if (req.body.color !== undefined) updateData.color = req.body.color;
-    
+
     if (req.body.size !== undefined) updateData.size = req.body.size;
-    
-    if (req.body.dimensions) updateData.dimensions = JSON.parse(req.body.dimensions);
-    
-    if (req.body.attributes) updateData.attributes = JSON.parse(req.body.attributes);
-    
+
+    if (req.body.dimensions)
+      updateData.dimensions = JSON.parse(req.body.dimensions);
+
+    if (req.body.attributes)
+      updateData.attributes = JSON.parse(req.body.attributes);
+
     if (variantImagesPaths.length > 0) {
       updateData.variantImages = variantImagesPaths;
     } else if (req.body.variantImages) {
       updateData.variantImages = JSON.parse(req.body.variantImages);
     }
-    
-    if (req.body.variantDescription) updateData.variantDescription = req.body.variantDescription;
-    
-    if (req.body.buyingPrice) updateData.buyingPrice = parseFloat(req.body.buyingPrice);
-    
-    if (req.body.maximumRetailPrice) updateData.maximumRetailPrice = parseFloat(req.body.maximumRetailPrice);
-    
-    if (req.body.sellingPrice) updateData.sellingPrice = parseFloat(req.body.sellingPrice);
-    
-    if (req.body.quantity !== undefined) updateData.quantity = parseInt(req.body.quantity);
-    
-    if (req.body.lowStockAlert) updateData.lowStockAlert = parseInt(req.body.lowStockAlert);
-    
-    if (req.body.expiryDate) updateData.expiryDate = new Date(req.body.expiryDate);
-    
-    if (req.body.hasCashOnDelivery !== undefined) updateData.hasCashOnDelivery = req.body.hasCashOnDelivery === 'true';
-    
+
+    if (req.body.variantDescription)
+      updateData.variantDescription = req.body.variantDescription;
+
+    if (req.body.buyingPrice)
+      updateData.buyingPrice = parseFloat(req.body.buyingPrice);
+
+    if (req.body.maximumRetailPrice)
+      updateData.maximumRetailPrice = parseFloat(req.body.maximumRetailPrice);
+
+    if (req.body.sellingPrice)
+      updateData.sellingPrice = parseFloat(req.body.sellingPrice);
+
+    if (req.body.quantity !== undefined)
+      updateData.quantity = parseInt(req.body.quantity);
+
+    if (req.body.lowStockAlert)
+      updateData.lowStockAlert = parseInt(req.body.lowStockAlert);
+
+    if (req.body.expiryDate)
+      updateData.expiryDate = new Date(req.body.expiryDate);
+
+    if (req.body.hasCashOnDelivery !== undefined)
+      updateData.hasCashOnDelivery = req.body.hasCashOnDelivery === "true";
+
     if (req.body.sizeChartId) updateData.sizeChartId = req.body.sizeChartId;
-    
-    if (req.body.isRelatedItem !== undefined) updateData.isRelatedItem = req.body.isRelatedItem === 'true';
-    
-    if (req.body.isDefault !== undefined) updateData.isDefault = req.body.isDefault === 'true';
-    
-    if (req.body.isActive !== undefined) updateData.isActive = req.body.isActive === 'true';
+
+    if (req.body.isRelatedItem !== undefined)
+      updateData.isRelatedItem = req.body.isRelatedItem === "true";
+
+    if (req.body.isDefault !== undefined)
+      updateData.isDefault = req.body.isDefault === "true";
+
+    if (req.body.isActive !== undefined)
+      updateData.isActive = req.body.isActive === "true";
 
     const variant = await productVariantService.updateVariant(
       productId,
       variantId,
-      updateData
+      updateData,
     );
     res.status(200).json({ success: true, data: variant });
   } catch (error) {
@@ -131,25 +161,26 @@ export const updateVariant = async (req: Request, res: Response) => {
   }
 };
 
- 
 export const deleteVariant = async (req: Request, res: Response) => {
   try {
     const { productId, variantId } = req.params;
     await productVariantService.deleteVariant(productId, variantId);
     res.status(200).json({
       success: true,
-      message: "Variant deleted successfully"
+      message: "Variant deleted successfully",
     });
   } catch (error) {
     throw error;
   }
 };
 
- 
 export const getVariantById = async (req: Request, res: Response) => {
   try {
     const { productId, variantId } = req.params;
-    const variant = await productVariantService.getVariantById(productId, variantId);
+    const variant = await productVariantService.getVariantById(
+      productId,
+      variantId,
+    );
 
     if (!variant) {
       throw new CustomError("Variant not found", 404);
@@ -167,23 +198,31 @@ export const getVariantById = async (req: Request, res: Response) => {
 export const getVariantsByProductId = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
-    const filters = {
+    const filters: any = {
       color: req.query.color as string,
       size: req.query.size as string,
-      isActive: req.query.isActive === 'true',
-      minPrice: req.query.minPrice ? parseFloat(req.query.minPrice as string) : undefined,
-      maxPrice: req.query.maxPrice ? parseFloat(req.query.maxPrice as string) : undefined,
+      minPrice: req.query.minPrice
+        ? parseFloat(req.query.minPrice as string)
+        : undefined,
+      maxPrice: req.query.maxPrice
+        ? parseFloat(req.query.maxPrice as string)
+        : undefined,
     };
+
+    // Only add isActive filter if explicitly provided in query
+    if (req.query.isActive !== undefined) {
+      filters.isActive = req.query.isActive === "true";
+    }
 
     const variants = await productVariantService.getVariantsByProductId(
       productId,
-      filters
+      filters,
     );
 
     res.status(200).json({
       success: true,
       data: variants,
-      count: variants.length
+      count: variants.length,
     });
   } catch (error) {
     throw error;
@@ -200,7 +239,7 @@ export const getAvailableColors = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      data: colors
+      data: colors,
     });
   } catch (error) {
     throw error;
@@ -217,7 +256,7 @@ export const getAvailableSizes = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      data: sizes
+      data: sizes,
     });
   } catch (error) {
     throw error;

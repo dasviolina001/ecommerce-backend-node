@@ -9,14 +9,12 @@ export const createProduct = async (req: Request, res: Response) => {
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
     const mainImagePath = files?.mainImage?.[0]?.path;
-
     const productImagesPaths =
       files?.productImages?.map((file) => file.path) || [];
 
     const productData: any = {
       productName: req.body.productName,
       shortDesc: req.body.shortDesc,
-
       longDesc: req.body.longDesc,
 
       mainImage: mainImagePath || req.body.mainImage,
@@ -25,12 +23,12 @@ export const createProduct = async (req: Request, res: Response) => {
         productImagesPaths.length > 0
           ? productImagesPaths
           : req.body.productImages
-          ? JSON.parse(req.body.productImages)
-          : [],
+            ? JSON.parse(req.body.productImages)
+            : [],
 
       youtubeLink: req.body.youtubeLink,
-
       size: req.body.size,
+
       expiryDate: req.body.expiryDate
         ? new Date(req.body.expiryDate)
         : undefined,
@@ -58,19 +56,13 @@ export const createProduct = async (req: Request, res: Response) => {
       metaData: req.body.metaData ? JSON.parse(req.body.metaData) : undefined,
 
       masterCategoryId: req.body.masterCategoryId,
-
       lastCategoryId: req.body.lastCategoryId,
-
       sizeChartId: req.body.sizeChartId,
 
       isFeatured: req.body.isFeatured === "true",
-
       isBestSelling: req.body.isBestSelling === "true",
-
       isNewCollection: req.body.isNewCollection === "true",
-
       isRelatedItem: req.body.isRelatedItem === "true",
-
       hasVariants: req.body.hasVariants === "true",
     };
 
@@ -81,7 +73,7 @@ export const createProduct = async (req: Request, res: Response) => {
     if (!productData.mainImage) {
       throw new CustomError(
         "Main image is required (upload file or provide URL)",
-        400
+        400,
       );
     }
 
@@ -98,7 +90,7 @@ export const createProduct = async (req: Request, res: Response) => {
 
 export const createProductWithVariants = async (
   req: Request,
-  res: Response
+  res: Response,
 ) => {
   try {
     const { product, variants } = req.body;
@@ -150,29 +142,32 @@ export const deleteProduct = async (req: Request, res: Response) => {
 
 export const getProducts = async (req: Request, res: Response) => {
   try {
-    const page = req.query.page
-      ? parseInt(req.query.page as string)
-      : undefined;
-    const limit = req.query.limit
-      ? parseInt(req.query.limit as string)
-      : undefined;
-    const filters = {
-      categoryId: req.query.categoryId as string,
+    const page = req.query.page ? Number(req.query.page) : undefined;
+    const limit = req.query.limit ? Number(req.query.limit) : undefined;
 
-      isFeatured: req.query.isFeatured === "true",
-
-      isBestSelling: req.query.isBestSelling === "true",
-
-      isNewCollection: req.query.isNewCollection === "true",
-
-      minPrice: req.query.minPrice
-        ? parseFloat(req.query.minPrice as string)
-        : undefined,
-
-      maxPrice: req.query.maxPrice
-        ? parseFloat(req.query.maxPrice as string)
-        : undefined,
+    const filters: any = {
+      categoryId: req.query.categoryId as string | undefined,
     };
+
+    if (req.query.isFeatured !== undefined) {
+      filters.isFeatured = req.query.isFeatured === "true";
+    }
+
+    if (req.query.isBestSelling !== undefined) {
+      filters.isBestSelling = req.query.isBestSelling === "true";
+    }
+
+    if (req.query.isNewCollection !== undefined) {
+      filters.isNewCollection = req.query.isNewCollection === "true";
+    }
+
+    if (req.query.minPrice !== undefined) {
+      filters.minPrice = Number(req.query.minPrice);
+    }
+
+    if (req.query.maxPrice !== undefined) {
+      filters.maxPrice = Number(req.query.maxPrice);
+    }
 
     const result = await productService.getAllProducts(page, limit, filters);
     res.status(200).json({ success: true, ...result });
@@ -185,9 +180,11 @@ export const getProductById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const product = await productService.getProductById(id);
+
     if (!product) {
       throw new CustomError("Product not found", 404);
     }
+
     res.status(200).json({ success: true, data: product });
   } catch (error) {
     throw error;
@@ -197,9 +194,11 @@ export const getProductById = async (req: Request, res: Response) => {
 export const updateInventory = async (req: Request, res: Response) => {
   try {
     const { updates } = req.body;
+
     if (!Array.isArray(updates)) {
       throw new CustomError("Updates must be an array", 400);
     }
+
     const result = await productService.updateInventory(updates);
     res
       .status(200)

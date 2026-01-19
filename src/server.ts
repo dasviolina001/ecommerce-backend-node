@@ -79,7 +79,7 @@ app.use(
     origin: "*",
     credentials: false,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  })
+  }),
 );
 
 app.use(express.json({ limit: "50mb" }));
@@ -87,7 +87,7 @@ app.use(express.json({ limit: "50mb" }));
 const logger = (
   req: express.Request,
   _: express.Response,
-  next: express.NextFunction
+  next: express.NextFunction,
 ) => {
   const url = req.url;
   const method = req.method;
@@ -95,10 +95,11 @@ const logger = (
   console.log(`[${time}] ${method} ${url}`);
   console.log(`Content-Type: ${req.headers["content-type"]}`);
   console.log(
-    `Body keys: ${Object.keys(req.body || {}).length > 0
-      ? Object.keys(req.body).join(", ")
-      : "EMPTY"
-    }`
+    `Body keys: ${
+      Object.keys(req.body || {}).length > 0
+        ? Object.keys(req.body).join(", ")
+        : "EMPTY"
+    }`,
   );
   next();
 };
@@ -119,7 +120,7 @@ app.use(
       operationsSorter: "alpha",
       defaultModelsExpandDepth: -1,
     },
-  })
+  }),
 );
 
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
@@ -144,11 +145,11 @@ app.use("/api/v1/admin/blogs", adminBlogRoutes);
 
 app.use("/api/v1/admin/products", adminProductRoutes);
 
-app.use("/api/v1/admin/products", adminProductVariantRoutes);
+app.use("/api/v1/admin/products-variants", adminProductVariantRoutes);
 
 app.use("/api/v1/products", userProductRoutes);
 
-app.use("/api/v1/products", userProductVariantRoutes);
+app.use("/api/v1/products-variants", userProductVariantRoutes);
 
 app.use("/api/v1/cart", userCartRoutes);
 
@@ -178,7 +179,10 @@ app.use("/api/v1/admin/about-page-content", adminAboutPageContentRoutes);
 
 app.use("/api/v1/about-page-content", userAboutPageContentRoutes);
 
-app.use("/api/v1/admin/contact-page-information", adminContactPageInformationRoutes);
+app.use(
+  "/api/v1/admin/contact-page-information",
+  adminContactPageInformationRoutes,
+);
 
 app.use("/api/v1/contact-page-information", userContactPageInformationRoutes);
 

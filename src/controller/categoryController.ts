@@ -8,7 +8,7 @@ import { CustomError } from "../middleware/errorHandler";
 
 export const createCategory = async (
   req: AuthRequest,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     if (!req.user) {
@@ -43,14 +43,14 @@ export const createCategory = async (
 
 export const getAllCategories = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const page = parseInt(req.query.page as string) || 1;
 
     const limit = parseInt(req.query.limit as string) || 10;
 
-    const includeInactive = req.query.includeInactive === "true";
+    const includeInactive = req.query.includeInactive === "true" ? true : false;
 
     if (page < 1 || limit < 1) {
       throw new CustomError("Page and limit must be positive numbers", 400);
@@ -59,7 +59,7 @@ export const getAllCategories = async (
     const result = await categoryService.getAllCategories(
       page,
       limit,
-      includeInactive
+      includeInactive,
     );
 
     res.status(200).json({
@@ -74,7 +74,7 @@ export const getAllCategories = async (
 
 export const getCategoryById = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const { categoryId } = req.params;
@@ -97,7 +97,7 @@ export const getCategoryById = async (
 
 export const getCategoryBySlug = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const { slug } = req.params;
@@ -120,7 +120,7 @@ export const getCategoryBySlug = async (
 
 export const getRootCategories = async (
   _: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const categories = await categoryService.getRootCategories();
@@ -137,7 +137,7 @@ export const getRootCategories = async (
 
 export const getCategoryChildren = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const { categoryId } = req.params;
@@ -160,7 +160,7 @@ export const getCategoryChildren = async (
 
 export const updateCategory = async (
   req: AuthRequest,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     if (!req.user) {
@@ -200,7 +200,7 @@ export const updateCategory = async (
 
 export const deleteCategory = async (
   req: AuthRequest,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     if (!req.user) {
