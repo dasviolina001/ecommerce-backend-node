@@ -4,6 +4,7 @@ import {
   createProduct,
   createProductWithVariants,
   updateProduct,
+  updateProductWithVariants,
   deleteProduct,
   updateInventory,
   getProducts,
@@ -54,6 +55,14 @@ router.get(
   authMiddleware as any,
   adminAuthMiddleware as any,
   asyncHandler(getProductById),
+);
+
+router.put(
+  "/:id/with-variants",
+  authMiddleware as any,
+  adminAuthMiddleware as any,
+  productWithVariantsUpload,
+  asyncHandler(updateProductWithVariants),
 );
 
 router.put(

@@ -27,7 +27,7 @@ interface CreateProductInput {
   isRelatedItem?: boolean;
 }
 
-interface UpdateProductInput extends Partial<CreateProductInput> {}
+interface UpdateProductInput extends Partial<CreateProductInput> { }
 
 interface InventoryUpdate {
   productId: string;
@@ -135,11 +135,15 @@ export const productService = {
       isFeatured?: boolean;
       isBestSelling?: boolean;
       isNewCollection?: boolean;
+      includeInactive?: boolean;
     },
   ) {
-    const where: any = {
-      isActive: true,
-    };
+    const where: any = {};
+
+    // Only filter by isActive if includeInactive is not true
+    if (!filters?.includeInactive) {
+      where.isActive = true;
+    }
 
     if (filters?.categoryId) {
       where.OR = [
@@ -302,15 +306,152 @@ export const productService = {
       updates.map(({ productId, variantId, quantity }) =>
         variantId
           ? prisma.productVariant.update({
-              where: { id: variantId },
-              data: { quantity },
-            })
+            where: { id: variantId },
+            data: { quantity },
+          })
           : prisma.product.update({
-              where: { id: productId },
-              data: { quantity },
-            }),
+            where: { id: productId },
+            data: { quantity },
+          }),
       ),
     );
+  },
+
+  async updateProductWithVariants(
+    productId: string,
+    input: {
+      product?: UpdateProductInput;
+      variants?: Array<{
+        id?: string; // If provided, update existing variant; if not, create new
+        sku?: string;
+        variantName?: string;
+        color?: string;
+        size?: string;
+        dimensions?: Record<string, any>;
+        attributes?: Record<string, any>;
+        variantImages?: string[];
+        variantDescription?: string;
+        buyingPrice?: number;
+        maximumRetailPrice?: number;
+        sellingPrice?: number;
+        quantity?: number;
+        lowStockAlert?: number;
+        expiryDate?: Date;
+        hasCashOnDelivery?: boolean;
+        sizeChartId?: string;
+        isRelatedItem?: boolean;
+        isDefault?: boolean;
+        isActive?: boolean;
+      }>;
+      deleteVariantIds?: string[]; // IDs of variants to delete
+    },
+  ): Promise<Product> {
+    const { productVariantService } = await import("./productVariantService");
+
+    return prisma.$transaction(async (tx) => {
+      // Check if product exists
+      const existingProduct = await tx.product.findUnique({
+        where: { id: productId },
+      });
+
+      if (!existingProduct) {
+        throw new Error("Product not found");
+      }
+
+      // Update product if product data is provided
+      if (input.product) {
+        const updateData: any = { ...input.product };
+
+        if (input.product.productImages) {
+          updateData.productImages = JSON.stringify(input.product.productImages);
+        }
+
+        await tx.product.update({
+          where: { id: productId },
+          data: updateData,
+        });
+      }
+
+      // Delete variants if specified
+      if (input.deleteVariantIds && input.deleteVariantIds.length > 0) {
+        await tx.productVariant.updateMany({
+          where: {
+            id: { in: input.deleteVariantIds },
+            productId,
+          },
+          data: { isActive: false },
+        });
+      }
+
+      // Process variants (create or update)
+      if (input.variants && input.variants.length > 0) {
+        for (const variantInput of input.variants) {
+          if (variantInput.id) {
+            // Update existing variant
+            const updateData: any = { ...variantInput };
+            delete updateData.id; // Remove id from update data
+
+            if (variantInput.variantImages) {
+              updateData.variantImages = JSON.stringify(variantInput.variantImages);
+            }
+
+            // Check if variant belongs to this product
+            const existingVariant = await tx.productVariant.findUnique({
+              where: { id: variantInput.id },
+            });
+
+            if (!existingVariant || existingVariant.productId !== productId) {
+              throw new Error(`Variant ${variantInput.id} does not belong to this product`);
+            }
+
+            await tx.productVariant.update({
+              where: { id: variantInput.id },
+              data: updateData,
+            });
+          } else {
+            // Create new variant
+            const sku =
+              variantInput.sku ||
+              (await productVariantService.generateSKU(
+                productId,
+                variantInput.color,
+                variantInput.size,
+              ));
+
+            const existingSKU = await tx.productVariant.findUnique({
+              where: { sku },
+            });
+
+            if (existingSKU) {
+              throw new Error(`SKU ${sku} already exists`);
+            }
+
+            await tx.productVariant.create({
+              data: {
+                productId,
+                ...variantInput,
+                sku,
+                quantity: variantInput.quantity || 0,
+                variantImages: variantInput.variantImages
+                  ? JSON.stringify(variantInput.variantImages)
+                  : null,
+              },
+            });
+          }
+        }
+      }
+
+      // Return updated product with all variants
+      return tx.product.findUnique({
+        where: { id: productId },
+        include: {
+          variants: true,
+          masterCategory: true,
+          lastCategory: true,
+          sizeChart: true,
+        },
+      }) as Promise<Product>;
+    });
   },
 
   /* ========================= DELETE ========================= */

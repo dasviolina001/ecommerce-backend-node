@@ -28,7 +28,7 @@ interface CreateVariantInput {
 
 interface UpdateVariantInput extends Partial<
   Omit<CreateVariantInput, "productId">
-> {}
+> { }
 
 export const productVariantService = {
   async generateSKU(
@@ -385,5 +385,73 @@ export const productVariantService = {
     });
 
     return variants.map((v) => v.size).filter(Boolean) as string[];
+  },
+
+  async getAllVariants(filters?: {
+    color?: string;
+    size?: string;
+    isActive?: boolean;
+    minPrice?: number;
+    maxPrice?: number;
+    page?: number;
+    limit?: number;
+    includeInactive?: boolean;
+  }): Promise<{ variants: ProductVariant[]; total: number; page: number; totalPages: number }> {
+    const page = filters?.page || 1;
+    const limit = filters?.limit || 50;
+    const skip = (page - 1) * limit;
+
+    const where: any = {};
+
+    // Only filter by isActive if not explicitly set and includeInactive is not true
+    if (filters?.isActive !== undefined) {
+      where.isActive = filters.isActive;
+    } else if (!filters?.includeInactive) {
+      where.isActive = true;
+    }
+
+    if (filters?.color) {
+      where.color = filters.color;
+    }
+
+    if (filters?.size) {
+      where.size = filters.size;
+    }
+
+    if (filters?.minPrice !== undefined || filters?.maxPrice !== undefined) {
+      where.sellingPrice = {};
+      if (filters.minPrice !== undefined) {
+        where.sellingPrice.gte = filters.minPrice;
+      }
+      if (filters.maxPrice !== undefined) {
+        where.sellingPrice.lte = filters.maxPrice;
+      }
+    }
+
+    const [variants, total] = await Promise.all([
+      prisma.productVariant.findMany({
+        where,
+        include: {
+          product: {
+            include: {
+              masterCategory: true,
+              lastCategory: true,
+            },
+          },
+          sizeChart: true,
+        },
+        orderBy: [{ createdAt: "desc" }],
+        skip,
+        take: limit,
+      }),
+      prisma.productVariant.count({ where }),
+    ]);
+
+    return {
+      variants,
+      total,
+      page,
+      totalPages: Math.ceil(total / limit),
+    };
   },
 };

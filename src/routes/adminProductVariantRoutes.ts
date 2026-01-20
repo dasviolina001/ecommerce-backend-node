@@ -9,6 +9,7 @@ import {
   getVariantsByProductId,
   getAvailableColors,
   getAvailableSizes,
+  getAllVariants,
 } from "../controller/productVariantController";
 
 import { authMiddleware } from "../middleware/auth";
@@ -20,6 +21,14 @@ import { asyncHandler } from "../middleware/errorHandler";
 import { variantImageUpload } from "../config/multer";
 
 const router = express.Router();
+
+// Get all variants across all products
+router.get(
+  "/variants",
+  authMiddleware as any,
+  adminAuthMiddleware as any,
+  asyncHandler(getAllVariants),
+);
 
 router.post(
   "/:productId/variants",

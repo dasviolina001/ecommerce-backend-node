@@ -222,6 +222,10 @@ export const getProducts = async (req: Request, res: Response) => {
       filters.maxPrice = Number(req.query.maxPrice);
     }
 
+    if (req.query.includeInactive !== undefined) {
+      filters.includeInactive = req.query.includeInactive === "true";
+    }
+
     const result = await productService.getAllProducts(page, limit, filters);
     res.status(200).json({ success: true, ...result });
   } catch (error) {
@@ -256,6 +260,95 @@ export const updateInventory = async (req: Request, res: Response) => {
     res
       .status(200)
       .json({ success: true, message: "Inventory updated", data: result });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateProductWithVariants = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const { id } = req.params;
+    const filesArray = req.files as Express.Multer.File[];
+
+    let productData = null;
+    let variantsData = null;
+    let deleteVariantIds = null;
+
+    // Parse JSON data from form
+    try {
+      productData = req.body.product ? JSON.parse(req.body.product) : null;
+    } catch (e) {
+      throw new CustomError("Invalid product data format. Must be valid JSON.", 400);
+    }
+
+    try {
+      variantsData = req.body.variants ? JSON.parse(req.body.variants) : null;
+    } catch (e) {
+      throw new CustomError("Invalid variants data format. Must be valid JSON.", 400);
+    }
+
+    try {
+      deleteVariantIds = req.body.deleteVariantIds
+        ? JSON.parse(req.body.deleteVariantIds)
+        : null;
+    } catch (e) {
+      throw new CustomError("Invalid deleteVariantIds format. Must be valid JSON.", 400);
+    }
+
+    // Organize uploaded files by field name
+    const filesByField: { [key: string]: Express.Multer.File[] } = {};
+    if (filesArray && Array.isArray(filesArray)) {
+      filesArray.forEach((file) => {
+        if (!filesByField[file.fieldname]) {
+          filesByField[file.fieldname] = [];
+        }
+        filesByField[file.fieldname].push(file);
+      });
+    }
+
+    // Process product images if provided
+    if (productData) {
+      const mainImagePath = filesByField.mainImage?.[0]?.path;
+      const productImagesPaths = filesByField.productImages?.map((file) => file.path) || [];
+
+      if (mainImagePath) {
+        productData.mainImage = mainImagePath;
+      }
+
+      if (productImagesPaths.length > 0) {
+        productData.productImages = productImagesPaths;
+      }
+    }
+
+    // Process variant images if variants are provided
+    const processedVariants = variantsData?.map((variant: any, index: number) => {
+      const variantImageField = `variantImage_${index}`;
+      const variantImagesField = `variantImages_${index}`;
+
+      const variantImagePath = filesByField[variantImageField]?.[0]?.path;
+      const variantImagesPaths = filesByField[variantImagesField]?.map((file) => file.path) || [];
+
+      return {
+        ...variant,
+        ...(variantImagePath && { variantImages: [variantImagePath] }),
+        ...(variantImagesPaths.length > 0 && { variantImages: variantImagesPaths }),
+      };
+    });
+
+    const updatedProduct = await productService.updateProductWithVariants(id, {
+      product: productData,
+      variants: processedVariants,
+      deleteVariantIds,
+    });
+
+    res.status(200).json({
+      success: true,
+      data: updatedProduct,
+      message: "Product and variants updated successfully",
+    });
   } catch (error) {
     throw error;
   }

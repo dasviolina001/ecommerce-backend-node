@@ -262,3 +262,48 @@ export const getAvailableSizes = async (req: Request, res: Response) => {
     throw error;
   }
 };
+
+/**
+ * Get all variants across all products
+ */
+export const getAllVariants = async (req: Request, res: Response) => {
+  try {
+    const filters: any = {
+      color: req.query.color as string,
+      size: req.query.size as string,
+      minPrice: req.query.minPrice
+        ? parseFloat(req.query.minPrice as string)
+        : undefined,
+      maxPrice: req.query.maxPrice
+        ? parseFloat(req.query.maxPrice as string)
+        : undefined,
+      page: req.query.page ? parseInt(req.query.page as string) : 1,
+      limit: req.query.limit ? parseInt(req.query.limit as string) : 50,
+    };
+
+    // Only add isActive filter if explicitly provided in query
+    if (req.query.isActive !== undefined) {
+      filters.isActive = req.query.isActive === "true";
+    }
+
+    // Allow admin to see inactive variants
+    if (req.query.includeInactive !== undefined) {
+      filters.includeInactive = req.query.includeInactive === "true";
+    }
+
+    const result = await productVariantService.getAllVariants(filters);
+
+    res.status(200).json({
+      success: true,
+      data: result.variants,
+      pagination: {
+        total: result.total,
+        page: result.page,
+        limit: filters.limit,
+        totalPages: result.totalPages,
+      },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
