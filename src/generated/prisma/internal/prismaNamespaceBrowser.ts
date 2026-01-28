@@ -74,7 +74,9 @@ export const ModelName = {
   PincodeGroupPincode: 'PincodeGroupPincode',
   AboutPageContent: 'AboutPageContent',
   ContactPageInformation: 'ContactPageInformation',
-  PolicyPageContent: 'PolicyPageContent'
+  PolicyPageContent: 'PolicyPageContent',
+  DeliveryManagement: 'DeliveryManagement',
+  Review: 'Review'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -445,6 +447,34 @@ export const PolicyPageContentScalarFieldEnum = {
 export type PolicyPageContentScalarFieldEnum = (typeof PolicyPageContentScalarFieldEnum)[keyof typeof PolicyPageContentScalarFieldEnum]
 
 
+export const DeliveryManagementScalarFieldEnum = {
+  id: 'id',
+  pincodeGroupId: 'pincodeGroupId',
+  deliveryCharge: 'deliveryCharge',
+  estimatedDeliveryTime: 'estimatedDeliveryTime',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DeliveryManagementScalarFieldEnum = (typeof DeliveryManagementScalarFieldEnum)[keyof typeof DeliveryManagementScalarFieldEnum]
+
+
+export const ReviewScalarFieldEnum = {
+  id: 'id',
+  rating: 'rating',
+  comment: 'comment',
+  image: 'image',
+  status: 'status',
+  isHighlighted: 'isHighlighted',
+  userId: 'userId',
+  productId: 'productId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -741,4 +771,24 @@ export const PolicyPageContentOrderByRelevanceFieldEnum = {
 } as const
 
 export type PolicyPageContentOrderByRelevanceFieldEnum = (typeof PolicyPageContentOrderByRelevanceFieldEnum)[keyof typeof PolicyPageContentOrderByRelevanceFieldEnum]
+
+
+export const DeliveryManagementOrderByRelevanceFieldEnum = {
+  id: 'id',
+  pincodeGroupId: 'pincodeGroupId',
+  estimatedDeliveryTime: 'estimatedDeliveryTime'
+} as const
+
+export type DeliveryManagementOrderByRelevanceFieldEnum = (typeof DeliveryManagementOrderByRelevanceFieldEnum)[keyof typeof DeliveryManagementOrderByRelevanceFieldEnum]
+
+
+export const ReviewOrderByRelevanceFieldEnum = {
+  id: 'id',
+  comment: 'comment',
+  image: 'image',
+  userId: 'userId',
+  productId: 'productId'
+} as const
+
+export type ReviewOrderByRelevanceFieldEnum = (typeof ReviewOrderByRelevanceFieldEnum)[keyof typeof ReviewOrderByRelevanceFieldEnum]
 

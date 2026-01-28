@@ -72,6 +72,12 @@ import adminPolicyPageContentRoutes from "./routes/adminPolicyPageContentRoutes"
 
 import userPolicyPageContentRoutes from "./routes/userPolicyPageContentRoutes";
 
+import adminDeliveryManagementRoutes from "./routes/adminDeliveryManagementRoutes";
+
+import userReviewRoutes from "./routes/userReviewRoutes";
+
+import adminReviewRoutes from "./routes/adminReviewRoutes";
+
 const app = express();
 
 app.use(
@@ -95,10 +101,9 @@ const logger = (
   console.log(`[${time}] ${method} ${url}`);
   console.log(`Content-Type: ${req.headers["content-type"]}`);
   console.log(
-    `Body keys: ${
-      Object.keys(req.body || {}).length > 0
-        ? Object.keys(req.body).join(", ")
-        : "EMPTY"
+    `Body keys: ${Object.keys(req.body || {}).length > 0
+      ? Object.keys(req.body).join(", ")
+      : "EMPTY"
     }`,
   );
   next();
@@ -189,6 +194,10 @@ app.use("/api/v1/contact-page-information", userContactPageInformationRoutes);
 app.use("/api/v1/admin/policy-page-content", adminPolicyPageContentRoutes);
 
 app.use("/api/v1/policy-page-content", userPolicyPageContentRoutes);
+
+app.use("/api/v1/admin/delivery-management", adminDeliveryManagementRoutes);
+app.use("/api/v1/reviews", userReviewRoutes);
+app.use("/api/v1/admin/reviews", adminReviewRoutes);
 
 app.get("/api/health", (_, res) => {
   res.json({ status: "___I'm yours to command.___" });

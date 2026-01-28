@@ -191,6 +191,7 @@ export type PincodeGroupWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"PincodeGroup"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PincodeGroup"> | Date | string
   pincodes?: Prisma.PincodeGroupPincodeListRelationFilter
+  deliveryManagement?: Prisma.XOR<Prisma.DeliveryManagementNullableScalarRelationFilter, Prisma.DeliveryManagementWhereInput> | null
 }
 
 export type PincodeGroupOrderByWithRelationInput = {
@@ -201,6 +202,7 @@ export type PincodeGroupOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   pincodes?: Prisma.PincodeGroupPincodeOrderByRelationAggregateInput
+  deliveryManagement?: Prisma.DeliveryManagementOrderByWithRelationInput
   _relevance?: Prisma.PincodeGroupOrderByRelevanceInput
 }
 
@@ -215,6 +217,7 @@ export type PincodeGroupWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"PincodeGroup"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PincodeGroup"> | Date | string
   pincodes?: Prisma.PincodeGroupPincodeListRelationFilter
+  deliveryManagement?: Prisma.XOR<Prisma.DeliveryManagementNullableScalarRelationFilter, Prisma.DeliveryManagementWhereInput> | null
 }, "id">
 
 export type PincodeGroupOrderByWithAggregationInput = {
@@ -249,6 +252,7 @@ export type PincodeGroupCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   pincodes?: Prisma.PincodeGroupPincodeCreateNestedManyWithoutPincodeGroupInput
+  deliveryManagement?: Prisma.DeliveryManagementCreateNestedOneWithoutPincodeGroupInput
 }
 
 export type PincodeGroupUncheckedCreateInput = {
@@ -259,6 +263,7 @@ export type PincodeGroupUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   pincodes?: Prisma.PincodeGroupPincodeUncheckedCreateNestedManyWithoutPincodeGroupInput
+  deliveryManagement?: Prisma.DeliveryManagementUncheckedCreateNestedOneWithoutPincodeGroupInput
 }
 
 export type PincodeGroupUpdateInput = {
@@ -269,6 +274,7 @@ export type PincodeGroupUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pincodes?: Prisma.PincodeGroupPincodeUpdateManyWithoutPincodeGroupNestedInput
+  deliveryManagement?: Prisma.DeliveryManagementUpdateOneWithoutPincodeGroupNestedInput
 }
 
 export type PincodeGroupUncheckedUpdateInput = {
@@ -279,6 +285,7 @@ export type PincodeGroupUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pincodes?: Prisma.PincodeGroupPincodeUncheckedUpdateManyWithoutPincodeGroupNestedInput
+  deliveryManagement?: Prisma.DeliveryManagementUncheckedUpdateOneWithoutPincodeGroupNestedInput
 }
 
 export type PincodeGroupCreateManyInput = {
@@ -360,6 +367,20 @@ export type PincodeGroupUpdateOneRequiredWithoutPincodesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PincodeGroupUpdateToOneWithWhereWithoutPincodesInput, Prisma.PincodeGroupUpdateWithoutPincodesInput>, Prisma.PincodeGroupUncheckedUpdateWithoutPincodesInput>
 }
 
+export type PincodeGroupCreateNestedOneWithoutDeliveryManagementInput = {
+  create?: Prisma.XOR<Prisma.PincodeGroupCreateWithoutDeliveryManagementInput, Prisma.PincodeGroupUncheckedCreateWithoutDeliveryManagementInput>
+  connectOrCreate?: Prisma.PincodeGroupCreateOrConnectWithoutDeliveryManagementInput
+  connect?: Prisma.PincodeGroupWhereUniqueInput
+}
+
+export type PincodeGroupUpdateOneRequiredWithoutDeliveryManagementNestedInput = {
+  create?: Prisma.XOR<Prisma.PincodeGroupCreateWithoutDeliveryManagementInput, Prisma.PincodeGroupUncheckedCreateWithoutDeliveryManagementInput>
+  connectOrCreate?: Prisma.PincodeGroupCreateOrConnectWithoutDeliveryManagementInput
+  upsert?: Prisma.PincodeGroupUpsertWithoutDeliveryManagementInput
+  connect?: Prisma.PincodeGroupWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PincodeGroupUpdateToOneWithWhereWithoutDeliveryManagementInput, Prisma.PincodeGroupUpdateWithoutDeliveryManagementInput>, Prisma.PincodeGroupUncheckedUpdateWithoutDeliveryManagementInput>
+}
+
 export type PincodeGroupCreateWithoutPincodesInput = {
   id?: string
   name: string
@@ -367,6 +388,7 @@ export type PincodeGroupCreateWithoutPincodesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deliveryManagement?: Prisma.DeliveryManagementCreateNestedOneWithoutPincodeGroupInput
 }
 
 export type PincodeGroupUncheckedCreateWithoutPincodesInput = {
@@ -376,6 +398,7 @@ export type PincodeGroupUncheckedCreateWithoutPincodesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deliveryManagement?: Prisma.DeliveryManagementUncheckedCreateNestedOneWithoutPincodeGroupInput
 }
 
 export type PincodeGroupCreateOrConnectWithoutPincodesInput = {
@@ -401,6 +424,7 @@ export type PincodeGroupUpdateWithoutPincodesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deliveryManagement?: Prisma.DeliveryManagementUpdateOneWithoutPincodeGroupNestedInput
 }
 
 export type PincodeGroupUncheckedUpdateWithoutPincodesInput = {
@@ -410,6 +434,63 @@ export type PincodeGroupUncheckedUpdateWithoutPincodesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deliveryManagement?: Prisma.DeliveryManagementUncheckedUpdateOneWithoutPincodeGroupNestedInput
+}
+
+export type PincodeGroupCreateWithoutDeliveryManagementInput = {
+  id?: string
+  name: string
+  description?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  pincodes?: Prisma.PincodeGroupPincodeCreateNestedManyWithoutPincodeGroupInput
+}
+
+export type PincodeGroupUncheckedCreateWithoutDeliveryManagementInput = {
+  id?: string
+  name: string
+  description?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  pincodes?: Prisma.PincodeGroupPincodeUncheckedCreateNestedManyWithoutPincodeGroupInput
+}
+
+export type PincodeGroupCreateOrConnectWithoutDeliveryManagementInput = {
+  where: Prisma.PincodeGroupWhereUniqueInput
+  create: Prisma.XOR<Prisma.PincodeGroupCreateWithoutDeliveryManagementInput, Prisma.PincodeGroupUncheckedCreateWithoutDeliveryManagementInput>
+}
+
+export type PincodeGroupUpsertWithoutDeliveryManagementInput = {
+  update: Prisma.XOR<Prisma.PincodeGroupUpdateWithoutDeliveryManagementInput, Prisma.PincodeGroupUncheckedUpdateWithoutDeliveryManagementInput>
+  create: Prisma.XOR<Prisma.PincodeGroupCreateWithoutDeliveryManagementInput, Prisma.PincodeGroupUncheckedCreateWithoutDeliveryManagementInput>
+  where?: Prisma.PincodeGroupWhereInput
+}
+
+export type PincodeGroupUpdateToOneWithWhereWithoutDeliveryManagementInput = {
+  where?: Prisma.PincodeGroupWhereInput
+  data: Prisma.XOR<Prisma.PincodeGroupUpdateWithoutDeliveryManagementInput, Prisma.PincodeGroupUncheckedUpdateWithoutDeliveryManagementInput>
+}
+
+export type PincodeGroupUpdateWithoutDeliveryManagementInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  pincodes?: Prisma.PincodeGroupPincodeUpdateManyWithoutPincodeGroupNestedInput
+}
+
+export type PincodeGroupUncheckedUpdateWithoutDeliveryManagementInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  pincodes?: Prisma.PincodeGroupPincodeUncheckedUpdateManyWithoutPincodeGroupNestedInput
 }
 
 
@@ -451,6 +532,7 @@ export type PincodeGroupSelect<ExtArgs extends runtime.Types.Extensions.Internal
   createdAt?: boolean
   updatedAt?: boolean
   pincodes?: boolean | Prisma.PincodeGroup$pincodesArgs<ExtArgs>
+  deliveryManagement?: boolean | Prisma.PincodeGroup$deliveryManagementArgs<ExtArgs>
   _count?: boolean | Prisma.PincodeGroupCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pincodeGroup"]>
 
@@ -468,6 +550,7 @@ export type PincodeGroupSelectScalar = {
 export type PincodeGroupOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["pincodeGroup"]>
 export type PincodeGroupInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   pincodes?: boolean | Prisma.PincodeGroup$pincodesArgs<ExtArgs>
+  deliveryManagement?: boolean | Prisma.PincodeGroup$deliveryManagementArgs<ExtArgs>
   _count?: boolean | Prisma.PincodeGroupCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -475,6 +558,7 @@ export type $PincodeGroupPayload<ExtArgs extends runtime.Types.Extensions.Intern
   name: "PincodeGroup"
   objects: {
     pincodes: Prisma.$PincodeGroupPincodePayload<ExtArgs>[]
+    deliveryManagement: Prisma.$DeliveryManagementPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -824,6 +908,7 @@ readonly fields: PincodeGroupFieldRefs;
 export interface Prisma__PincodeGroupClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   pincodes<T extends Prisma.PincodeGroup$pincodesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PincodeGroup$pincodesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PincodeGroupPincodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  deliveryManagement<T extends Prisma.PincodeGroup$deliveryManagementArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PincodeGroup$deliveryManagementArgs<ExtArgs>>): Prisma.Prisma__DeliveryManagementClient<runtime.Types.Result.GetResult<Prisma.$DeliveryManagementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1223,6 +1308,25 @@ export type PincodeGroup$pincodesArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.PincodeGroupPincodeScalarFieldEnum | Prisma.PincodeGroupPincodeScalarFieldEnum[]
+}
+
+/**
+ * PincodeGroup.deliveryManagement
+ */
+export type PincodeGroup$deliveryManagementArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DeliveryManagement
+   */
+  select?: Prisma.DeliveryManagementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DeliveryManagement
+   */
+  omit?: Prisma.DeliveryManagementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DeliveryManagementInclude<ExtArgs> | null
+  where?: Prisma.DeliveryManagementWhereInput
 }
 
 /**

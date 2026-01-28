@@ -22,7 +22,7 @@ import { variantImageUpload } from "../config/multer";
 
 const router = express.Router();
 
-// Get all variants across all products
+
 router.get(
   "/variants",
   authMiddleware as any,

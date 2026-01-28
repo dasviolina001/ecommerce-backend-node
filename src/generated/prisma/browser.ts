@@ -137,3 +137,13 @@ export type ContactPageInformation = Prisma.ContactPageInformationModel
  * 
  */
 export type PolicyPageContent = Prisma.PolicyPageContentModel
+/**
+ * Model DeliveryManagement
+ * 
+ */
+export type DeliveryManagement = Prisma.DeliveryManagementModel
+/**
+ * Model Review
+ * 
+ */
+export type Review = Prisma.ReviewModel

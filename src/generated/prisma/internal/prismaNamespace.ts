@@ -407,7 +407,9 @@ export const ModelName = {
   PincodeGroupPincode: 'PincodeGroupPincode',
   AboutPageContent: 'AboutPageContent',
   ContactPageInformation: 'ContactPageInformation',
-  PolicyPageContent: 'PolicyPageContent'
+  PolicyPageContent: 'PolicyPageContent',
+  DeliveryManagement: 'DeliveryManagement',
+  Review: 'Review'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -423,7 +425,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "bankDetails" | "category" | "product" | "productVariant" | "cart" | "address" | "wishlist" | "colorScheme" | "sizeChart" | "coupon" | "couponUser" | "couponProduct" | "couponCategory" | "blog" | "order" | "orderItem" | "orderHistory" | "pincode" | "pincodeGroup" | "pincodeGroupPincode" | "aboutPageContent" | "contactPageInformation" | "policyPageContent"
+    modelProps: "user" | "bankDetails" | "category" | "product" | "productVariant" | "cart" | "address" | "wishlist" | "colorScheme" | "sizeChart" | "coupon" | "couponUser" | "couponProduct" | "couponCategory" | "blog" | "order" | "orderItem" | "orderHistory" | "pincode" | "pincodeGroup" | "pincodeGroupPincode" | "aboutPageContent" | "contactPageInformation" | "policyPageContent" | "deliveryManagement" | "review"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2011,6 +2013,138 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DeliveryManagement: {
+      payload: Prisma.$DeliveryManagementPayload<ExtArgs>
+      fields: Prisma.DeliveryManagementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DeliveryManagementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryManagementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DeliveryManagementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryManagementPayload>
+        }
+        findFirst: {
+          args: Prisma.DeliveryManagementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryManagementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DeliveryManagementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryManagementPayload>
+        }
+        findMany: {
+          args: Prisma.DeliveryManagementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryManagementPayload>[]
+        }
+        create: {
+          args: Prisma.DeliveryManagementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryManagementPayload>
+        }
+        createMany: {
+          args: Prisma.DeliveryManagementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.DeliveryManagementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryManagementPayload>
+        }
+        update: {
+          args: Prisma.DeliveryManagementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryManagementPayload>
+        }
+        deleteMany: {
+          args: Prisma.DeliveryManagementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DeliveryManagementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.DeliveryManagementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryManagementPayload>
+        }
+        aggregate: {
+          args: Prisma.DeliveryManagementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDeliveryManagement>
+        }
+        groupBy: {
+          args: Prisma.DeliveryManagementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeliveryManagementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DeliveryManagementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeliveryManagementCountAggregateOutputType> | number
+        }
+      }
+    }
+    Review: {
+      payload: Prisma.$ReviewPayload<ExtArgs>
+      fields: Prisma.ReviewFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReviewFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReviewPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReviewFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReviewPayload>
+        }
+        findFirst: {
+          args: Prisma.ReviewFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReviewPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReviewFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReviewPayload>
+        }
+        findMany: {
+          args: Prisma.ReviewFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReviewPayload>[]
+        }
+        create: {
+          args: Prisma.ReviewCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReviewPayload>
+        }
+        createMany: {
+          args: Prisma.ReviewCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ReviewDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReviewPayload>
+        }
+        update: {
+          args: Prisma.ReviewUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReviewPayload>
+        }
+        deleteMany: {
+          args: Prisma.ReviewDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReviewUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ReviewUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReviewPayload>
+        }
+        aggregate: {
+          args: Prisma.ReviewAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReview>
+        }
+        groupBy: {
+          args: Prisma.ReviewGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReviewGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReviewCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReviewCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2402,6 +2536,34 @@ export const PolicyPageContentScalarFieldEnum = {
 export type PolicyPageContentScalarFieldEnum = (typeof PolicyPageContentScalarFieldEnum)[keyof typeof PolicyPageContentScalarFieldEnum]
 
 
+export const DeliveryManagementScalarFieldEnum = {
+  id: 'id',
+  pincodeGroupId: 'pincodeGroupId',
+  deliveryCharge: 'deliveryCharge',
+  estimatedDeliveryTime: 'estimatedDeliveryTime',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DeliveryManagementScalarFieldEnum = (typeof DeliveryManagementScalarFieldEnum)[keyof typeof DeliveryManagementScalarFieldEnum]
+
+
+export const ReviewScalarFieldEnum = {
+  id: 'id',
+  rating: 'rating',
+  comment: 'comment',
+  image: 'image',
+  status: 'status',
+  isHighlighted: 'isHighlighted',
+  userId: 'userId',
+  productId: 'productId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2700,6 +2862,26 @@ export const PolicyPageContentOrderByRelevanceFieldEnum = {
 export type PolicyPageContentOrderByRelevanceFieldEnum = (typeof PolicyPageContentOrderByRelevanceFieldEnum)[keyof typeof PolicyPageContentOrderByRelevanceFieldEnum]
 
 
+export const DeliveryManagementOrderByRelevanceFieldEnum = {
+  id: 'id',
+  pincodeGroupId: 'pincodeGroupId',
+  estimatedDeliveryTime: 'estimatedDeliveryTime'
+} as const
+
+export type DeliveryManagementOrderByRelevanceFieldEnum = (typeof DeliveryManagementOrderByRelevanceFieldEnum)[keyof typeof DeliveryManagementOrderByRelevanceFieldEnum]
+
+
+export const ReviewOrderByRelevanceFieldEnum = {
+  id: 'id',
+  comment: 'comment',
+  image: 'image',
+  userId: 'userId',
+  productId: 'productId'
+} as const
+
+export type ReviewOrderByRelevanceFieldEnum = (typeof ReviewOrderByRelevanceFieldEnum)[keyof typeof ReviewOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -2773,6 +2955,13 @@ export type EnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
  * Reference to a field of type 'PaymentStatus'
  */
 export type EnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ReviewStatus'
+ */
+export type EnumReviewStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReviewStatus'>
     
 
 /**
@@ -2894,6 +3083,8 @@ export type GlobalOmitConfig = {
   aboutPageContent?: Prisma.AboutPageContentOmit
   contactPageInformation?: Prisma.ContactPageInformationOmit
   policyPageContent?: Prisma.PolicyPageContentOmit
+  deliveryManagement?: Prisma.DeliveryManagementOmit
+  review?: Prisma.ReviewOmit
 }
 
 /* Types for Logging */

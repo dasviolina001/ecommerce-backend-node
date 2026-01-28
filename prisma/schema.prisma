@@ -30,6 +30,7 @@ model User {
   coupons     CouponUser[]
   addresses   Address[]
   orders      Order[]
+  reviews     Review[]
 
   @@map("user")
 }
@@ -116,6 +117,7 @@ model Product {
   wishlist   Wishlist[]
   coupons    CouponProduct[]
   orderItems OrderItem[]
+  reviews    Review[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -468,6 +470,7 @@ model PincodeGroup {
   updatedAt   DateTime @updatedAt
 
   pincodes PincodeGroupPincode[]
+  deliveryManagement DeliveryManagement?
 
   @@index([name])
   @@index([isActive])
@@ -522,4 +525,45 @@ model PolicyPageContent {
 
   @@index([title])
   @@map("policypagecontent")
+}
+
+model DeliveryManagement {
+  id                    String   @id @default(uuid())
+  pincodeGroupId        String   @unique
+  deliveryCharge        Float
+  estimatedDeliveryTime String
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  pincodeGroup PincodeGroup @relation(fields: [pincodeGroupId], references: [id], onDelete: Cascade)
+
+  @@map("deliverymanagement")
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Review {
+  id            String       @id @default(uuid())
+  rating        Int          @default(5)
+  comment       String?      @db.LongText
+  image         String?
+  status        ReviewStatus @default(PENDING)
+  isHighlighted Boolean      @default(false)
+
+  userId    String
+  productId String
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
+  @@index([userId])
+  @@map("review")
 }
