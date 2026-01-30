@@ -17,45 +17,42 @@ export interface UpdateReviewStatusData {
 }
 
 export const createReview = async (data: CreateReviewData) => {
-  let targetProductId = data.productId;
 
-
-  const variant = await prisma.productVariant.findUnique({
-    where: { id: data.productId },
-    select: { productId: true },
-  });
-
-  if (variant) {
-    targetProductId = variant.productId;
-  }
-
-  console.log("Review Creation Diagnostic:", { userId: data.userId, productId: data.productId, targetProductId });
-
-  const orderWithProduct = await prisma.order.findFirst({
+  const orderItem = await prisma.orderItem.findFirst({
     where: {
-      userId: data.userId,
-      status: OrderStatus.DELIVERED,
-      orderItems: {
-        some: {
-          productId: targetProductId,
-        },
+      order: {
+        userId: data.userId,
+        status: OrderStatus.DELIVERED,
       },
+      OR: [
+        { productId: data.productId },
+        { variantId: data.productId },
+      ],
+    },
+    select: {
+      productId: true,
     },
   });
 
-  if (!orderWithProduct) {
-    const userOrders = await prisma.order.findMany({
-      where: { userId: data.userId },
-      include: { orderItems: true },
-      take: 5,
-    });
-    console.log("Diagnostic - User Orders found:", JSON.stringify(userOrders, null, 2));
+  if (!orderItem) {
+
+    if (process.env.NODE_ENV !== 'production') {
+      const allUserOrders = await prisma.order.findMany({
+        where: { userId: data.userId },
+        include: { orderItems: true },
+        take: 3,
+      });
+      console.log("Diagnostic - User Orders found:", JSON.stringify(allUserOrders, null, 2));
+    }
 
     throw new CustomError(
       "You can only review products that have been delivered to you.",
       403,
     );
   }
+
+  const targetProductId = orderItem.productId;
+
 
   const existingReview = await prisma.review.findFirst({
     where: {
