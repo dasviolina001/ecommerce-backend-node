@@ -6,7 +6,7 @@ import { ReviewStatus, OrderStatus } from "../generated/prisma/enums";
 
 export interface CreateReviewData {
   userId: string;
-  productId: string; // This could be a productId or a variantId
+  productId: string;
   rating: number;
   comment?: string;
   image?: string;
@@ -20,10 +20,8 @@ export const createReview = async (data: CreateReviewData) => {
 
   const orderItem = await prisma.orderItem.findFirst({
     where: {
-      order: {
-        userId: data.userId,
-        status: OrderStatus.DELIVERED,
-      },
+      order: { userId: data.userId },
+      status: OrderStatus.DELIVERED,
       OR: [
         { productId: data.productId },
         { variantId: data.productId },

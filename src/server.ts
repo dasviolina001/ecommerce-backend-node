@@ -103,6 +103,7 @@ import adminShippingPolicyRoutes from "./routes/adminShippingPolicyRoutes";
 import storeBrandingRoutes from "./routes/storeBrandingRoutes";
 
 import adminStoreBrandingRoutes from "./routes/adminStoreBrandingRoutes";
+import orderItemRoutes from "./route/orderItemRoutes";
 
 const app = express();
 
@@ -127,10 +128,9 @@ const logger = (
   console.log(`[${time}] ${method} ${url}`);
   console.log(`Content-Type: ${req.headers["content-type"]}`);
   console.log(
-    `Body keys: ${
-      Object.keys(req.body || {}).length > 0
-        ? Object.keys(req.body).join(", ")
-        : "EMPTY"
+    `Body keys: ${Object.keys(req.body || {}).length > 0
+      ? Object.keys(req.body).join(", ")
+      : "EMPTY"
     }`,
   );
   next();
@@ -251,6 +251,7 @@ app.use("/api/v1/admin/shipping-policies", adminShippingPolicyRoutes);
 app.use("/api/v1/store-branding", storeBrandingRoutes);
 
 app.use("/api/v1/admin/store-branding", adminStoreBrandingRoutes);
+app.use("/api/v1/admin/order-items", orderItemRoutes);
 
 app.use("/api/v1/search", searchRoutes);
 

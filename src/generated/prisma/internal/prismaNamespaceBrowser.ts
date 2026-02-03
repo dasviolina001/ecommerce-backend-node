@@ -68,6 +68,7 @@ export const ModelName = {
   Blog: 'Blog',
   Order: 'Order',
   OrderItem: 'OrderItem',
+  OrderItemHistory: 'OrderItemHistory',
   OrderHistory: 'OrderHistory',
   Pincode: 'Pincode',
   PincodeGroup: 'PincodeGroup',
@@ -372,10 +373,23 @@ export const OrderItemScalarFieldEnum = {
   price: 'price',
   size: 'size',
   color: 'color',
-  deliveredAt: 'deliveredAt'
+  deliveredAt: 'deliveredAt',
+  status: 'status'
 } as const
 
 export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum]
+
+
+export const OrderItemHistoryScalarFieldEnum = {
+  id: 'id',
+  orderItemId: 'orderItemId',
+  status: 'status',
+  comment: 'comment',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy'
+} as const
+
+export type OrderItemHistoryScalarFieldEnum = (typeof OrderItemHistoryScalarFieldEnum)[keyof typeof OrderItemHistoryScalarFieldEnum]
 
 
 export const OrderHistoryScalarFieldEnum = {
@@ -815,6 +829,16 @@ export const OrderItemOrderByRelevanceFieldEnum = {
 } as const
 
 export type OrderItemOrderByRelevanceFieldEnum = (typeof OrderItemOrderByRelevanceFieldEnum)[keyof typeof OrderItemOrderByRelevanceFieldEnum]
+
+
+export const OrderItemHistoryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  orderItemId: 'orderItemId',
+  comment: 'comment',
+  createdBy: 'createdBy'
+} as const
+
+export type OrderItemHistoryOrderByRelevanceFieldEnum = (typeof OrderItemHistoryOrderByRelevanceFieldEnum)[keyof typeof OrderItemHistoryOrderByRelevanceFieldEnum]
 
 
 export const OrderHistoryOrderByRelevanceFieldEnum = {

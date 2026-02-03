@@ -401,6 +401,7 @@ export const ModelName = {
   Blog: 'Blog',
   Order: 'Order',
   OrderItem: 'OrderItem',
+  OrderItemHistory: 'OrderItemHistory',
   OrderHistory: 'OrderHistory',
   Pincode: 'Pincode',
   PincodeGroup: 'PincodeGroup',
@@ -432,7 +433,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "bankDetails" | "category" | "product" | "productVariant" | "cart" | "address" | "wishlist" | "colorScheme" | "sizeChart" | "coupon" | "couponUser" | "couponProduct" | "couponCategory" | "blog" | "order" | "orderItem" | "orderHistory" | "pincode" | "pincodeGroup" | "pincodeGroupPincode" | "aboutPageContent" | "contactPageInformation" | "policyPageContent" | "deliveryManagement" | "review" | "return" | "returnHistory" | "privacyPolicy" | "service" | "disclaimer" | "shippingPolicy" | "storeBranding"
+    modelProps: "user" | "bankDetails" | "category" | "product" | "productVariant" | "cart" | "address" | "wishlist" | "colorScheme" | "sizeChart" | "coupon" | "couponUser" | "couponProduct" | "couponCategory" | "blog" | "order" | "orderItem" | "orderItemHistory" | "orderHistory" | "pincode" | "pincodeGroup" | "pincodeGroupPincode" | "aboutPageContent" | "contactPageInformation" | "policyPageContent" | "deliveryManagement" | "review" | "return" | "returnHistory" | "privacyPolicy" | "service" | "disclaimer" | "shippingPolicy" | "storeBranding"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1555,6 +1556,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.OrderItemCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.OrderItemCountAggregateOutputType> | number
+        }
+      }
+    }
+    OrderItemHistory: {
+      payload: Prisma.$OrderItemHistoryPayload<ExtArgs>
+      fields: Prisma.OrderItemHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrderItemHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderItemHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrderItemHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderItemHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.OrderItemHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderItemHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrderItemHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderItemHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.OrderItemHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderItemHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.OrderItemHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderItemHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.OrderItemHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.OrderItemHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderItemHistoryPayload>
+        }
+        update: {
+          args: Prisma.OrderItemHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderItemHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.OrderItemHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrderItemHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.OrderItemHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderItemHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.OrderItemHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrderItemHistory>
+        }
+        groupBy: {
+          args: Prisma.OrderItemHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrderItemHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrderItemHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrderItemHistoryCountAggregateOutputType> | number
         }
       }
     }
@@ -2923,10 +2990,23 @@ export const OrderItemScalarFieldEnum = {
   price: 'price',
   size: 'size',
   color: 'color',
-  deliveredAt: 'deliveredAt'
+  deliveredAt: 'deliveredAt',
+  status: 'status'
 } as const
 
 export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum]
+
+
+export const OrderItemHistoryScalarFieldEnum = {
+  id: 'id',
+  orderItemId: 'orderItemId',
+  status: 'status',
+  comment: 'comment',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy'
+} as const
+
+export type OrderItemHistoryScalarFieldEnum = (typeof OrderItemHistoryScalarFieldEnum)[keyof typeof OrderItemHistoryScalarFieldEnum]
 
 
 export const OrderHistoryScalarFieldEnum = {
@@ -3368,6 +3448,16 @@ export const OrderItemOrderByRelevanceFieldEnum = {
 export type OrderItemOrderByRelevanceFieldEnum = (typeof OrderItemOrderByRelevanceFieldEnum)[keyof typeof OrderItemOrderByRelevanceFieldEnum]
 
 
+export const OrderItemHistoryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  orderItemId: 'orderItemId',
+  comment: 'comment',
+  createdBy: 'createdBy'
+} as const
+
+export type OrderItemHistoryOrderByRelevanceFieldEnum = (typeof OrderItemHistoryOrderByRelevanceFieldEnum)[keyof typeof OrderItemHistoryOrderByRelevanceFieldEnum]
+
+
 export const OrderHistoryOrderByRelevanceFieldEnum = {
   id: 'id',
   orderId: 'orderId',
@@ -3716,6 +3806,7 @@ export type GlobalOmitConfig = {
   blog?: Prisma.BlogOmit
   order?: Prisma.OrderOmit
   orderItem?: Prisma.OrderItemOmit
+  orderItemHistory?: Prisma.OrderItemHistoryOmit
   orderHistory?: Prisma.OrderHistoryOmit
   pincode?: Prisma.PincodeOmit
   pincodeGroup?: Prisma.PincodeGroupOmit

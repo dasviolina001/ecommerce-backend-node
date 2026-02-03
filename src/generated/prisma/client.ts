@@ -123,6 +123,11 @@ export type Order = Prisma.OrderModel
  */
 export type OrderItem = Prisma.OrderItemModel
 /**
+ * Model OrderItemHistory
+ * 
+ */
+export type OrderItemHistory = Prisma.OrderItemHistoryModel
+/**
  * Model OrderHistory
  * 
  */

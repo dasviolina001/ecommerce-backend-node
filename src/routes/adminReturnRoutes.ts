@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { NextFunction, Router } from "express";
 
 import {
   getAllReturns,
@@ -31,6 +31,12 @@ router.use(adminAuthMiddleware as any);
 
 router.get("/", getAllReturns);
 
+
+const logger = (req: Request, _res: Response, next: NextFunction) => {
+  console.log(req.body);
+  next();
+};
+
 router.get(
   "/:returnId",
   validate(getReturnByIdValidation),
@@ -60,7 +66,7 @@ router.patch(
 );
 
 router.patch(
-  "/orders/:orderItemId/delivery-date",
+  "/orders/:orderItemId/delivery-date",logger as any,
   validate(setDeliveryDateParamValidation),
   validate(setDeliveryDateValidation),
   setDeliveryDate,

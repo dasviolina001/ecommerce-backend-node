@@ -131,7 +131,16 @@ export const createOrder = async (data: CreateOrderData) => {
         couponId,
         status: OrderStatus.PENDING,
         orderItems: {
-          create: orderItemsData,
+          create: orderItemsData.map((item) => ({
+            ...item,
+            status: OrderStatus.PENDING,
+            orderItemHistories: {
+              create: {
+                status: OrderStatus.PENDING,
+                comment: "Order item created",
+              },
+            },
+          })),
         },
         history: {
           create: {
@@ -202,6 +211,71 @@ export const updateOrderStatus = async (
   return getOrderById(orderId);
 };
 
+export const updateOrderItemStatus = async (
+  orderItemId: string,
+  status: OrderStatus,
+  comment?: string,
+  userId?: string
+) => {
+  const orderItem = await prisma.orderItem.findUnique({
+    where: { id: orderItemId },
+    include: { order: true },
+  });
+
+  if (!orderItem) {
+    throw new CustomError("Order item not found", 404);
+  }
+
+  await prisma.$transaction(async (tx) => {
+    await tx.orderItem.update({
+      where: { id: orderItemId },
+      data: {
+        status,
+        deliveredAt: status === OrderStatus.DELIVERED ? new Date() : orderItem.deliveredAt,
+      },
+    });
+
+    await (tx as any).orderItemHistory.create({
+      data: {
+        orderItemId,
+        status,
+        comment,
+        createdBy: userId,
+      },
+    });
+
+    // Check if all items in the order have the same status
+    const allItems = await tx.orderItem.findMany({
+      where: { orderId: orderItem.orderId },
+    });
+
+    const statuses = allItems.map((item) => item.status);
+    const uniqueStatuses = [...new Set(statuses)];
+
+    if (uniqueStatuses.length === 1 && uniqueStatuses[0] === status) {
+      // If all items have the same status, update the main order status too
+      await tx.order.update({
+        where: { id: orderItem.orderId },
+        data: { status },
+      });
+
+      await tx.orderHistory.create({
+        data: {
+          orderId: orderItem.orderId,
+          status,
+          comment: `Main order status automatically updated to ${status} as all items are now ${status}`,
+          createdBy: "SYSTEM",
+        },
+      });
+    } else if (status === OrderStatus.PROCESSING || status === OrderStatus.SHIPPED || status === OrderStatus.DELIVERED) {
+      // If main order is still PENDING but an item moved forward, sync main order to PROCESSING or better
+      // This is a simple heuristic. For now, let's keep it simple.
+    }
+  });
+
+  return getOrderById(orderItem.orderId);
+};
+
 export const getOrderById = async (orderId: string) => {
   const order = await prisma.order.findUnique({
     where: { id: orderId },
@@ -209,7 +283,10 @@ export const getOrderById = async (orderId: string) => {
       orderItems: {
         include: {
           product: true,
-          variant: true // Include variant details
+          variant: true, // Include variant details
+          orderItemHistories: {
+            orderBy: { createdAt: 'desc' }
+          }
         }
       },
       history: {
