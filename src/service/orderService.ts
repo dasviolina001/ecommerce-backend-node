@@ -5,7 +5,7 @@ import { OrderStatus, PaymentStatus } from "../generated/prisma/enums";
 import { CustomError } from "../middleware/errorHandler";
 
 export interface CreateOrderItemData {
-  productId: string;
+  productId?: string;
   variantId?: string;
   quantity: number;
   size?: string;
@@ -45,14 +45,9 @@ export const createOrder = async (data: CreateOrderData) => {
 
   // 1. Validation and Stock Check Phase
   for (const item of items) {
-    const product = await prisma.product.findUnique({
-      where: { id: item.productId },
-    });
-
-    if (!product) {
-      throw new CustomError(`Product not found: ${item.productId}`, 404);
-    }
-
+    let finalProductId = item.productId;
+    let finalSize = item.size;
+    let finalColor = item.color;
     let price = 0;
     let availableQuantity = 0;
 
@@ -61,7 +56,14 @@ export const createOrder = async (data: CreateOrderData) => {
         where: { id: item.variantId }
       });
       if (!variant) throw new CustomError(`Variant not found: ${item.variantId}`, 404);
-      if (variant.productId !== item.productId) throw new CustomError("Variant mismatch", 400);
+
+      if (finalProductId && variant.productId !== finalProductId) {
+        throw new CustomError("Variant mismatch", 400);
+      }
+
+      finalProductId = variant.productId;
+      finalSize = variant.size || finalSize;
+      finalColor = variant.color || finalColor;
 
       price = variant.sellingPrice || variant.maximumRetailPrice || 0;
       availableQuantity = variant.quantity;
@@ -69,9 +71,24 @@ export const createOrder = async (data: CreateOrderData) => {
       if (availableQuantity < item.quantity) {
         throw new CustomError(`Insufficient stock for variant: ${variant.sku}`, 400);
       }
-    } else {
+    }
 
+    if (!finalProductId) {
+      throw new CustomError("Product ID is required if no variant is provided", 400);
+    }
 
+    const product = await prisma.product.findUnique({
+      where: { id: finalProductId },
+    });
+
+    if (!product) {
+      throw new CustomError(`Product not found: ${finalProductId}`, 404);
+    }
+
+    if (!item.variantId) {
+      if (product.hasVariants) {
+        throw new CustomError(`Product ${product.productName} requires a variant selection`, 400);
+      }
       price = product.sellingPrice || product.maximumRetailPrice || 0;
       availableQuantity = product.quantity;
 
@@ -83,12 +100,12 @@ export const createOrder = async (data: CreateOrderData) => {
     totalAmount += price * item.quantity;
 
     orderItemsData.push({
-      productId: item.productId,
+      productId: finalProductId,
       variantId: item.variantId || undefined,
       quantity: item.quantity,
       price: price,
-      size: item.size,
-      color: item.color,
+      size: finalSize,
+      color: finalColor,
     });
   }
 
@@ -164,7 +181,7 @@ export const createOrder = async (data: CreateOrderData) => {
         });
       } else {
         await tx.product.update({
-          where: { id: item.productId },
+          where: { id: item.productId || orderItemsData[items.indexOf(item)].productId },
           data: { quantity: { decrement: item.quantity } }
         });
       }

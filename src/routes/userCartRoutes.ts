@@ -26,7 +26,11 @@ router.get("/total", getCartTotal);
 
 router.put("/:productId", updateCartQuantity);
 
+router.put("/:productId/:variantId", updateCartQuantity);
+
 router.delete("/:productId", removeFromCart);
+
+router.delete("/:productId/:variantId", removeFromCart);
 
 router.delete("/", clearCart);
 

@@ -24,10 +24,6 @@ import userCartRoutes from "./routes/userCartRoutes";
 
 import userWishlistRoutes from "./routes/userWishlistRoutes";
 
-import swaggerUi from "swagger-ui-express";
-
-import swaggerDocument from "./swagger-output.json";
-
 import adminColorSchemeRoutes from "./routes/adminColorSchemeRoutes";
 
 import adminSizeChartRoutes from "./routes/adminSizeChartRoutes";
@@ -103,7 +99,8 @@ import adminShippingPolicyRoutes from "./routes/adminShippingPolicyRoutes";
 import storeBrandingRoutes from "./routes/storeBrandingRoutes";
 
 import adminStoreBrandingRoutes from "./routes/adminStoreBrandingRoutes";
-import orderItemRoutes from "./route/orderItemRoutes";
+
+import orderItemRoutes from "./routes/orderItemRoutes";
 
 const app = express();
 
@@ -138,22 +135,7 @@ const logger = (
 
 app.use(logger);
 
-app.use(
-  "/api-docs",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, {
-    explorer: true,
-    customSiteTitle: "Node Ecommerce API Docs",
-    swaggerOptions: {
-      docExpansion: "none",
-      filter: true,
-      displayRequestDuration: true,
-      tagsSorter: "alpha",
-      operationsSorter: "alpha",
-      defaultModelsExpandDepth: -1,
-    },
-  }),
-);
+
 
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
@@ -251,6 +233,7 @@ app.use("/api/v1/admin/shipping-policies", adminShippingPolicyRoutes);
 app.use("/api/v1/store-branding", storeBrandingRoutes);
 
 app.use("/api/v1/admin/store-branding", adminStoreBrandingRoutes);
+
 app.use("/api/v1/admin/order-items", orderItemRoutes);
 
 app.use("/api/v1/search", searchRoutes);

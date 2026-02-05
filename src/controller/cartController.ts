@@ -9,10 +9,10 @@ const cartService = new CartService();
 export const addToCart = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?.id;
 
-  const { productId, quantity } = req.body;
+  const { productId, variantId, quantity } = req.body;
 
-  if (!productId) {
-    res.status(400).json({ message: "Product ID is required" });
+  if (!productId && !variantId) {
+    res.status(400).json({ message: "Product ID or Variant ID is required" });
     return;
   }
 
@@ -24,6 +24,7 @@ export const addToCart = asyncHandler(async (req: Request, res: Response) => {
   const cartItem = await cartService.addToCart({
     userId,
     productId,
+    variantId,
     quantity: quantity || 1,
   });
 
@@ -56,8 +57,8 @@ export const updateCartQuantity = asyncHandler(
   async (req: Request, res: Response) => {
     const userId = req.user?.id;
 
-    const { productId } = req.params;
-    
+    const { productId, variantId } = req.params;
+
     const { quantity } = req.body;
 
     if (!quantity) {
@@ -73,6 +74,7 @@ export const updateCartQuantity = asyncHandler(
     const cartItem = await cartService.updateCartQuantity({
       userId,
       productId,
+      variantId,
       quantity,
     });
 
@@ -86,15 +88,15 @@ export const updateCartQuantity = asyncHandler(
 export const removeFromCart = asyncHandler(
   async (req: Request, res: Response) => {
     const userId = req.user?.id;
-    
-    const { productId } = req.params;
+
+    const { productId, variantId } = req.params;
 
     if (!userId) {
       res.status(401).json({ message: "User not authenticated" });
       return;
     }
 
-    await cartService.removeFromCart(userId, productId);
+    await cartService.removeFromCart(userId, productId, variantId);
 
     res.status(200).json({
       message: "Item removed from cart successfully",
