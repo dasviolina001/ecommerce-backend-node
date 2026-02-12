@@ -492,7 +492,7 @@ export const productService = {
 
   /* ========================= INVENTORY ========================= */
 
-  async getInventoryList() {
+  async getInventoryList(page?: number, limit?: number) {
     // 1. Fetch simple products (no variants)
     const simpleProducts = await prisma.product.findMany({
       where: { hasVariants: false },
@@ -533,7 +533,7 @@ export const productService = {
     });
 
     // 3. Normalize and combine
-    const inventoryList = [
+    const allItems = [
       ...simpleProducts.map((p) => ({
         id: p.id,
         type: "PRODUCT",
@@ -563,6 +563,30 @@ export const productService = {
       })),
     ];
 
-    return inventoryList;
+    const total = allItems.length;
+
+    if (page && limit) {
+      const skip = (page - 1) * limit;
+      const paginatedItems = allItems.slice(skip, skip + limit);
+      return {
+        inventoryList: paginatedItems,
+        pagination: {
+          total,
+          page,
+          limit,
+          totalPages: Math.ceil(total / limit),
+        },
+      };
+    }
+
+    return {
+      inventoryList: allItems,
+      pagination: {
+        total,
+        page: 1,
+        limit: total,
+        totalPages: 1,
+      },
+    };
   },
 };

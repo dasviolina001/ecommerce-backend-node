@@ -115,8 +115,8 @@ export const getOrderById = async (req: AuthRequest, res: Response): Promise<voi
 
 export const getAllOrders = async (req: Request, res: Response): Promise<void> => {
     try {
-        const page = parseInt(req.query.page as string) || 1;
-        const limit = parseInt(req.query.limit as string) || 10;
+        const page = req.query.page ? parseInt(req.query.page as string) : undefined;
+        const limit = req.query.limit ? parseInt(req.query.limit as string) : undefined;
         const status = req.query.status as OrderStatus | undefined;
 
         const result = await orderService.getAllOrders(page, limit, status);

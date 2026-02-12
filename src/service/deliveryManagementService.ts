@@ -48,20 +48,23 @@ export const getDeliveryManagementByGroupId = async (pincodeGroupId: string) => 
     return deliveryManagement;
 };
 
-export const getAllDeliveryManagements = async (page = 1, limit = 10) => {
-    const skip = (page - 1) * limit;
+export const getAllDeliveryManagements = async (page?: number, limit?: number) => {
+    const queryOptions: any = {
+        include: {
+            pincodeGroup: true,
+        },
+        orderBy: {
+            createdAt: "desc",
+        },
+    };
+
+    if (page && limit) {
+        queryOptions.skip = (page - 1) * limit;
+        queryOptions.take = limit;
+    }
 
     const [deliveryManagements, total] = await Promise.all([
-        prisma.deliveryManagement.findMany({
-            skip,
-            take: limit,
-            include: {
-                pincodeGroup: true,
-            },
-            orderBy: {
-                createdAt: "desc",
-            },
-        }),
+        prisma.deliveryManagement.findMany(queryOptions),
         prisma.deliveryManagement.count(),
     ]);
 
@@ -69,9 +72,9 @@ export const getAllDeliveryManagements = async (page = 1, limit = 10) => {
         deliveryManagements,
         pagination: {
             total,
-            page,
-            limit,
-            totalPages: Math.ceil(total / limit),
+            page: page || 1,
+            limit: limit || total,
+            totalPages: limit ? Math.ceil(total / limit) : 1,
         },
     };
 };

@@ -40,8 +40,8 @@ export const getAllDeliveryManagements = async (
   req: Request | AuthRequest,
   res: Response,
 ): Promise<void> => {
-  const page = parseInt(req.query.page as string) || 1;
-  const limit = parseInt(req.query.limit as string) || 10;
+  const page = req.query.page ? parseInt(req.query.page as string) : undefined;
+  const limit = req.query.limit ? parseInt(req.query.limit as string) : undefined;
 
   const result = await deliveryManagementService.getAllDeliveryManagements(
     page,

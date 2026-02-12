@@ -52,13 +52,13 @@ export const getAllCategories = async (
   res: Response,
 ): Promise<void> => {
   try {
-    const page = parseInt(req.query.page as string) || 1;
+    const page = req.query.page ? parseInt(req.query.page as string) : undefined;
 
-    const limit = parseInt(req.query.limit as string) || 10;
+    const limit = req.query.limit ? parseInt(req.query.limit as string) : undefined;
 
     const includeInactive = req.query.includeInactive === "true" ? true : false;
 
-    if (page < 1 || limit < 1) {
+    if ((page !== undefined && page < 1) || (limit !== undefined && limit < 1)) {
       throw new CustomError("Page and limit must be positive numbers", 400);
     }
 

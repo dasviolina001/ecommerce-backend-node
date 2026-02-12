@@ -265,9 +265,11 @@ export const updateInventory = async (req: Request, res: Response) => {
   }
 };
 
-export const getInventoryList = async (_req: Request, res: Response) => {
+export const getInventoryList = async (req: Request, res: Response) => {
   try {
-    const inventoryList = await productService.getInventoryList();
+    const page = req.query.page ? parseInt(req.query.page as string) : undefined;
+    const limit = req.query.limit ? parseInt(req.query.limit as string) : undefined;
+    const inventoryList = await productService.getInventoryList(page, limit);
     res.status(200).json({ success: true, data: inventoryList });
   } catch (error) {
     throw error;

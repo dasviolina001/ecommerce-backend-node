@@ -68,18 +68,14 @@ export const createCategory = async (data: CreateCategoryData) => {
 };
 
 export const getAllCategories = async (
-  page = 1,
-  limit = 10,
+  page?: number,
+  limit?: number,
   includeInactive = false,
 ) => {
-  const skip = (page - 1) * limit;
-
   const where = includeInactive ? {} : { isActive: true };
 
-  const categories = await prisma.category.findMany({
+  const queryOptions: any = {
     where,
-    skip,
-    take: limit,
     include: {
       parent: {
         select: {
@@ -97,17 +93,25 @@ export const getAllCategories = async (
     orderBy: {
       createdAt: "desc",
     },
-  });
+  };
 
-  const total = await prisma.category.count({ where });
+  if (page && limit) {
+    queryOptions.skip = (page - 1) * limit;
+    queryOptions.take = limit;
+  }
+
+  const [categories, total] = await Promise.all([
+    prisma.category.findMany(queryOptions),
+    prisma.category.count({ where }),
+  ]);
 
   return {
     categories,
     pagination: {
       total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
+      page: page || 1,
+      limit: limit || total,
+      totalPages: limit ? Math.ceil(total / limit) : 1,
     },
   };
 };

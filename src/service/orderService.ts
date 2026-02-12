@@ -359,14 +359,11 @@ export const getUserOrders = async (userId: string, page = 1, limit = 10) => {
   };
 }
 
-export const getAllOrders = async (page = 1, limit = 10, status?: OrderStatus) => {
-  const skip = (page - 1) * limit;
+export const getAllOrders = async (page?: number, limit?: number, status?: OrderStatus) => {
   const where = status ? { status } : {};
 
-  const orders = await prisma.order.findMany({
+  const queryOptions: any = {
     where,
-    skip,
-    take: limit,
     orderBy: { createdAt: 'desc' },
     include: {
       user: {
@@ -380,17 +377,25 @@ export const getAllOrders = async (page = 1, limit = 10, status?: OrderStatus) =
         select: { orderItems: true }
       }
     }
-  });
+  };
 
-  const total = await prisma.order.count({ where });
+  if (page && limit) {
+    queryOptions.skip = (page - 1) * limit;
+    queryOptions.take = limit;
+  }
+
+  const [orders, total] = await Promise.all([
+    prisma.order.findMany(queryOptions),
+    prisma.order.count({ where }),
+  ]);
 
   return {
     orders,
     pagination: {
       total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit)
+      page: page || 1,
+      limit: limit || total,
+      totalPages: limit ? Math.ceil(total / limit) : 1
     }
   };
 }

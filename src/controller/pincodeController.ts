@@ -21,9 +21,9 @@ export const getAllPincodes = async (
   req: Request | AuthRequest,
   res: Response
 ): Promise<void> => {
-  const page = parseInt(req.query.page as string) || 1;
+  const page = req.query.page ? parseInt(req.query.page as string) : undefined;
 
-  const limit = parseInt(req.query.limit as string) || 10;
+  const limit = req.query.limit ? parseInt(req.query.limit as string) : undefined;
 
   const includeInactive = (req as AuthRequest).user
     ? req.query.includeInactive === "true"
