@@ -3,21 +3,21 @@ import { prisma } from "../db/prisma";
 class PrivacyPolicyService {
 
   async getAllPolicies() {
-    return await (prisma as any).privacypolicy.findMany({
+    return await (prisma as any).privacyPolicy.findMany({
       orderBy: { createdAt: "desc" },
     });
   }
 
 
   async getActivePolicy() {
-    return await (prisma as any).privacypolicy.findFirst({
+    return await (prisma as any).privacyPolicy.findFirst({
       where: { isActive: true },
     });
   }
 
 
   async getPolicyById(id: string) {
-    return await (prisma as any).privacypolicy.findUnique({
+    return await (prisma as any).privacyPolicy.findUnique({
       where: { id },
     });
   }
@@ -28,7 +28,7 @@ class PrivacyPolicyService {
     content: any;
     isActive?: boolean;
   }) {
-    return await (prisma as any).privacypolicy.create({
+    return await (prisma as any).privacyPolicy.create({
       data: {
         title: data.title,
         content: data.content,
@@ -42,7 +42,7 @@ class PrivacyPolicyService {
     id: string,
     data: { title?: string; content?: any; isActive?: boolean },
   ) {
-    return await (prisma as any).privacypolicy.update({
+    return await (prisma as any).privacyPolicy.update({
       where: { id },
       data,
     });
@@ -50,14 +50,14 @@ class PrivacyPolicyService {
 
 
   async deletePolicy(id: string) {
-    return await (prisma as any).privacypolicy.delete({
+    return await (prisma as any).privacyPolicy.delete({
       where: { id },
     });
   }
 
 
   async toggleStatus(id: string) {
-    const policy = await (prisma as any).privacypolicy.findUnique({
+    const policy = await (prisma as any).privacyPolicy.findUnique({
       where: { id },
     });
 
@@ -65,7 +65,7 @@ class PrivacyPolicyService {
       throw new Error("Policy not found");
     }
 
-    return await (prisma as any).privacypolicy.update({
+    return await (prisma as any).privacyPolicy.update({
       where: { id },
       data: { isActive: !policy.isActive },
     });

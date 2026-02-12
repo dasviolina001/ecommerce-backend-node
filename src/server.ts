@@ -102,6 +102,10 @@ import adminStoreBrandingRoutes from "./routes/adminStoreBrandingRoutes";
 
 import orderItemRoutes from "./routes/orderItemRoutes";
 
+import adminReturnReasonRoutes from "./routes/adminReturnReasonRoutes";
+
+import userReturnReasonRoutes from "./routes/userReturnReasonRoutes";
+
 const app = express();
 
 app.use(
@@ -130,10 +134,9 @@ const logger = (
   console.log(`Content-Type: ${req.headers["content-type"]}`);
 
   console.log(
-    `Body keys: ${
-      Object.keys(req.body || {}).length > 0
-        ? Object.keys(req.body).join(", ")
-        : "EMPTY"
+    `Body keys: ${Object.keys(req.body || {}).length > 0
+      ? Object.keys(req.body).join(", ")
+      : "EMPTY"
     }`,
   );
   next();
@@ -217,6 +220,10 @@ app.use("/api/v1/admin/reviews", adminReviewRoutes);
 app.use("/api/v1/returns", returnRoutes);
 
 app.use("/api/v1/admin/returns", adminReturnRoutes);
+
+app.use("/api/v1/admin/return-reasons", adminReturnReasonRoutes);
+
+app.use("/api/v1/return-reasons", userReturnReasonRoutes);
 
 app.use("/api/v1/privacy-policy", privacyPolicyRoutes);
 
