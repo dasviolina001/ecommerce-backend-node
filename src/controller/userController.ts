@@ -11,7 +11,8 @@ export const register = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { fullName, email, password, confirmPassword } = req.body;
+    const { fullName, email, password, confirmPassword, phone, altPhone } =
+      req.body;
 
     if (!fullName || !email || !password) {
       throw new CustomError("fullName, email, and password are required", 400);
@@ -29,6 +30,8 @@ export const register = async (
       fullName,
       email,
       password,
+      phone,
+      altPhone,
     });
 
     res.status(201).json({
@@ -94,11 +97,11 @@ export const updateProfile = async (
       throw new CustomError("User not authenticated", 401);
     }
 
-    const { fullName, email } = req.body;
+    const { fullName, email, phone, altPhone } = req.body;
 
-    if (!fullName && !email) {
+    if (!fullName && !email && !phone && !altPhone) {
       throw new CustomError(
-        "At least one field (fullName or email) is required",
+        "At least one field (fullName, email, phone or altPhone) is required",
         400
       );
     }
@@ -106,6 +109,8 @@ export const updateProfile = async (
     const user = await userService.updateUserProfile(req.user.id, {
       fullName,
       email,
+      phone,
+      altPhone,
     });
 
     res.status(200).json({

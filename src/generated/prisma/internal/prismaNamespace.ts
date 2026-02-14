@@ -2863,7 +2863,9 @@ export const UserScalarFieldEnum = {
   updatedAt: 'updatedAt',
   isActive: 'isActive',
   isAdmin: 'isAdmin',
-  isUserVerified: 'isUserVerified'
+  isUserVerified: 'isUserVerified',
+  phone: 'phone',
+  altPhone: 'altPhone'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -3262,6 +3264,7 @@ export const ReturnScalarFieldEnum = {
   adminComment: 'adminComment',
   returnableUntil: 'returnableUntil',
   isReturnableWindow: 'isReturnableWindow',
+  inventoryRestored: 'inventoryRestored',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -3400,11 +3403,21 @@ export const JsonNullValueInput = {
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
 export const UserOrderByRelevanceFieldEnum = {
   id: 'id',
   fullName: 'fullName',
   email: 'email',
-  password: 'password'
+  password: 'password',
+  phone: 'phone',
+  altPhone: 'altPhone'
 } as const
 
 export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
@@ -3421,14 +3434,6 @@ export const BankDetailsOrderByRelevanceFieldEnum = {
 } as const
 
 export type BankDetailsOrderByRelevanceFieldEnum = (typeof BankDetailsOrderByRelevanceFieldEnum)[keyof typeof BankDetailsOrderByRelevanceFieldEnum]
-
-
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 export const CategoryOrderByRelevanceFieldEnum = {

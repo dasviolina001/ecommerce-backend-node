@@ -35,6 +35,7 @@ export type ReturnMinAggregateOutputType = {
   adminComment: string | null
   returnableUntil: Date | null
   isReturnableWindow: boolean | null
+  inventoryRestored: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -50,6 +51,7 @@ export type ReturnMaxAggregateOutputType = {
   adminComment: string | null
   returnableUntil: Date | null
   isReturnableWindow: boolean | null
+  inventoryRestored: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -65,6 +67,7 @@ export type ReturnCountAggregateOutputType = {
   adminComment: number
   returnableUntil: number
   isReturnableWindow: number
+  inventoryRestored: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -82,6 +85,7 @@ export type ReturnMinAggregateInputType = {
   adminComment?: true
   returnableUntil?: true
   isReturnableWindow?: true
+  inventoryRestored?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -97,6 +101,7 @@ export type ReturnMaxAggregateInputType = {
   adminComment?: true
   returnableUntil?: true
   isReturnableWindow?: true
+  inventoryRestored?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -112,6 +117,7 @@ export type ReturnCountAggregateInputType = {
   adminComment?: true
   returnableUntil?: true
   isReturnableWindow?: true
+  inventoryRestored?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -200,6 +206,7 @@ export type ReturnGroupByOutputType = {
   adminComment: string | null
   returnableUntil: Date
   isReturnableWindow: boolean
+  inventoryRestored: boolean
   createdAt: Date
   updatedAt: Date
   _count: ReturnCountAggregateOutputType | null
@@ -236,6 +243,7 @@ export type ReturnWhereInput = {
   adminComment?: Prisma.StringNullableFilter<"Return"> | string | null
   returnableUntil?: Prisma.DateTimeFilter<"Return"> | Date | string
   isReturnableWindow?: Prisma.BoolFilter<"Return"> | boolean
+  inventoryRestored?: Prisma.BoolFilter<"Return"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Return"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Return"> | Date | string
   orderItem?: Prisma.XOR<Prisma.OrderItemScalarRelationFilter, Prisma.OrderItemWhereInput>
@@ -254,6 +262,7 @@ export type ReturnOrderByWithRelationInput = {
   adminComment?: Prisma.SortOrderInput | Prisma.SortOrder
   returnableUntil?: Prisma.SortOrder
   isReturnableWindow?: Prisma.SortOrder
+  inventoryRestored?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   orderItem?: Prisma.OrderItemOrderByWithRelationInput
@@ -276,6 +285,7 @@ export type ReturnWhereUniqueInput = Prisma.AtLeast<{
   adminComment?: Prisma.StringNullableFilter<"Return"> | string | null
   returnableUntil?: Prisma.DateTimeFilter<"Return"> | Date | string
   isReturnableWindow?: Prisma.BoolFilter<"Return"> | boolean
+  inventoryRestored?: Prisma.BoolFilter<"Return"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Return"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Return"> | Date | string
   orderItem?: Prisma.XOR<Prisma.OrderItemScalarRelationFilter, Prisma.OrderItemWhereInput>
@@ -294,6 +304,7 @@ export type ReturnOrderByWithAggregationInput = {
   adminComment?: Prisma.SortOrderInput | Prisma.SortOrder
   returnableUntil?: Prisma.SortOrder
   isReturnableWindow?: Prisma.SortOrder
+  inventoryRestored?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ReturnCountOrderByAggregateInput
@@ -315,6 +326,7 @@ export type ReturnScalarWhereWithAggregatesInput = {
   adminComment?: Prisma.StringNullableWithAggregatesFilter<"Return"> | string | null
   returnableUntil?: Prisma.DateTimeWithAggregatesFilter<"Return"> | Date | string
   isReturnableWindow?: Prisma.BoolWithAggregatesFilter<"Return"> | boolean
+  inventoryRestored?: Prisma.BoolWithAggregatesFilter<"Return"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Return"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Return"> | Date | string
 }
@@ -328,6 +340,7 @@ export type ReturnCreateInput = {
   adminComment?: string | null
   returnableUntil: Date | string
   isReturnableWindow?: boolean
+  inventoryRestored?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   orderItem: Prisma.OrderItemCreateNestedOneWithoutReturnsInput
@@ -346,6 +359,7 @@ export type ReturnUncheckedCreateInput = {
   adminComment?: string | null
   returnableUntil: Date | string
   isReturnableWindow?: boolean
+  inventoryRestored?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   history?: Prisma.ReturnHistoryUncheckedCreateNestedManyWithoutReturnInput
@@ -360,6 +374,7 @@ export type ReturnUpdateInput = {
   adminComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   returnableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isReturnableWindow?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inventoryRestored?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orderItem?: Prisma.OrderItemUpdateOneRequiredWithoutReturnsNestedInput
@@ -378,6 +393,7 @@ export type ReturnUncheckedUpdateInput = {
   adminComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   returnableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isReturnableWindow?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inventoryRestored?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.ReturnHistoryUncheckedUpdateManyWithoutReturnNestedInput
@@ -394,6 +410,7 @@ export type ReturnCreateManyInput = {
   adminComment?: string | null
   returnableUntil: Date | string
   isReturnableWindow?: boolean
+  inventoryRestored?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -407,6 +424,7 @@ export type ReturnUpdateManyMutationInput = {
   adminComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   returnableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isReturnableWindow?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inventoryRestored?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -422,6 +440,7 @@ export type ReturnUncheckedUpdateManyInput = {
   adminComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   returnableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isReturnableWindow?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inventoryRestored?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -453,6 +472,7 @@ export type ReturnCountOrderByAggregateInput = {
   adminComment?: Prisma.SortOrder
   returnableUntil?: Prisma.SortOrder
   isReturnableWindow?: Prisma.SortOrder
+  inventoryRestored?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -468,6 +488,7 @@ export type ReturnMaxOrderByAggregateInput = {
   adminComment?: Prisma.SortOrder
   returnableUntil?: Prisma.SortOrder
   isReturnableWindow?: Prisma.SortOrder
+  inventoryRestored?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -483,6 +504,7 @@ export type ReturnMinOrderByAggregateInput = {
   adminComment?: Prisma.SortOrder
   returnableUntil?: Prisma.SortOrder
   isReturnableWindow?: Prisma.SortOrder
+  inventoryRestored?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -603,6 +625,7 @@ export type ReturnCreateWithoutUserInput = {
   adminComment?: string | null
   returnableUntil: Date | string
   isReturnableWindow?: boolean
+  inventoryRestored?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   orderItem: Prisma.OrderItemCreateNestedOneWithoutReturnsInput
@@ -619,6 +642,7 @@ export type ReturnUncheckedCreateWithoutUserInput = {
   adminComment?: string | null
   returnableUntil: Date | string
   isReturnableWindow?: boolean
+  inventoryRestored?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   history?: Prisma.ReturnHistoryUncheckedCreateNestedManyWithoutReturnInput
@@ -664,6 +688,7 @@ export type ReturnScalarWhereInput = {
   adminComment?: Prisma.StringNullableFilter<"Return"> | string | null
   returnableUntil?: Prisma.DateTimeFilter<"Return"> | Date | string
   isReturnableWindow?: Prisma.BoolFilter<"Return"> | boolean
+  inventoryRestored?: Prisma.BoolFilter<"Return"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Return"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Return"> | Date | string
 }
@@ -677,6 +702,7 @@ export type ReturnCreateWithoutOrderItemInput = {
   adminComment?: string | null
   returnableUntil: Date | string
   isReturnableWindow?: boolean
+  inventoryRestored?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutReturnsInput
@@ -693,6 +719,7 @@ export type ReturnUncheckedCreateWithoutOrderItemInput = {
   adminComment?: string | null
   returnableUntil: Date | string
   isReturnableWindow?: boolean
+  inventoryRestored?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   history?: Prisma.ReturnHistoryUncheckedCreateNestedManyWithoutReturnInput
@@ -733,6 +760,7 @@ export type ReturnCreateWithoutHistoryInput = {
   adminComment?: string | null
   returnableUntil: Date | string
   isReturnableWindow?: boolean
+  inventoryRestored?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   orderItem: Prisma.OrderItemCreateNestedOneWithoutReturnsInput
@@ -750,6 +778,7 @@ export type ReturnUncheckedCreateWithoutHistoryInput = {
   adminComment?: string | null
   returnableUntil: Date | string
   isReturnableWindow?: boolean
+  inventoryRestored?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -779,6 +808,7 @@ export type ReturnUpdateWithoutHistoryInput = {
   adminComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   returnableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isReturnableWindow?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inventoryRestored?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orderItem?: Prisma.OrderItemUpdateOneRequiredWithoutReturnsNestedInput
@@ -796,6 +826,7 @@ export type ReturnUncheckedUpdateWithoutHistoryInput = {
   adminComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   returnableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isReturnableWindow?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inventoryRestored?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -810,6 +841,7 @@ export type ReturnCreateManyUserInput = {
   adminComment?: string | null
   returnableUntil: Date | string
   isReturnableWindow?: boolean
+  inventoryRestored?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -823,6 +855,7 @@ export type ReturnUpdateWithoutUserInput = {
   adminComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   returnableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isReturnableWindow?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inventoryRestored?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orderItem?: Prisma.OrderItemUpdateOneRequiredWithoutReturnsNestedInput
@@ -839,6 +872,7 @@ export type ReturnUncheckedUpdateWithoutUserInput = {
   adminComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   returnableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isReturnableWindow?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inventoryRestored?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.ReturnHistoryUncheckedUpdateManyWithoutReturnNestedInput
@@ -854,6 +888,7 @@ export type ReturnUncheckedUpdateManyWithoutUserInput = {
   adminComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   returnableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isReturnableWindow?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inventoryRestored?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -868,6 +903,7 @@ export type ReturnCreateManyOrderItemInput = {
   adminComment?: string | null
   returnableUntil: Date | string
   isReturnableWindow?: boolean
+  inventoryRestored?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -881,6 +917,7 @@ export type ReturnUpdateWithoutOrderItemInput = {
   adminComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   returnableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isReturnableWindow?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inventoryRestored?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutReturnsNestedInput
@@ -897,6 +934,7 @@ export type ReturnUncheckedUpdateWithoutOrderItemInput = {
   adminComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   returnableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isReturnableWindow?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inventoryRestored?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.ReturnHistoryUncheckedUpdateManyWithoutReturnNestedInput
@@ -912,6 +950,7 @@ export type ReturnUncheckedUpdateManyWithoutOrderItemInput = {
   adminComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   returnableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isReturnableWindow?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inventoryRestored?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -958,6 +997,7 @@ export type ReturnSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   adminComment?: boolean
   returnableUntil?: boolean
   isReturnableWindow?: boolean
+  inventoryRestored?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   orderItem?: boolean | Prisma.OrderItemDefaultArgs<ExtArgs>
@@ -979,11 +1019,12 @@ export type ReturnSelectScalar = {
   adminComment?: boolean
   returnableUntil?: boolean
   isReturnableWindow?: boolean
+  inventoryRestored?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ReturnOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderItemId" | "userId" | "reason" | "videoPath" | "status" | "approvedRejectedAt" | "adminComment" | "returnableUntil" | "isReturnableWindow" | "createdAt" | "updatedAt", ExtArgs["result"]["return"]>
+export type ReturnOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderItemId" | "userId" | "reason" | "videoPath" | "status" | "approvedRejectedAt" | "adminComment" | "returnableUntil" | "isReturnableWindow" | "inventoryRestored" | "createdAt" | "updatedAt", ExtArgs["result"]["return"]>
 export type ReturnInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orderItem?: boolean | Prisma.OrderItemDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1009,6 +1050,7 @@ export type $ReturnPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     adminComment: string | null
     returnableUntil: Date
     isReturnableWindow: boolean
+    inventoryRestored: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["return"]>
@@ -1393,6 +1435,7 @@ export interface ReturnFieldRefs {
   readonly adminComment: Prisma.FieldRef<"Return", 'String'>
   readonly returnableUntil: Prisma.FieldRef<"Return", 'DateTime'>
   readonly isReturnableWindow: Prisma.FieldRef<"Return", 'Boolean'>
+  readonly inventoryRestored: Prisma.FieldRef<"Return", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Return", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Return", 'DateTime'>
 }

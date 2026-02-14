@@ -34,6 +34,8 @@ export type UserMinAggregateOutputType = {
   isActive: boolean | null
   isAdmin: boolean | null
   isUserVerified: boolean | null
+  phone: string | null
+  altPhone: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -46,6 +48,8 @@ export type UserMaxAggregateOutputType = {
   isActive: boolean | null
   isAdmin: boolean | null
   isUserVerified: boolean | null
+  phone: string | null
+  altPhone: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -58,6 +62,8 @@ export type UserCountAggregateOutputType = {
   isActive: number
   isAdmin: number
   isUserVerified: number
+  phone: number
+  altPhone: number
   _all: number
 }
 
@@ -72,6 +78,8 @@ export type UserMinAggregateInputType = {
   isActive?: true
   isAdmin?: true
   isUserVerified?: true
+  phone?: true
+  altPhone?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -84,6 +92,8 @@ export type UserMaxAggregateInputType = {
   isActive?: true
   isAdmin?: true
   isUserVerified?: true
+  phone?: true
+  altPhone?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -96,6 +106,8 @@ export type UserCountAggregateInputType = {
   isActive?: true
   isAdmin?: true
   isUserVerified?: true
+  phone?: true
+  altPhone?: true
   _all?: true
 }
 
@@ -181,6 +193,8 @@ export type UserGroupByOutputType = {
   isActive: boolean
   isAdmin: boolean
   isUserVerified: boolean
+  phone: string | null
+  altPhone: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -214,6 +228,8 @@ export type UserWhereInput = {
   isActive?: Prisma.BoolFilter<"User"> | boolean
   isAdmin?: Prisma.BoolFilter<"User"> | boolean
   isUserVerified?: Prisma.BoolFilter<"User"> | boolean
+  phone?: Prisma.StringNullableFilter<"User"> | string | null
+  altPhone?: Prisma.StringNullableFilter<"User"> | string | null
   bankDetails?: Prisma.XOR<Prisma.BankDetailsNullableScalarRelationFilter, Prisma.BankDetailsWhereInput> | null
   cart?: Prisma.CartListRelationFilter
   wishlist?: Prisma.WishlistListRelationFilter
@@ -234,6 +250,8 @@ export type UserOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   isAdmin?: Prisma.SortOrder
   isUserVerified?: Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  altPhone?: Prisma.SortOrderInput | Prisma.SortOrder
   bankDetails?: Prisma.BankDetailsOrderByWithRelationInput
   cart?: Prisma.CartOrderByRelationAggregateInput
   wishlist?: Prisma.WishlistOrderByRelationAggregateInput
@@ -258,6 +276,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"User"> | boolean
   isAdmin?: Prisma.BoolFilter<"User"> | boolean
   isUserVerified?: Prisma.BoolFilter<"User"> | boolean
+  phone?: Prisma.StringNullableFilter<"User"> | string | null
+  altPhone?: Prisma.StringNullableFilter<"User"> | string | null
   bankDetails?: Prisma.XOR<Prisma.BankDetailsNullableScalarRelationFilter, Prisma.BankDetailsWhereInput> | null
   cart?: Prisma.CartListRelationFilter
   wishlist?: Prisma.WishlistListRelationFilter
@@ -278,6 +298,8 @@ export type UserOrderByWithAggregationInput = {
   isActive?: Prisma.SortOrder
   isAdmin?: Prisma.SortOrder
   isUserVerified?: Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  altPhone?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -296,6 +318,8 @@ export type UserScalarWhereWithAggregatesInput = {
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   isAdmin?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   isUserVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  altPhone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
 export type UserCreateInput = {
@@ -308,6 +332,8 @@ export type UserCreateInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsCreateNestedOneWithoutUserInput
   cart?: Prisma.CartCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistCreateNestedManyWithoutUserInput
@@ -328,6 +354,8 @@ export type UserUncheckedCreateInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsUncheckedCreateNestedOneWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput
@@ -348,6 +376,8 @@ export type UserUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUpdateManyWithoutUserNestedInput
@@ -368,6 +398,8 @@ export type UserUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUncheckedUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput
@@ -388,6 +420,8 @@ export type UserCreateManyInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -400,6 +434,8 @@ export type UserUpdateManyMutationInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -412,6 +448,8 @@ export type UserUncheckedUpdateManyInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserOrderByRelevanceInput = {
@@ -430,6 +468,8 @@ export type UserCountOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   isAdmin?: Prisma.SortOrder
   isUserVerified?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  altPhone?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -442,6 +482,8 @@ export type UserMaxOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   isAdmin?: Prisma.SortOrder
   isUserVerified?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  altPhone?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -454,6 +496,8 @@ export type UserMinOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   isAdmin?: Prisma.SortOrder
   isUserVerified?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  altPhone?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -471,6 +515,10 @@ export type DateTimeFieldUpdateOperationsInput = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type UserCreateNestedOneWithoutBankDetailsInput = {
@@ -595,6 +643,8 @@ export type UserCreateWithoutBankDetailsInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   cart?: Prisma.CartCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistCreateNestedManyWithoutUserInput
   coupons?: Prisma.CouponUserCreateNestedManyWithoutUserInput
@@ -614,6 +664,8 @@ export type UserUncheckedCreateWithoutBankDetailsInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput
   coupons?: Prisma.CouponUserUncheckedCreateNestedManyWithoutUserInput
@@ -649,6 +701,8 @@ export type UserUpdateWithoutBankDetailsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cart?: Prisma.CartUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUpdateManyWithoutUserNestedInput
   coupons?: Prisma.CouponUserUpdateManyWithoutUserNestedInput
@@ -668,6 +722,8 @@ export type UserUncheckedUpdateWithoutBankDetailsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput
   coupons?: Prisma.CouponUserUncheckedUpdateManyWithoutUserNestedInput
@@ -687,6 +743,8 @@ export type UserCreateWithoutCartInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsCreateNestedOneWithoutUserInput
   wishlist?: Prisma.WishlistCreateNestedManyWithoutUserInput
   coupons?: Prisma.CouponUserCreateNestedManyWithoutUserInput
@@ -706,6 +764,8 @@ export type UserUncheckedCreateWithoutCartInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsUncheckedCreateNestedOneWithoutUserInput
   wishlist?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput
   coupons?: Prisma.CouponUserUncheckedCreateNestedManyWithoutUserInput
@@ -741,6 +801,8 @@ export type UserUpdateWithoutCartInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUpdateOneWithoutUserNestedInput
   wishlist?: Prisma.WishlistUpdateManyWithoutUserNestedInput
   coupons?: Prisma.CouponUserUpdateManyWithoutUserNestedInput
@@ -760,6 +822,8 @@ export type UserUncheckedUpdateWithoutCartInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUncheckedUpdateOneWithoutUserNestedInput
   wishlist?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput
   coupons?: Prisma.CouponUserUncheckedUpdateManyWithoutUserNestedInput
@@ -779,6 +843,8 @@ export type UserCreateWithoutAddressesInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsCreateNestedOneWithoutUserInput
   cart?: Prisma.CartCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistCreateNestedManyWithoutUserInput
@@ -798,6 +864,8 @@ export type UserUncheckedCreateWithoutAddressesInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsUncheckedCreateNestedOneWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput
@@ -833,6 +901,8 @@ export type UserUpdateWithoutAddressesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUpdateManyWithoutUserNestedInput
@@ -852,6 +922,8 @@ export type UserUncheckedUpdateWithoutAddressesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUncheckedUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput
@@ -871,6 +943,8 @@ export type UserCreateWithoutWishlistInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsCreateNestedOneWithoutUserInput
   cart?: Prisma.CartCreateNestedManyWithoutUserInput
   coupons?: Prisma.CouponUserCreateNestedManyWithoutUserInput
@@ -890,6 +964,8 @@ export type UserUncheckedCreateWithoutWishlistInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsUncheckedCreateNestedOneWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   coupons?: Prisma.CouponUserUncheckedCreateNestedManyWithoutUserInput
@@ -925,6 +1001,8 @@ export type UserUpdateWithoutWishlistInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUpdateManyWithoutUserNestedInput
   coupons?: Prisma.CouponUserUpdateManyWithoutUserNestedInput
@@ -944,6 +1022,8 @@ export type UserUncheckedUpdateWithoutWishlistInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUncheckedUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   coupons?: Prisma.CouponUserUncheckedUpdateManyWithoutUserNestedInput
@@ -963,6 +1043,8 @@ export type UserCreateWithoutCouponsInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsCreateNestedOneWithoutUserInput
   cart?: Prisma.CartCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistCreateNestedManyWithoutUserInput
@@ -982,6 +1064,8 @@ export type UserUncheckedCreateWithoutCouponsInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsUncheckedCreateNestedOneWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput
@@ -1017,6 +1101,8 @@ export type UserUpdateWithoutCouponsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUpdateManyWithoutUserNestedInput
@@ -1036,6 +1122,8 @@ export type UserUncheckedUpdateWithoutCouponsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUncheckedUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput
@@ -1055,6 +1143,8 @@ export type UserCreateWithoutOrdersInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsCreateNestedOneWithoutUserInput
   cart?: Prisma.CartCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistCreateNestedManyWithoutUserInput
@@ -1074,6 +1164,8 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsUncheckedCreateNestedOneWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput
@@ -1109,6 +1201,8 @@ export type UserUpdateWithoutOrdersInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUpdateManyWithoutUserNestedInput
@@ -1128,6 +1222,8 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUncheckedUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput
@@ -1147,6 +1243,8 @@ export type UserCreateWithoutReviewsInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsCreateNestedOneWithoutUserInput
   cart?: Prisma.CartCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistCreateNestedManyWithoutUserInput
@@ -1166,6 +1264,8 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsUncheckedCreateNestedOneWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput
@@ -1201,6 +1301,8 @@ export type UserUpdateWithoutReviewsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUpdateManyWithoutUserNestedInput
@@ -1220,6 +1322,8 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUncheckedUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput
@@ -1239,6 +1343,8 @@ export type UserCreateWithoutReturnsInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsCreateNestedOneWithoutUserInput
   cart?: Prisma.CartCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistCreateNestedManyWithoutUserInput
@@ -1258,6 +1364,8 @@ export type UserUncheckedCreateWithoutReturnsInput = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: string | null
+  altPhone?: string | null
   bankDetails?: Prisma.BankDetailsUncheckedCreateNestedOneWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   wishlist?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput
@@ -1293,6 +1401,8 @@ export type UserUpdateWithoutReturnsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUpdateManyWithoutUserNestedInput
@@ -1312,6 +1422,8 @@ export type UserUncheckedUpdateWithoutReturnsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isUserVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankDetails?: Prisma.BankDetailsUncheckedUpdateOneWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   wishlist?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput
@@ -1416,6 +1528,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: boolean
+  altPhone?: boolean
   bankDetails?: boolean | Prisma.User$bankDetailsArgs<ExtArgs>
   cart?: boolean | Prisma.User$cartArgs<ExtArgs>
   wishlist?: boolean | Prisma.User$wishlistArgs<ExtArgs>
@@ -1439,9 +1553,11 @@ export type UserSelectScalar = {
   isActive?: boolean
   isAdmin?: boolean
   isUserVerified?: boolean
+  phone?: boolean
+  altPhone?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "createdAt" | "updatedAt" | "isActive" | "isAdmin" | "isUserVerified", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "createdAt" | "updatedAt" | "isActive" | "isAdmin" | "isUserVerified" | "phone" | "altPhone", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bankDetails?: boolean | Prisma.User$bankDetailsArgs<ExtArgs>
   cart?: boolean | Prisma.User$cartArgs<ExtArgs>
@@ -1476,6 +1592,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     isActive: boolean
     isAdmin: boolean
     isUserVerified: boolean
+    phone: string | null
+    altPhone: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1862,6 +1980,8 @@ export interface UserFieldRefs {
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
   readonly isAdmin: Prisma.FieldRef<"User", 'Boolean'>
   readonly isUserVerified: Prisma.FieldRef<"User", 'Boolean'>
+  readonly phone: Prisma.FieldRef<"User", 'String'>
+  readonly altPhone: Prisma.FieldRef<"User", 'String'>
 }
     
 

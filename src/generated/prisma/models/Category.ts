@@ -496,10 +496,6 @@ export type NullableBoolFieldUpdateOperationsInput = {
   set?: boolean | null
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type CategoryUpdateOneWithoutChildrenNestedInput = {
   create?: Prisma.XOR<Prisma.CategoryCreateWithoutChildrenInput, Prisma.CategoryUncheckedCreateWithoutChildrenInput>
   connectOrCreate?: Prisma.CategoryCreateOrConnectWithoutChildrenInput

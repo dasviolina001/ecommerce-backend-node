@@ -223,6 +223,42 @@ export const updateOrderStatus = async (
         createdBy: userId,
       },
     });
+
+    // SUMAN -> If order is being REFUNDED, look for COMPLETED returns to restore inventory
+    if (status === OrderStatus.REFUNDED) {
+      const orderItemsWithReturns = await tx.orderItem.findMany({
+        where: { orderId },
+        include: {
+          returns: {
+            where: {
+              status: "COMPLETED",
+              inventoryRestored: false,
+            },
+          },
+        },
+      });
+
+      for (const item of orderItemsWithReturns) {
+        for (const ret of item.returns) {
+          if (item.variantId) {
+            await tx.productVariant.update({
+              where: { id: item.variantId },
+              data: { quantity: { increment: item.quantity } },
+            });
+          } else {
+            await tx.product.update({
+              where: { id: item.productId },
+              data: { quantity: { increment: item.quantity } },
+            });
+          }
+
+          await tx.return.update({
+            where: { id: ret.id },
+            data: { inventoryRestored: true },
+          });
+        }
+      }
+    }
   });
 
   return getOrderById(orderId);

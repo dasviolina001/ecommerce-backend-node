@@ -8,6 +8,8 @@ export interface RegisterData {
   fullName: string;
   email: string;
   password: string;
+  phone?: string;
+  altPhone?: string;
 }
 
 export interface LoginData {
@@ -26,6 +28,8 @@ export interface BankDetailsData {
 export interface ProfileUpdateData {
   fullName?: string;
   email?: string;
+  phone?: string;
+  altPhone?: string;
 }
 
 export interface PasswordChangeData {
@@ -35,7 +39,7 @@ export interface PasswordChangeData {
 }
 
 export const registerUser = async (data: RegisterData) => {
-  const { fullName, email, password } = data;
+  const { fullName, email, password, phone, altPhone } = data;
 
   const existingUser = await prisma.user.findUnique({
     where: { email },
@@ -52,11 +56,15 @@ export const registerUser = async (data: RegisterData) => {
       fullName,
       email,
       password: hashedPassword,
+      phone,
+      altPhone,
     },
     select: {
       id: true,
       fullName: true,
       email: true,
+      phone: true,
+      altPhone: true,
       isAdmin: true,
       createdAt: true,
     },
@@ -110,6 +118,8 @@ export const getUserProfile = async (userId: string) => {
       email: true,
       isAdmin: true,
       isUserVerified: true,
+      phone: true,
+      altPhone: true,
       createdAt: true,
       updatedAt: true,
       bankDetails: {
@@ -138,7 +148,7 @@ export const updateUserProfile = async (
   userId: string,
   data: ProfileUpdateData
 ) => {
-  const { fullName, email } = data;
+  const { fullName, email, phone, altPhone } = data;
 
   if (email) {
     const existingUser = await prisma.user.findUnique({
@@ -155,11 +165,15 @@ export const updateUserProfile = async (
     data: {
       ...(fullName && { fullName }),
       ...(email && { email }),
+      ...(phone !== undefined && { phone }),
+      ...(altPhone !== undefined && { altPhone }),
     },
     select: {
       id: true,
       fullName: true,
       email: true,
+      phone: true,
+      altPhone: true,
       isAdmin: true,
       isUserVerified: true,
       updatedAt: true,
