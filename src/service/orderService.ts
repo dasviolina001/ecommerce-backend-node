@@ -378,7 +378,9 @@ export const getOrderById = async (orderId: string) => {
         select: {
           id: true,
           fullName: true,
-          email: true
+          email: true,
+          phone: true,
+          altPhone: true
         }
       }
     }
@@ -450,7 +452,10 @@ export const getAllOrders = async (page?: number, limit?: number, status?: Order
       user: {
         select: {
           fullName: true,
-          email: true
+          email: true,
+          phone: true,
+          altPhone: true
+
         }
       },
       address: true,
