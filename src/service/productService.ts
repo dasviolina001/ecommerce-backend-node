@@ -9,6 +9,7 @@ interface CreateProductInput {
   mainImage: string;
   productImages?: string[];
   youtubeLink?: string;
+  sku?: string;
   size?: string;
   expiryDate?: Date;
   buyingPrice?: number;
@@ -69,6 +70,9 @@ export const productService = {
       sizeChartId?: string;
       isRelatedItem?: boolean;
       isDefault?: boolean;
+      isFeatured?: boolean;
+      isBestSelling?: boolean;
+      isNewCollection?: boolean;
     }>;
   }): Promise<Product> {
     const { productVariantService } = await import("./productVariantService");
@@ -140,7 +144,6 @@ export const productService = {
   ) {
     const where: any = {};
 
-    // Only filter by isActive if includeInactive is not true
     if (!filters?.includeInactive) {
       where.isActive = true;
     }
@@ -185,7 +188,6 @@ export const productService = {
       prisma.product.count({ where }),
     ]);
 
-    // Add variant count to each product
     const productsWithCount = products.map((product: any) => ({
       ...product,
       variantCount: product.variants?.length || 0,
@@ -283,8 +285,6 @@ export const productService = {
     };
   },
 
-  /* ========================= UPDATE ========================= */
-
   async updateProduct(
     productId: string,
     input: UpdateProductInput,
@@ -322,7 +322,7 @@ export const productService = {
     input: {
       product?: UpdateProductInput;
       variants?: Array<{
-        id?: string; // If provided, update existing variant; if not, create new
+        id?: string;
         sku?: string;
         variantName?: string;
         color?: string;
@@ -343,13 +343,13 @@ export const productService = {
         isDefault?: boolean;
         isActive?: boolean;
       }>;
-      deleteVariantIds?: string[]; // IDs of variants to delete
+      deleteVariantIds?: string[];
     },
   ): Promise<Product> {
     const { productVariantService } = await import("./productVariantService");
 
     return prisma.$transaction(async (tx) => {
-      // Check if product exists
+
       const existingProduct = await tx.product.findUnique({
         where: { id: productId },
       });
@@ -358,12 +358,14 @@ export const productService = {
         throw new Error("Product not found");
       }
 
-      // Update product if product data is provided
+
       if (input.product) {
         const updateData: any = { ...input.product };
 
         if (input.product.productImages) {
-          updateData.productImages = JSON.stringify(input.product.productImages);
+          updateData.productImages = JSON.stringify(
+            input.product.productImages,
+          );
         }
 
         await tx.product.update({
@@ -372,7 +374,7 @@ export const productService = {
         });
       }
 
-      // Delete variants if specified
+
       if (input.deleteVariantIds && input.deleteVariantIds.length > 0) {
         await tx.productVariant.updateMany({
           where: {
@@ -383,25 +385,28 @@ export const productService = {
         });
       }
 
-      // Process variants (create or update)
       if (input.variants && input.variants.length > 0) {
         for (const variantInput of input.variants) {
           if (variantInput.id) {
-            // Update existing variant
+
             const updateData: any = { ...variantInput };
-            delete updateData.id; // Remove id from update data
+            delete updateData.id;
 
             if (variantInput.variantImages) {
-              updateData.variantImages = JSON.stringify(variantInput.variantImages);
+              updateData.variantImages = JSON.stringify(
+                variantInput.variantImages,
+              );
             }
 
-            // Check if variant belongs to this product
+
             const existingVariant = await tx.productVariant.findUnique({
               where: { id: variantInput.id },
             });
 
             if (!existingVariant || existingVariant.productId !== productId) {
-              throw new Error(`Variant ${variantInput.id} does not belong to this product`);
+              throw new Error(
+                `Variant ${variantInput.id} does not belong to this product`,
+              );
             }
 
             await tx.productVariant.update({
@@ -441,7 +446,6 @@ export const productService = {
         }
       }
 
-      // Return updated product with all variants
       return tx.product.findUnique({
         where: { id: productId },
         include: {
@@ -453,8 +457,6 @@ export const productService = {
       }) as Promise<Product>;
     });
   },
-
-  /* ========================= DELETE ========================= */
 
   async deleteProduct(productId: string): Promise<Product> {
     return prisma.product.update({
@@ -469,8 +471,6 @@ export const productService = {
     });
   },
 
-  /* ========================= SEARCH ========================= */
-
   async searchProducts(query: string, limit = 10) {
     return prisma.product.findMany({
       where: {
@@ -479,6 +479,7 @@ export const productService = {
           { productName: { contains: query } },
           { shortDesc: { contains: query } },
           { longDesc: { contains: query } },
+          { sku: { contains: query } },
         ],
       },
       take: limit,
@@ -490,10 +491,7 @@ export const productService = {
     });
   },
 
-  /* ========================= INVENTORY ========================= */
-
   async getInventoryList(page?: number, limit?: number) {
-    // 1. Fetch simple products (no variants)
     const simpleProducts = await prisma.product.findMany({
       where: { hasVariants: false },
       select: {
@@ -508,7 +506,6 @@ export const productService = {
       orderBy: { createdAt: "desc" },
     });
 
-    // 2. Fetch all variants
     const variants = await prisma.productVariant.findMany({
       select: {
         id: true,
@@ -532,7 +529,101 @@ export const productService = {
       orderBy: { createdAt: "desc" },
     });
 
-    // 3. Normalize and combine
+    const allItems = [
+      ...simpleProducts.map((p) => ({
+        id: p.id,
+        type: "PRODUCT",
+        name: p.productName,
+        sku: null,
+        quantity: p.quantity,
+        price: p.sellingPrice,
+        image: p.mainImage,
+        isActive: p.isActive,
+        updatedAt: p.updatedAt,
+      })),
+      ...variants.map((v) => ({
+        id: v.id,
+        productId: v.productId,
+        type: "VARIANT",
+        name: `${v.product.productName} - ${v.variantName || v.sku}`,
+        sku: v.sku,
+        quantity: v.quantity,
+        price: v.sellingPrice,
+        image: v.variantImages
+          ? JSON.parse(v.variantImages)[0]
+          : v.product.mainImage,
+        color: v.color,
+        size: v.size,
+        isActive: v.isActive,
+        updatedAt: v.updatedAt,
+      })),
+    ];
+
+    const total = allItems.length;
+
+    if (page && limit) {
+      const skip = (page - 1) * limit;
+      const paginatedItems = allItems.slice(skip, skip + limit);
+      return {
+        inventoryList: paginatedItems,
+        pagination: {
+          total,
+          page,
+          limit,
+          totalPages: Math.ceil(total / limit),
+        },
+      };
+    }
+
+    return {
+      inventoryList: allItems,
+      pagination: {
+        total,
+        page: 1,
+        limit: total,
+        totalPages: 1,
+      },
+    };
+  },
+
+  async getAllProductsAndVariants(page?: number, limit?: number) {
+    const simpleProducts = await prisma.product.findMany({
+      where: { hasVariants: false },
+      select: {
+        id: true,
+        productName: true,
+        quantity: true,
+        sellingPrice: true,
+        mainImage: true,
+        isActive: true,
+        updatedAt: true,
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    const variants = await prisma.productVariant.findMany({
+      select: {
+        id: true,
+        productId: true,
+        sku: true,
+        variantName: true,
+        quantity: true,
+        sellingPrice: true,
+        variantImages: true,
+        color: true,
+        size: true,
+        isActive: true,
+        updatedAt: true,
+        product: {
+          select: {
+            productName: true,
+            mainImage: true,
+          },
+        },
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
     const allItems = [
       ...simpleProducts.map((p) => ({
         id: p.id,

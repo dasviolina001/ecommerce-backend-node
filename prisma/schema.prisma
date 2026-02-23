@@ -84,6 +84,7 @@ model Product {
   shortDesc     String?
   longDesc      String?
   mainImage     String
+  sku           String? @unique
   productImages String? @db.LongText
   youtubeLink   String?
 
@@ -133,6 +134,7 @@ model Product {
   @@index([isBestSelling])
   @@index([isActive])
   @@index([productName])
+  @@index([sku])
   @@map("product")
 }
 
@@ -164,10 +166,13 @@ model ProductVariant {
   sizeChartId String?
   sizeChart   SizeChart? @relation(fields: [sizeChartId], references: [id], onDelete: SetNull)
 
-  isRelatedItem Boolean @default(false)
-  isActive      Boolean @default(true)
-  isDefault     Boolean @default(false)
-  isReturn      Boolean @default(true)
+  isRelatedItem   Boolean @default(false)
+  isActive        Boolean @default(true)
+  isDefault       Boolean @default(false)
+  isReturn        Boolean @default(true)
+  isFeatured      Boolean @default(false)
+  isBestSelling   Boolean @default(false)
+  isNewCollection Boolean @default(false)
 
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
@@ -397,6 +402,7 @@ model Order {
 
   totalAmount    Float
   discountAmount Float @default(0)
+  deliveryCharge Float @default(0)
   finalAmount    Float
 
   status        OrderStatus   @default(PENDING)

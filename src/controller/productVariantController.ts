@@ -51,6 +51,10 @@ export const createVariant = async (req: Request, res: Response) => {
       sizeChartId: req.body.sizeChartId,
       isRelatedItem: req.body.isRelatedItem === "true",
       isDefault: req.body.isDefault === "true",
+      isFeatured: req.body.isFeatured === "true",
+      isBestSelling: req.body.isBestSelling === "true",
+      isNewCollection: req.body.isNewCollection === "true",
+      isReturn: req.body.isReturn !== undefined ? req.body.isReturn === "true" : true,
     };
 
     const variant = await productVariantService.createVariant(variantData);
@@ -146,6 +150,18 @@ export const updateVariant = async (req: Request, res: Response) => {
 
     if (req.body.isDefault !== undefined)
       updateData.isDefault = req.body.isDefault === "true";
+
+    if (req.body.isFeatured !== undefined)
+      updateData.isFeatured = req.body.isFeatured === "true";
+
+    if (req.body.isBestSelling !== undefined)
+      updateData.isBestSelling = req.body.isBestSelling === "true";
+
+    if (req.body.isNewCollection !== undefined)
+      updateData.isNewCollection = req.body.isNewCollection === "true";
+
+    if (req.body.isReturn !== undefined)
+      updateData.isReturn = req.body.isReturn === "true";
 
     if (req.body.isActive !== undefined)
       updateData.isActive = req.body.isActive === "true";

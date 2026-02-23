@@ -96,3 +96,30 @@ export const getPickupLocations = async (_req: Request, res: Response): Promise<
         throw error;
     }
 };
+export const getPincodeAvailabilityAndDeliveryCharge = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { delivery_postcode, weight, cod } = req.query;
+
+        if (!delivery_postcode) {
+            throw new CustomError("Delivery postcode is required", 400);
+        }
+
+        // Static pickup for the time being
+        const result = await shipRocketService.getPincodeAvailabilityAndDeliveryCharge(
+            undefined,
+            delivery_postcode as string,
+            parseFloat(weight as string) || 0.25,
+            parseInt(cod as string) || 0,
+        );
+
+        console.log("Result ", result);
+
+        res.status(200).json({
+            success: true,
+            message: "Pincode serviceability and delivery charges retrieved successfully",
+            data: result,
+        });
+    } catch (error) {
+        throw error;
+    }
+};

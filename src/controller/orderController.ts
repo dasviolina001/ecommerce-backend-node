@@ -17,7 +17,7 @@ export const createOrder = async (req: AuthRequest, res: Response): Promise<void
             throw new CustomError("User not authenticated", 401);
         }
 
-        const { addressId, items, paymentMethod, paymentId, couponId } = req.body;
+        const { addressId, items, paymentMethod, paymentId, couponCode, deliveryCharge } = req.body;
 
         if (!items || !Array.isArray(items) || items.length === 0) {
             throw new CustomError("Items are required", 400);
@@ -37,7 +37,8 @@ export const createOrder = async (req: AuthRequest, res: Response): Promise<void
             items,
             paymentMethod,
             paymentId,
-            couponId
+            couponCode,
+            deliveryCharge: deliveryCharge ? parseFloat(deliveryCharge) : 0
         });
 
         res.status(201).json({

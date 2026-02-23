@@ -24,6 +24,9 @@ interface CreateVariantInput {
   sizeChartId?: string;
   isRelatedItem?: boolean;
   isDefault?: boolean;
+  isFeatured?: boolean;
+  isBestSelling?: boolean;
+  isNewCollection?: boolean;
 }
 
 interface UpdateVariantInput extends Partial<

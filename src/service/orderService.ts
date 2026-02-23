@@ -4,6 +4,8 @@ import { OrderStatus, PaymentStatus } from "../generated/prisma/enums";
 
 import { CustomError } from "../middleware/errorHandler";
 
+import { couponService } from "./couponService";
+
 export interface CreateOrderItemData {
   productId?: string;
   variantId?: string;
@@ -18,11 +20,12 @@ export interface CreateOrderData {
   items: CreateOrderItemData[];
   paymentMethod: string;
   paymentId?: string;
-  couponId?: number;
+  couponCode?: string;
+  deliveryCharge?: number;
 }
 
 export const createOrder = async (data: CreateOrderData) => {
-  const { userId, addressId, items, paymentMethod, paymentId, couponId } = data;
+  const { userId, addressId, items, paymentMethod, paymentId, couponCode, deliveryCharge = 0 } = data;
 
   const address = await prisma.address.findUnique({
     where: { id: addressId },
@@ -55,6 +58,7 @@ export const createOrder = async (data: CreateOrderData) => {
       const variant = await prisma.productVariant.findUnique({
         where: { id: item.variantId }
       });
+
       if (!variant) throw new CustomError(`Variant not found: ${item.variantId}`, 404);
 
       if (finalProductId && variant.productId !== finalProductId) {
@@ -62,10 +66,13 @@ export const createOrder = async (data: CreateOrderData) => {
       }
 
       finalProductId = variant.productId;
+
       finalSize = variant.size || finalSize;
+
       finalColor = variant.color || finalColor;
 
       price = variant.sellingPrice || variant.maximumRetailPrice || 0;
+
       availableQuantity = variant.quantity;
 
       if (availableQuantity < item.quantity) {
@@ -111,26 +118,45 @@ export const createOrder = async (data: CreateOrderData) => {
 
 
   let discountAmount = 0;
-  if (couponId) {
-    const coupon = await prisma.coupon.findUnique({ where: { id: couponId } });
-    if (coupon && coupon.isActive) {
+
+  let resolvedCouponId: number | undefined = undefined;
+
+  if (couponCode) {
+
+    const coupon = await couponService.getCouponByCode(couponCode);
 
 
-
-      if (coupon.type === "FIXED") {
-        discountAmount = coupon.value;
-      } else if (coupon.type === "PERCENTAGE") {
-        discountAmount = (totalAmount * coupon.value) / 100;
-      }
-      if (coupon.maxDiscount && discountAmount > coupon.maxDiscount) {
-        discountAmount = coupon.maxDiscount;
-      }
+    if (coupon.minOrderValue && totalAmount < coupon.minOrderValue) {
+      throw new CustomError(
+        `Minimum order value must be ${coupon.minOrderValue} to apply this coupon`,
+        400
+      );
     }
+
+
+    const existingUsage = await prisma.couponUser.findUnique({
+      where: { couponId_userId: { couponId: coupon.id, userId } },
+    });
+    if (existingUsage) {
+      throw new CustomError("You have already used this coupon", 400);
+    }
+
+    if (coupon.type === "FIXED") {
+      discountAmount = coupon.value;
+    } else if (coupon.type === "PERCENTAGE") {
+      discountAmount = (totalAmount * coupon.value) / 100;
+    }
+    if (coupon.maxDiscount && discountAmount > coupon.maxDiscount) {
+      discountAmount = coupon.maxDiscount;
+    }
+
+    resolvedCouponId = coupon.id;
   }
 
-  const finalAmount = Math.max(0, totalAmount - discountAmount);
+  const finalAmount = Math.max(0, totalAmount - discountAmount + (deliveryCharge || 0));
 
   const orderNumber = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
 
   const order = await prisma.$transaction(async (tx) => {
 
@@ -141,11 +167,12 @@ export const createOrder = async (data: CreateOrderData) => {
         addressId,
         totalAmount,
         discountAmount,
+        deliveryCharge,
         finalAmount,
         paymentMethod,
         paymentId,
         paymentStatus: paymentId ? PaymentStatus.COMPLETED : PaymentStatus.PENDING,
-        couponId,
+        couponId: resolvedCouponId,
         status: OrderStatus.PENDING,
         orderItems: {
           create: orderItemsData.map((item) => ({
@@ -193,6 +220,17 @@ export const createOrder = async (data: CreateOrderData) => {
           data: { quantity: { decrement: item.quantity } }
         });
       }
+    }
+
+
+    if (resolvedCouponId) {
+      await tx.couponUser.create({
+        data: {
+          couponId: resolvedCouponId,
+          userId,
+          usedAt: new Date(),
+        },
+      });
     }
 
     return newOrder;

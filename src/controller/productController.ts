@@ -27,6 +27,7 @@ export const createProduct = async (req: Request, res: Response) => {
             : [],
 
       youtubeLink: req.body.youtubeLink,
+      sku: req.body.sku,
       size: req.body.size,
 
       expiryDate: req.body.expiryDate

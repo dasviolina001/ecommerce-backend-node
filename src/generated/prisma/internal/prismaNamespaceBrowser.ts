@@ -159,6 +159,7 @@ export const ProductScalarFieldEnum = {
   shortDesc: 'shortDesc',
   longDesc: 'longDesc',
   mainImage: 'mainImage',
+  sku: 'sku',
   productImages: 'productImages',
   youtubeLink: 'youtubeLink',
   metaData: 'metaData',
@@ -211,6 +212,9 @@ export const ProductVariantScalarFieldEnum = {
   isActive: 'isActive',
   isDefault: 'isDefault',
   isReturn: 'isReturn',
+  isFeatured: 'isFeatured',
+  isBestSelling: 'isBestSelling',
+  isNewCollection: 'isNewCollection',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -356,6 +360,7 @@ export const OrderScalarFieldEnum = {
   addressId: 'addressId',
   totalAmount: 'totalAmount',
   discountAmount: 'discountAmount',
+  deliveryCharge: 'deliveryCharge',
   finalAmount: 'finalAmount',
   status: 'status',
   paymentStatus: 'paymentStatus',
@@ -723,6 +728,7 @@ export const ProductOrderByRelevanceFieldEnum = {
   shortDesc: 'shortDesc',
   longDesc: 'longDesc',
   mainImage: 'mainImage',
+  sku: 'sku',
   productImages: 'productImages',
   youtubeLink: 'youtubeLink',
   masterCategoryId: 'masterCategoryId',

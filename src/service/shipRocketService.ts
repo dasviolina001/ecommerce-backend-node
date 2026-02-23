@@ -15,7 +15,7 @@ let tokenExpiresAt: number = 0;
 export async function getShiprocketToken(): Promise<string> {
   if (cachedToken && Date.now() < tokenExpiresAt) {
     return cachedToken;
-  };
+  }
 
   console.log(env.SHIPROCKET_EMAIL, env.SHIPROCKET_PASSWORD);
 
@@ -65,6 +65,8 @@ export async function createShiprocketOrder(payload: Record<string, any>) {
       },
     );
 
+    console.log("Ship Rocket Response", response);
+
     if (response.status !== 200) {
       throw new CustomError(
         response.data?.message || "Failed to create ShipRocket order.",
@@ -74,6 +76,7 @@ export async function createShiprocketOrder(payload: Record<string, any>) {
 
     return response.data;
   } catch (err: any) {
+    console.log(JSON.stringify(err.response?.data, null, 2));
     if (err instanceof CustomError) throw err;
     throw new CustomError(
       `ShipRocket order creation failed: ${err.response?.data?.message || err.message}`,
@@ -222,6 +225,81 @@ export async function getPickupLocations() {
     if (err instanceof CustomError) throw err;
     throw new CustomError(
       `ShipRocket pickup locations failed: ${err.response?.data?.message || err.message}`,
+      502,
+    );
+  }
+}
+
+
+//	1 for Cash on Delivery and 0 for Prepaid orders.
+export async function getPincodeAvailabilityAndDeliveryCharge(
+  pickupPostcode: string = "785001",
+  deliveryPostcode: string,
+  weight: number,
+  cod: number
+) {
+  const token = await getShiprocketToken();
+
+  try {
+    const response = await axios.get(
+      `${SHIPROCKET_BASE_URL}/courier/serviceability?pickup_postcode=${pickupPostcode}&delivery_postcode=${deliveryPostcode}&weight=${weight}&cod=${cod}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    if (response.status !== 200) {
+      throw new CustomError(
+        response.data?.message || "Failed to fetch serviceability.",
+        502,
+      );
+    }
+
+    console.log("Response ", response.data);
+
+    const couriers = response.data.data.available_courier_companies;
+
+    if (!couriers || couriers.length === 0) {
+      return {
+        available: false,
+        message: "No courier service available for this pincode.",
+        couriers: [],
+        rates: {
+          lowest: 0,
+          highest: 0,
+          average: 0
+        }
+      };
+    }
+
+    const processedCouriers = couriers.map((c: any) => ({
+      courier_name: c.courier_name,
+      rate: parseFloat(c.rate),
+      estimated_delivery_days: c.estimated_delivery_days,
+      etd: c.etd,
+      cod: c.cod === 1
+    }));
+
+    const rates = processedCouriers.map((c: any) => c.rate);
+    const lowest_rate = Math.min(...rates);
+    const highest_rate = Math.max(...rates);
+    const average_rate = rates.reduce((a: number, b: number) => a + b, 0) / rates.length;
+
+    return {
+      available: true,
+      couriers: processedCouriers,
+      rates: {
+        lowest: lowest_rate,
+        highest: highest_rate,
+        average: parseFloat(average_rate.toFixed(2))
+      }
+    };
+  } catch (err: any) {
+    if (err instanceof CustomError) throw err;
+    throw new CustomError(
+      `ShipRocket serviceability check failed: ${err.response?.data?.message || err.message}`,
       502,
     );
   }

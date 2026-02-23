@@ -46,6 +46,7 @@ export type ProductMinAggregateOutputType = {
   shortDesc: string | null
   longDesc: string | null
   mainImage: string | null
+  sku: string | null
   productImages: string | null
   youtubeLink: string | null
   masterCategoryId: string | null
@@ -76,6 +77,7 @@ export type ProductMaxAggregateOutputType = {
   shortDesc: string | null
   longDesc: string | null
   mainImage: string | null
+  sku: string | null
   productImages: string | null
   youtubeLink: string | null
   masterCategoryId: string | null
@@ -106,6 +108,7 @@ export type ProductCountAggregateOutputType = {
   shortDesc: number
   longDesc: number
   mainImage: number
+  sku: number
   productImages: number
   youtubeLink: number
   metaData: number
@@ -154,6 +157,7 @@ export type ProductMinAggregateInputType = {
   shortDesc?: true
   longDesc?: true
   mainImage?: true
+  sku?: true
   productImages?: true
   youtubeLink?: true
   masterCategoryId?: true
@@ -184,6 +188,7 @@ export type ProductMaxAggregateInputType = {
   shortDesc?: true
   longDesc?: true
   mainImage?: true
+  sku?: true
   productImages?: true
   youtubeLink?: true
   masterCategoryId?: true
@@ -214,6 +219,7 @@ export type ProductCountAggregateInputType = {
   shortDesc?: true
   longDesc?: true
   mainImage?: true
+  sku?: true
   productImages?: true
   youtubeLink?: true
   metaData?: true
@@ -333,6 +339,7 @@ export type ProductGroupByOutputType = {
   shortDesc: string | null
   longDesc: string | null
   mainImage: string
+  sku: string | null
   productImages: string | null
   youtubeLink: string | null
   metaData: runtime.JsonValue | null
@@ -388,6 +395,7 @@ export type ProductWhereInput = {
   shortDesc?: Prisma.StringNullableFilter<"Product"> | string | null
   longDesc?: Prisma.StringNullableFilter<"Product"> | string | null
   mainImage?: Prisma.StringFilter<"Product"> | string
+  sku?: Prisma.StringNullableFilter<"Product"> | string | null
   productImages?: Prisma.StringNullableFilter<"Product"> | string | null
   youtubeLink?: Prisma.StringNullableFilter<"Product"> | string | null
   metaData?: Prisma.JsonNullableFilter<"Product">
@@ -429,6 +437,7 @@ export type ProductOrderByWithRelationInput = {
   shortDesc?: Prisma.SortOrderInput | Prisma.SortOrder
   longDesc?: Prisma.SortOrderInput | Prisma.SortOrder
   mainImage?: Prisma.SortOrder
+  sku?: Prisma.SortOrderInput | Prisma.SortOrder
   productImages?: Prisma.SortOrderInput | Prisma.SortOrder
   youtubeLink?: Prisma.SortOrderInput | Prisma.SortOrder
   metaData?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -467,6 +476,7 @@ export type ProductOrderByWithRelationInput = {
 
 export type ProductWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  sku?: string
   AND?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   OR?: Prisma.ProductWhereInput[]
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
@@ -507,7 +517,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   coupons?: Prisma.CouponProductListRelationFilter
   orderItems?: Prisma.OrderItemListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
-}, "id">
+}, "id" | "sku">
 
 export type ProductOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -515,6 +525,7 @@ export type ProductOrderByWithAggregationInput = {
   shortDesc?: Prisma.SortOrderInput | Prisma.SortOrder
   longDesc?: Prisma.SortOrderInput | Prisma.SortOrder
   mainImage?: Prisma.SortOrder
+  sku?: Prisma.SortOrderInput | Prisma.SortOrder
   productImages?: Prisma.SortOrderInput | Prisma.SortOrder
   youtubeLink?: Prisma.SortOrderInput | Prisma.SortOrder
   metaData?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -555,6 +566,7 @@ export type ProductScalarWhereWithAggregatesInput = {
   shortDesc?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   longDesc?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   mainImage?: Prisma.StringWithAggregatesFilter<"Product"> | string
+  sku?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   productImages?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   youtubeLink?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   metaData?: Prisma.JsonNullableWithAggregatesFilter<"Product">
@@ -587,6 +599,7 @@ export type ProductCreateInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -625,6 +638,7 @@ export type ProductUncheckedCreateInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -663,6 +677,7 @@ export type ProductUpdateInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -701,6 +716,7 @@ export type ProductUncheckedUpdateInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -739,6 +755,7 @@ export type ProductCreateManyInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -771,6 +788,7 @@ export type ProductUpdateManyMutationInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -800,6 +818,7 @@ export type ProductUncheckedUpdateManyInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -848,6 +867,7 @@ export type ProductCountOrderByAggregateInput = {
   shortDesc?: Prisma.SortOrder
   longDesc?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
+  sku?: Prisma.SortOrder
   productImages?: Prisma.SortOrder
   youtubeLink?: Prisma.SortOrder
   metaData?: Prisma.SortOrder
@@ -887,6 +907,7 @@ export type ProductMaxOrderByAggregateInput = {
   shortDesc?: Prisma.SortOrder
   longDesc?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
+  sku?: Prisma.SortOrder
   productImages?: Prisma.SortOrder
   youtubeLink?: Prisma.SortOrder
   masterCategoryId?: Prisma.SortOrder
@@ -917,6 +938,7 @@ export type ProductMinOrderByAggregateInput = {
   shortDesc?: Prisma.SortOrder
   longDesc?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
+  sku?: Prisma.SortOrder
   productImages?: Prisma.SortOrder
   youtubeLink?: Prisma.SortOrder
   masterCategoryId?: Prisma.SortOrder
@@ -1189,6 +1211,7 @@ export type ProductCreateWithoutMasterCategoryInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1226,6 +1249,7 @@ export type ProductUncheckedCreateWithoutMasterCategoryInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1273,6 +1297,7 @@ export type ProductCreateWithoutLastCategoryInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1310,6 +1335,7 @@ export type ProductUncheckedCreateWithoutLastCategoryInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1376,6 +1402,7 @@ export type ProductScalarWhereInput = {
   shortDesc?: Prisma.StringNullableFilter<"Product"> | string | null
   longDesc?: Prisma.StringNullableFilter<"Product"> | string | null
   mainImage?: Prisma.StringFilter<"Product"> | string
+  sku?: Prisma.StringNullableFilter<"Product"> | string | null
   productImages?: Prisma.StringNullableFilter<"Product"> | string | null
   youtubeLink?: Prisma.StringNullableFilter<"Product"> | string | null
   metaData?: Prisma.JsonNullableFilter<"Product">
@@ -1424,6 +1451,7 @@ export type ProductCreateWithoutVariantsInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1461,6 +1489,7 @@ export type ProductUncheckedCreateWithoutVariantsInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1514,6 +1543,7 @@ export type ProductUpdateWithoutVariantsInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1551,6 +1581,7 @@ export type ProductUncheckedUpdateWithoutVariantsInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1588,6 +1619,7 @@ export type ProductCreateWithoutCartInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1625,6 +1657,7 @@ export type ProductUncheckedCreateWithoutCartInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1678,6 +1711,7 @@ export type ProductUpdateWithoutCartInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1715,6 +1749,7 @@ export type ProductUncheckedUpdateWithoutCartInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1752,6 +1787,7 @@ export type ProductCreateWithoutWishlistInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1789,6 +1825,7 @@ export type ProductUncheckedCreateWithoutWishlistInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1842,6 +1879,7 @@ export type ProductUpdateWithoutWishlistInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1879,6 +1917,7 @@ export type ProductUncheckedUpdateWithoutWishlistInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1916,6 +1955,7 @@ export type ProductCreateWithoutSizeChartInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1953,6 +1993,7 @@ export type ProductUncheckedCreateWithoutSizeChartInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2016,6 +2057,7 @@ export type ProductCreateWithoutCouponsInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2053,6 +2095,7 @@ export type ProductUncheckedCreateWithoutCouponsInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2106,6 +2149,7 @@ export type ProductUpdateWithoutCouponsInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2143,6 +2187,7 @@ export type ProductUncheckedUpdateWithoutCouponsInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2180,6 +2225,7 @@ export type ProductCreateWithoutOrderItemsInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2217,6 +2263,7 @@ export type ProductUncheckedCreateWithoutOrderItemsInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2270,6 +2317,7 @@ export type ProductUpdateWithoutOrderItemsInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2307,6 +2355,7 @@ export type ProductUncheckedUpdateWithoutOrderItemsInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2344,6 +2393,7 @@ export type ProductCreateWithoutReviewsInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2381,6 +2431,7 @@ export type ProductUncheckedCreateWithoutReviewsInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2434,6 +2485,7 @@ export type ProductUpdateWithoutReviewsInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2471,6 +2523,7 @@ export type ProductUncheckedUpdateWithoutReviewsInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2508,6 +2561,7 @@ export type ProductCreateManyMasterCategoryInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2539,6 +2593,7 @@ export type ProductCreateManyLastCategoryInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2570,6 +2625,7 @@ export type ProductUpdateWithoutMasterCategoryInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2607,6 +2663,7 @@ export type ProductUncheckedUpdateWithoutMasterCategoryInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2644,6 +2701,7 @@ export type ProductUncheckedUpdateManyWithoutMasterCategoryInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2675,6 +2733,7 @@ export type ProductUpdateWithoutLastCategoryInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2712,6 +2771,7 @@ export type ProductUncheckedUpdateWithoutLastCategoryInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2749,6 +2809,7 @@ export type ProductUncheckedUpdateManyWithoutLastCategoryInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2780,6 +2841,7 @@ export type ProductCreateManySizeChartInput = {
   shortDesc?: string | null
   longDesc?: string | null
   mainImage: string
+  sku?: string | null
   productImages?: string | null
   youtubeLink?: string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2811,6 +2873,7 @@ export type ProductUpdateWithoutSizeChartInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2848,6 +2911,7 @@ export type ProductUncheckedUpdateWithoutSizeChartInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2885,6 +2949,7 @@ export type ProductUncheckedUpdateManyWithoutSizeChartInput = {
   shortDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   longDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productImages?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metaData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2992,6 +3057,7 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   shortDesc?: boolean
   longDesc?: boolean
   mainImage?: boolean
+  sku?: boolean
   productImages?: boolean
   youtubeLink?: boolean
   metaData?: boolean
@@ -3036,6 +3102,7 @@ export type ProductSelectScalar = {
   shortDesc?: boolean
   longDesc?: boolean
   mainImage?: boolean
+  sku?: boolean
   productImages?: boolean
   youtubeLink?: boolean
   metaData?: boolean
@@ -3062,7 +3129,7 @@ export type ProductSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "productName" | "shortDesc" | "longDesc" | "mainImage" | "productImages" | "youtubeLink" | "metaData" | "masterCategoryId" | "lastCategoryId" | "isFeatured" | "isBestSelling" | "isNewCollection" | "isActive" | "hasCashOnDelivery" | "isReturn" | "hasVariants" | "buyingPrice" | "maximumRetailPrice" | "sellingPrice" | "quantity" | "size" | "expiryDate" | "dimensions" | "isRelatedItem" | "paymentType" | "sizeChartId" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "productName" | "shortDesc" | "longDesc" | "mainImage" | "sku" | "productImages" | "youtubeLink" | "metaData" | "masterCategoryId" | "lastCategoryId" | "isFeatured" | "isBestSelling" | "isNewCollection" | "isActive" | "hasCashOnDelivery" | "isReturn" | "hasVariants" | "buyingPrice" | "maximumRetailPrice" | "sellingPrice" | "quantity" | "size" | "expiryDate" | "dimensions" | "isRelatedItem" | "paymentType" | "sizeChartId" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   masterCategory?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
   lastCategory?: boolean | Prisma.Product$lastCategoryArgs<ExtArgs>
@@ -3095,6 +3162,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     shortDesc: string | null
     longDesc: string | null
     mainImage: string
+    sku: string | null
     productImages: string | null
     youtubeLink: string | null
     metaData: runtime.JsonValue | null
@@ -3502,6 +3570,7 @@ export interface ProductFieldRefs {
   readonly shortDesc: Prisma.FieldRef<"Product", 'String'>
   readonly longDesc: Prisma.FieldRef<"Product", 'String'>
   readonly mainImage: Prisma.FieldRef<"Product", 'String'>
+  readonly sku: Prisma.FieldRef<"Product", 'String'>
   readonly productImages: Prisma.FieldRef<"Product", 'String'>
   readonly youtubeLink: Prisma.FieldRef<"Product", 'String'>
   readonly metaData: Prisma.FieldRef<"Product", 'Json'>
