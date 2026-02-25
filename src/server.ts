@@ -110,6 +110,10 @@ import adminShipRocketRoutes from "./routes/adminShipRocketRoutes";
 
 import userShipRocketRoutes from "./routes/userShipRocket";
 
+import adminPopupRoutes from "./routes/adminPopupRoutes";
+
+import userPopupRoutes from "./routes/userPopupRoutes";
+
 const app = express();
 
 app.use(
@@ -254,6 +258,10 @@ app.use("/api/v1/admin/order-items", orderItemRoutes);
 app.use("/api/v1/admin/shiprocket", adminShipRocketRoutes);
 
 app.use("/api/v1/shiprocket", userShipRocketRoutes);
+
+app.use("/api/v1/admin/popups", adminPopupRoutes);
+
+app.use("/api/v1/popups", userPopupRoutes);
 
 app.use("/api/v1/search", searchRoutes);
 

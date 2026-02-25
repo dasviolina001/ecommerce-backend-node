@@ -86,7 +86,8 @@ export const ModelName = {
   ShippingPolicy: 'ShippingPolicy',
   StoreBranding: 'StoreBranding',
   ReturnReason: 'ReturnReason',
-  ShipRocketOrder: 'ShipRocketOrder'
+  ShipRocketOrder: 'ShipRocketOrder',
+  Popup: 'Popup'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -637,6 +638,18 @@ export const ShipRocketOrderScalarFieldEnum = {
 export type ShipRocketOrderScalarFieldEnum = (typeof ShipRocketOrderScalarFieldEnum)[keyof typeof ShipRocketOrderScalarFieldEnum]
 
 
+export const PopupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  imagePath: 'imagePath',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PopupScalarFieldEnum = (typeof PopupScalarFieldEnum)[keyof typeof PopupScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1055,4 +1068,13 @@ export const ShipRocketOrderOrderByRelevanceFieldEnum = {
 } as const
 
 export type ShipRocketOrderOrderByRelevanceFieldEnum = (typeof ShipRocketOrderOrderByRelevanceFieldEnum)[keyof typeof ShipRocketOrderOrderByRelevanceFieldEnum]
+
+
+export const PopupOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  imagePath: 'imagePath'
+} as const
+
+export type PopupOrderByRelevanceFieldEnum = (typeof PopupOrderByRelevanceFieldEnum)[keyof typeof PopupOrderByRelevanceFieldEnum]
 

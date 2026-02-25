@@ -14,12 +14,15 @@ const bannerUploadDir = path.join(process.cwd(), "uploads/branding/banners");
 
 const categoryUploadDir = path.join(process.cwd(), "uploads/categories");
 
+const popupUploadDir = path.join(process.cwd(), "uploads/popups");
+
 [
   productUploadDir,
   blogUploadDir,
   logoUploadDir,
   bannerUploadDir,
   categoryUploadDir,
+  popupUploadDir,
 ].forEach((dir) => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
@@ -152,6 +155,24 @@ const categoryStorage = multer.diskStorage({
 
 export const categoryImageUpload = multer({
   storage: categoryStorage,
+  fileFilter,
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+}).single("image");
+
+const popupStorage = multer.diskStorage({
+  destination: (_, __, cb) => {
+    cb(null, popupUploadDir);
+  },
+  filename: (_, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, "popup-" + uniqueSuffix + path.extname(file.originalname));
+  },
+});
+
+export const popupImageUpload = multer({
+  storage: popupStorage,
   fileFilter,
   limits: {
     fileSize: 5 * 1024 * 1024,

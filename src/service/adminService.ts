@@ -103,6 +103,8 @@ export const getAllUsers = async (page = 1, limit = 10) => {
         id: true,
         fullName: true,
         email: true,
+        phone: true,
+        altPhone: true,
         isAdmin: true,
         isUserVerified: true,
         isActive: true,

@@ -217,3 +217,8 @@ export type ReturnReason = Prisma.ReturnReasonModel
  * 
  */
 export type ShipRocketOrder = Prisma.ShipRocketOrderModel
+/**
+ * Model Popup
+ * 
+ */
+export type Popup = Prisma.PopupModel

@@ -419,7 +419,8 @@ export const ModelName = {
   ShippingPolicy: 'ShippingPolicy',
   StoreBranding: 'StoreBranding',
   ReturnReason: 'ReturnReason',
-  ShipRocketOrder: 'ShipRocketOrder'
+  ShipRocketOrder: 'ShipRocketOrder',
+  Popup: 'Popup'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -435,7 +436,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "bankDetails" | "category" | "product" | "productVariant" | "cart" | "address" | "wishlist" | "colorScheme" | "sizeChart" | "coupon" | "couponUser" | "couponProduct" | "couponCategory" | "blog" | "order" | "orderItem" | "orderItemHistory" | "orderHistory" | "pincode" | "pincodeGroup" | "pincodeGroupPincode" | "aboutPageContent" | "contactPageInformation" | "policyPageContent" | "deliveryManagement" | "review" | "return" | "returnHistory" | "privacyPolicy" | "service" | "disclaimer" | "shippingPolicy" | "storeBranding" | "returnReason" | "shipRocketOrder"
+    modelProps: "user" | "bankDetails" | "category" | "product" | "productVariant" | "cart" | "address" | "wishlist" | "colorScheme" | "sizeChart" | "coupon" | "couponUser" | "couponProduct" | "couponCategory" | "blog" | "order" | "orderItem" | "orderItemHistory" | "orderHistory" | "pincode" | "pincodeGroup" | "pincodeGroupPincode" | "aboutPageContent" | "contactPageInformation" | "policyPageContent" | "deliveryManagement" | "review" | "return" | "returnHistory" | "privacyPolicy" | "service" | "disclaimer" | "shippingPolicy" | "storeBranding" | "returnReason" | "shipRocketOrder" | "popup"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2815,6 +2816,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Popup: {
+      payload: Prisma.$PopupPayload<ExtArgs>
+      fields: Prisma.PopupFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PopupFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PopupPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PopupFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PopupPayload>
+        }
+        findFirst: {
+          args: Prisma.PopupFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PopupPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PopupFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PopupPayload>
+        }
+        findMany: {
+          args: Prisma.PopupFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PopupPayload>[]
+        }
+        create: {
+          args: Prisma.PopupCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PopupPayload>
+        }
+        createMany: {
+          args: Prisma.PopupCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.PopupDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PopupPayload>
+        }
+        update: {
+          args: Prisma.PopupUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PopupPayload>
+        }
+        deleteMany: {
+          args: Prisma.PopupDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PopupUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.PopupUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PopupPayload>
+        }
+        aggregate: {
+          args: Prisma.PopupAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePopup>
+        }
+        groupBy: {
+          args: Prisma.PopupGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PopupGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PopupCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PopupCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3386,6 +3453,18 @@ export const ShipRocketOrderScalarFieldEnum = {
 export type ShipRocketOrderScalarFieldEnum = (typeof ShipRocketOrderScalarFieldEnum)[keyof typeof ShipRocketOrderScalarFieldEnum]
 
 
+export const PopupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  imagePath: 'imagePath',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PopupScalarFieldEnum = (typeof PopupScalarFieldEnum)[keyof typeof PopupScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3806,6 +3885,15 @@ export const ShipRocketOrderOrderByRelevanceFieldEnum = {
 export type ShipRocketOrderOrderByRelevanceFieldEnum = (typeof ShipRocketOrderOrderByRelevanceFieldEnum)[keyof typeof ShipRocketOrderOrderByRelevanceFieldEnum]
 
 
+export const PopupOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  imagePath: 'imagePath'
+} as const
+
+export type PopupOrderByRelevanceFieldEnum = (typeof PopupOrderByRelevanceFieldEnum)[keyof typeof PopupOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -4026,6 +4114,7 @@ export type GlobalOmitConfig = {
   storeBranding?: Prisma.StoreBrandingOmit
   returnReason?: Prisma.ReturnReasonOmit
   shipRocketOrder?: Prisma.ShipRocketOrderOmit
+  popup?: Prisma.PopupOmit
 }
 
 /* Types for Logging */
